@@ -3,9 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Swiper from 'swiper'
+// css
 import './font/iconfont.css'
 import './css/style.css'
+import 'swiper/dist/css/swiper.css';
 Vue.config.productionTip = false
+Vue.prototype.$Swiper = Swiper
 
 /* eslint-disable no-new */
 new Vue({
