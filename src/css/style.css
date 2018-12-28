@@ -1,13 +1,12 @@
 *{padding:0;margin:0;}
 html,body{
-	font:14px/1.5 "Hiragino Sans GB", "Helvetica Neue", "Helvetica", Arial, Tahoma, sans-serif;
+	font:14px/1.5 Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
 }
-body{overflow-x: hidden;}
+body{overflow-x: hidden;color:#333;background:#FFF; text-align:left;}
 body, div, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4
 {margin:0;padding:0;font-style:normal;font-family:inherit;font-size:14px;font-weight:400;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;} 
 ol, ul ,li{list-style: none;} 
-img {border: 0; vertical-align:top;} 
-body{color:#000000;background:#FFF; text-align:left;} 
+img {border: 0; vertical-align:top;max-width: 100%;} 
 .clearfix:after{content:'';display:block;clear:both;overflow:hidden;visibility: hidden;} 
 a{color:#000000;text-decoration:none; }  
 a:hover{color:#c8161e;} 
@@ -153,3 +152,18 @@ a:hover{color:#c8161e;}
 .storefront li a{position:absolute;top:10px;left:10px;right:10px;bottom:10px;overflow: hidden;}
 .storefront li a img{max-width: 100%;min-height: 100%;transition: all 1s}
 .storefront li a:hover img{transform:scale(1.1);}
+
+.moreBtn{
+  width:140px;
+  height:50px;
+  background:#cfcfcf;
+  border:0;
+  color:#fff;
+  margin:30px auto;
+  transition: all .5s;
+  cursor: pointer;
+  outline:none;
+}
+.moreBtn:hover{
+  background:#c8161e;
+}

@@ -366,7 +366,7 @@
 		</div>		
 		<div class="modifying modifying08"><img src="../assets/modifying_08.png"></div>
 	</div>
-  </div>
+  </div>  
 </template>
 
 <script>

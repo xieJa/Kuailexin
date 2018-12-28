@@ -48,7 +48,9 @@ export default {
     }
   },
   created:function(){
-  	  
+	  if(sessionStorage.message === 'false'){
+		  this.message=false
+	  }
   },
   mounted:function(){
   	window.addEventListener('scroll',this.handleScroll)
@@ -75,7 +77,7 @@ export default {
   		console.log(this.name,this.phone)
   	},
   	messagePop:function(){
-  		this.message=!this.message
+  		sessionStorage.message=this.message=!this.message
   	}
   }
 }

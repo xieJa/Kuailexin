@@ -8,6 +8,7 @@ import Swiper from 'swiper'
 import './font/iconfont.css'
 import './css/style.css'
 import 'swiper/dist/css/swiper.css';
+import 'animate.css'
 Vue.config.productionTip = false
 Vue.prototype.$Swiper = Swiper
 

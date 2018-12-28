@@ -1,6 +1,6 @@
 <template>
-  <div class="header relative">
-    <div class="site-nav">
+  <div class="header">
+    <div class="site-nav" :style="{ background :'rgba(0,0,0,'+ headOpacity+' )'}">
       <div class="site-nav-bd">
         <div class="site-nav-bd-l"><i class="iconfont icon-shouye--"></i><span>您好，欢迎您来到快乐星汉堡官网网站！</span></div>
         <ul class="site-nav-bd-r">
@@ -15,10 +15,11 @@
         </ul>
       </div>      
     </div>
+    <div :style="{ background :'rgba(255,255,255,'+ headOpacity+' )'}">
     <div class="top-body">
         <div class="hd-logo"><img src="../assets/logo.png"></div>
         <ul class="hd-menu">
-          <li><router-link to="/">首页</router-link></li>
+          <li><router-link to="/" @click.native="submenu=false">首页</router-link></li>
           <li @click.stop="submenu='关于我们'"><a href="javascript:;">关于我们</a></li>
           <li @click.stop="submenu='新鲜美食'"><a href="javascript:;">新鲜美食</a></li>
           <li @click.stop="submenu='品牌形象'"><a href="javascript:;">品牌形象</a></li>
@@ -28,21 +29,22 @@
           <li @click.stop="submenu='联系我们'"><a href="javascript:;">联系我们</a></li>
         </ul>
     </div>
-    <div class="submenu" v-show="submenu" @click.stop>
+    </div>
+    <div class="submenu" v-show="submenu" @click.stop  :style="{ background :'rgba(247,248,250,'+ headOpacity+' )'}">
       <div class="cover relative">
         <i class="iconfont icon-guanbi" @click="submenu=!submenu"></i>
         <div class="submenu-item" v-show="submenu=='关于我们'">
-          <router-link to="/" @click.native="submenu=false">公司简介</router-link>
-          <router-link to="/">企业愿景</router-link>
-          <router-link to="/">核心文化</router-link>
-          <router-link to="/">发展历程</router-link>
-          <router-link to="/">组织架构</router-link>
-          <router-link to="/">优秀团队</router-link>
-          <router-link to="/">企业责任</router-link>
+          <router-link to="/about/公司简介" @click.native="submenu=false">公司简介</router-link>
+          <router-link to="/about/企业愿景" @click.native="submenu=false">企业愿景</router-link>
+          <router-link to="/about/核心文化" @click.native="submenu=false">核心文化</router-link>
+          <router-link to="/about/发展历程" @click.native="submenu=false">发展历程</router-link>
+          <router-link to="/about/组织架构" @click.native="submenu=false">组织架构</router-link>
+          <router-link to="/about/优秀团队" @click.native="submenu=false">优秀团队</router-link>
+          <router-link to="/about/企业责任" @click.native="submenu=false">企业责任</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新鲜美食'">
           <dl class="new-product clearfix">
-            <dt><router-link to="/" @click.native="submenu=false">新品动态  ></router-link></dt>
+            <dt><router-link to="/product/新品动态" @click.native="submenu=false">新品动态  ></router-link></dt>
             <dd>
               <div class="new-product-item">
                 <router-link to="">
@@ -104,7 +106,30 @@
               <router-link to="">奥尔良套餐</router-link>
             </dd>
           </dl>
+          <dl>
+            <dt><router-link to="/" @click.native="submenu=false">精美小食  ></router-link></dt>
+            <dd>
+              <router-link to="">快乐鸡腿堡套餐</router-link>
+              <router-link to="">全家桶</router-link>
+              <router-link to="">奥尔良套餐</router-link>
+            </dd>
+          </dl>
         </div>
+        <div class="submenu-item" v-show="submenu=='品牌形象'">
+          <router-link to="/">店面规划</router-link>
+          <router-link to="/">装修效果</router-link>
+          <router-link to="/">加盟商风采</router-link>
+          <router-link to="/">卡通形象</router-link>
+          <router-link to="/">品牌VI</router-link>
+          <router-link to="/">品牌IP</router-link>
+        </div>
+        <div class="submenu-item" v-show="submenu=='营销活动'">
+          <router-link to="/">新品营销</router-link>
+          <router-link to="/">节日营销</router-link>
+          <router-link to="/">日常营销</router-link>
+          <router-link to="/">微信点餐</router-link>
+          <router-link to="/">外卖运营</router-link>
+        </div>        
         <div class="submenu-item" v-show="submenu=='加盟服务'">
           <router-link to="/" @click.native="submenu=false">企业荣誉</router-link>
           <router-link to="/">如何选择</router-link>
@@ -116,6 +141,17 @@
           <router-link to="/">培训系统</router-link>
           <router-link to="/">服务指导</router-link>
           <router-link to="/">常见问题</router-link>
+        </div>
+        <div class="submenu-item" v-show="submenu=='新闻资讯'">
+          <router-link to="/">品牌新闻</router-link>
+          <router-link to="/">成功案例</router-link>	
+        </div>
+        <div class="submenu-item" v-show="submenu=='联系我们'">
+          <router-link to="/">联系方式</router-link>
+          <router-link to="/">人才招聘</router-link>		  				
+          <router-link to="/">在线留言</router-link>		  				
+          <router-link to="/">考察预约</router-link>		  				
+          <router-link to="/">投诉建议</router-link>
         </div>
       </div>
     </div>
@@ -129,12 +165,13 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       searchbox:false,
-      submenu:false
+      submenu:false,
+      headOpacity:1
     }
   },
   mounted:function(){
     window.addEventListener('click',this.handleClick)
-    console.log(this.submenu)
+    window.addEventListener('scroll',this.handleScroll)
   },
   methods:{
     searchInput:function(){
@@ -148,14 +185,22 @@ export default {
     handleClick:function(){
       this.searchbox=false
       this.submenu=false
-    }
+    },
+    handleScroll:function(){
+  		var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+  		if(scrollTop>20){    
+  			this.headOpacity = 0.95
+  		}else{
+        this.headOpacity = 1
+      }
+  	}
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header{z-index:999;}
+.header{z-index:999;position:fixed;width:100%;top:0;transition:all .2s;}
 .site-nav{height: 40px; font-size: 14px; line-height: 40px; background: #111; } 
 .site-nav .iconfont{float: left; margin-right: 5px; } 
 .site-nav-bd{box-sizing: border-box; max-width: 1200px; width: 99%; margin:0 auto; } 
