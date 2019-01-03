@@ -4,6 +4,7 @@ import Home from '@/components/home'
 import About from '@/components/about/about'
 import Product from '@/components/product/product'
 import ProductDetail from '@/components/product/ProductDetail'
+import Brand from '@/components/brand/brand'
 
 Vue.use(Router)
 
@@ -21,16 +22,21 @@ export default new Router({
       component: About,     
     },
     {
-      path: '/product/:Name',
+      path: '/Product',
       name: 'Product',
-      component: Product,   
+      component: Product,
       children:[
         {
-          path: 'productdetail',
+          path: '/Product/ProductDetail',
           name: 'ProductDetail',
           component: ProductDetail,  
         }  
       ]
+    },
+    {
+      path: '/brand',
+      name: 'Brand',
+      component: Brand,     
     }
   ],
   scrollBehavior(to,from,savedPosition){

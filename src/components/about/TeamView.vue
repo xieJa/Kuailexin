@@ -12,7 +12,7 @@
             <p style="text-align:center;padding:30px 0;"><img src="@/assets/team01.jpg" alt=""></p>
             <p>始终坚持服务为导向，加强公司内部管理，积极优化组织结构，公司经过硬件和软件的系统化建设及优化升级，体系的不断完善，使公司得以迅速发展。以“专心用心放心”的经营理念规范提升专业度和服务模块，从加盟开店前期选址、装修、开业、培训到后期门店营运、管理、产品、活动、线上线下推广，“快乐星汉堡” 已形成了加盟连锁经营的完整体系。</p>
         </div>
-        <div class="moreTeam">
+        <div class="other-related">
             更多优秀团队
         </div>
         <ul class="team-list clearfix">
@@ -68,23 +68,6 @@ export default {
     padding-bottom:10px;
     text-indent:2em;
     line-height: 24px;
-}
-.moreTeam{
-    font-size:18px;
-    position: relative;
-    line-height: 46px;
-    margin-bottom: 30px;
-    margin-top:100px;
-}
-.moreTeam:after{
-    content:'';
-    display:block;
-    position: absolute;
-    left:0;
-    bottom:0;
-    width:40px;
-    height:2px;
-    background:#c8161e;
 }
 .team-list li{
     width:30%;

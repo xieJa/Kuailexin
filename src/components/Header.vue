@@ -44,28 +44,28 @@
         </div>
         <div class="submenu-item" v-show="submenu=='新鲜美食'">
           <dl class="new-product clearfix">
-            <dt><router-link to="/product/新品动态" @click.native="submenu=false">新品动态  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'新品动态'}}" @click.native="submenu=false">新品动态  ></router-link></dt>
             <dd>
               <div class="new-product-item">
-                <router-link to="">
+                <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">
                   <span><img src="../assets/ad_03.jpg"></span>
                   <p>快乐星昔果乐</p>
                 </router-link>
               </div>
               <div class="new-product-item">
-                <router-link to="">
+                <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">
                   <span><img src="../assets/ad_03.jpg"></span>
                   <p>快乐星昔果乐</p>
                 </router-link>
               </div>
               <div class="new-product-item">
-                <router-link to="">
+                <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">
                   <span><img src="../assets/ad_03.jpg"></span>
                   <p>快乐星昔果乐</p>
                 </router-link>
               </div>
               <div class="new-product-item">
-                <router-link to="">
+                <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">
                   <span><img src="../assets/ad_03.jpg"></span>
                   <p>快乐星昔果乐</p>
                 </router-link>
@@ -73,50 +73,50 @@
             </dd>
           </dl>
           <dl>
-            <dt><router-link to="/" @click.native="submenu=false">明星产品  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'明星产品'}}" @click.native="submenu=false">明星产品  ></router-link></dt>
             <dd>
-              <router-link to="">快乐鸡腿堡</router-link>
-              <router-link to="">脆皮全鸡</router-link>
-              <router-link to="">香辣鸡翅</router-link>
-              <router-link to="">招牌奶茶</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">快乐鸡腿堡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">脆皮全鸡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">香辣鸡翅</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">招牌奶茶</router-link>
             </dd>
           </dl>
           <dl>
-            <dt><router-link to="/" @click.native="submenu=false">时尚饮品  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'时尚饮品'}}" @click.native="submenu=false">时尚饮品  ></router-link></dt>
             <dd>
-              <router-link to="">蓝莓冰沙</router-link>
-              <router-link to="">香溢可可</router-link>
-              <router-link to="">焦糖拿铁咖啡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">蓝莓冰沙</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">香溢可可</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">焦糖拿铁咖啡</router-link>
             </dd>
           </dl>
           <dl>
-            <dt><router-link to="/" @click.native="submenu=false">经典主食  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'经典主食'}}" @click.native="submenu=false">经典主食  ></router-link></dt>
             <dd>
-              <router-link to="">快乐鸡腿堡</router-link>
-              <router-link to="">奥尔良鸡腿堡</router-link>
-              <router-link to="">超级牛肉堡</router-link>
-              <router-link to="">劲烧牛肉煲</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">快乐鸡腿堡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">奥尔良鸡腿堡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">超级牛肉堡</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">劲烧牛肉煲</router-link>
             </dd>
           </dl>
           <dl>
-            <dt><router-link to="/" @click.native="submenu=false">超值套餐  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'超值套餐'}}" @click.native="submenu=false">超值套餐  ></router-link></dt>
             <dd>
-              <router-link to="">快乐鸡腿堡套餐</router-link>
-              <router-link to="">全家桶</router-link>
-              <router-link to="">奥尔良套餐</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">快乐鸡腿堡套餐</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">全家桶</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">奥尔良套餐</router-link>
             </dd>
           </dl>
           <dl>
-            <dt><router-link to="/" @click.native="submenu=false">精美小食  ></router-link></dt>
+            <dt><router-link :to="{path:'/Product',query:{name:'精美小食'}}" @click.native="submenu=false">精美小食  ></router-link></dt>
             <dd>
-              <router-link to="">快乐鸡腿堡套餐</router-link>
-              <router-link to="">全家桶</router-link>
-              <router-link to="">奥尔良套餐</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">快乐鸡腿堡套餐</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">全家桶</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}" @click.native="submenu=false">奥尔良套餐</router-link>
             </dd>
           </dl>
         </div>
         <div class="submenu-item" v-show="submenu=='品牌形象'">
-          <router-link to="/">店面规划</router-link>
+          <router-link :to="{path:'/brand',query:{name:'店面规划'}}">店面规划</router-link>
           <router-link to="/">装修效果</router-link>
           <router-link to="/">加盟商风采</router-link>
           <router-link to="/">卡通形象</router-link>
@@ -200,7 +200,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header{z-index:999;position:fixed;width:100%;top:0;transition:all .2s;}
+.header{z-index:999;position:fixed;width:100%;top:0;transition:all .2s;border-bottom:1px solid #d2d2d2}
 .site-nav{height: 40px; font-size: 14px; line-height: 40px; background: #111; } 
 .site-nav .iconfont{float: left; margin-right: 5px; } 
 .site-nav-bd{box-sizing: border-box; max-width: 1200px; width: 99%; margin:0 auto; } 

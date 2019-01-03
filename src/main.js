@@ -12,6 +12,8 @@ import 'animate.css'
 Vue.config.productionTip = false
 Vue.prototype.$Swiper = Swiper
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -40,7 +40,6 @@ import TimeLine from '../about/TimeLine'
 import Team from '../about/Team'
 import TeamView from '../about/TeamView'
 import JoinHotline from '../about/JoinHotline'
-import imageUrl from '@/assets/banner02.jpg'
 export default {
     name:'about',
     data:function(){
@@ -48,7 +47,7 @@ export default {
             pageBanner:{
                 name:'关于我们',
                 enName:'About us',
-                imageUrl:imageUrl,
+                imageUrl:require('@/assets/banner02.jpg'),
                 text:'快乐星汉堡， 专注西式快餐加盟！',
                 content:'快乐星汉堡将西式快餐与中国传承千年的经典文化相融合，做出更适合中国人的饮食习惯和生活品味的美食。'
             },

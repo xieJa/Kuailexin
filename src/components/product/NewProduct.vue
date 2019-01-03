@@ -43,12 +43,13 @@ export default {
     name:'NewProduct',
     methods:{
         tapJump:function(){
-            console.log(this.$route.params.Name)
             this.$router.push({
-                path:'/product/'+this.$route.params.Name+'/productdetail'
+                path:'/Product/ProductDetail',
+                query:{name:'快乐星昔果乐'}               
             })
         }
-    }
+    },
+    
 }
 </script>
 
