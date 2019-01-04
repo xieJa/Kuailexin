@@ -36,11 +36,9 @@
         <div class="submenu-item" v-show="submenu=='关于我们'">
           <router-link to="/about/公司简介" @click.native="submenu=false">公司简介</router-link>
           <router-link to="/about/企业愿景" @click.native="submenu=false">企业愿景</router-link>
-          <router-link to="/about/核心文化" @click.native="submenu=false">核心文化</router-link>
           <router-link to="/about/发展历程" @click.native="submenu=false">发展历程</router-link>
           <router-link to="/about/组织架构" @click.native="submenu=false">组织架构</router-link>
           <router-link to="/about/优秀团队" @click.native="submenu=false">优秀团队</router-link>
-          <router-link to="/about/企业责任" @click.native="submenu=false">企业责任</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新鲜美食'">
           <dl class="new-product clearfix">
@@ -116,12 +114,11 @@
           </dl>
         </div>
         <div class="submenu-item" v-show="submenu=='品牌形象'">
-          <router-link :to="{path:'/brand',query:{name:'店面规划'}}">店面规划</router-link>
-          <router-link to="/">装修效果</router-link>
-          <router-link to="/">加盟商风采</router-link>
-          <router-link to="/">卡通形象</router-link>
-          <router-link to="/">品牌VI</router-link>
-          <router-link to="/">品牌IP</router-link>
+          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" @click.native="submenu=false">店面规划</router-link>
+          <router-link :to="{path:'/brand',query:{name:'我们的店'}}" @click.native="submenu=false">我们的店</router-link>
+          <router-link :to="{path:'/brand',query:{name:'卡通形象'}}" @click.native="submenu=false">卡通形象</router-link>
+          <router-link :to="{path:'/brand',query:{name:'品牌VI'}}" @click.native="submenu=false">品牌VI</router-link>
+          <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" @click.native="submenu=false">品牌IP</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='营销活动'">
           <router-link to="/">新品营销</router-link>

@@ -1,10 +1,10 @@
 <template>
     <div class="crumbs cover">
         <router-link to="/">首页</router-link>>
-        <span v-for="(crumb,index) in crumbs" :key="index" v-if="index!=crumbs.length-1">
+        <!-- <span v-for="(crumb,index) in crumbs" :key="index" v-if="index!=crumbs.length-1">
             <router-link :to="crumb.breadUrl" >{{crumb.breadText}}</router-link>>
-        </span>
-        <a href="javascript:;" style="color:#c8161e">{{this.$route.params.Name}}</a>
+        </span> -->
+        <a href="javascript:;" style="color:#c8161e">{{this.$route.query.name}}</a>
     </div>
 </template>
 

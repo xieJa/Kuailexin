@@ -41,6 +41,7 @@ export default {
 .pageTitle{    
     display: inline-block;
     border-bottom:1px solid #fff; 
+    padding-bottom: 30px;
 }
 .pageTitle h1{
     font-size:48px;

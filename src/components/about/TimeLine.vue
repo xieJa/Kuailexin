@@ -127,7 +127,6 @@
 </template>
 
 <script>
-import WOW from 'wowjs' 
 export default {
     name:'TimeLine',
     data(){
@@ -137,7 +136,7 @@ export default {
     },
     mounted:function(){         	
        this.$nextTick(function(){
-           new WOW.WOW().init()
+           new this.$WOW.WOW().init()
        })      
     },
     methods:{
@@ -263,15 +262,6 @@ export default {
     font-size:18px;
     text-align: center;
     margin:30px 0;
-}
-.shade{
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.5);
-    z-index: 1000;
 }
 .pop-up-box{
     position:fixed;
