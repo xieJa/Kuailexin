@@ -121,22 +121,22 @@
           <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" @click.native="submenu=false">品牌IP</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='营销活动'">
-          <router-link to="/">新品营销</router-link>
-          <router-link to="/">节日营销</router-link>
-          <router-link to="/">日常营销</router-link>
-          <router-link to="/">微信点餐</router-link>
-          <router-link to="/">外卖运营</router-link>
+          <router-link :to="{path:'/market',query:{name:'新品营销',new:true}}" @click.native="submenu=false">新品营销</router-link>
+          <router-link :to="{path:'/market',query:{name:'节日营销'}}" @click.native="submenu=false">节日营销</router-link>
+          <router-link :to="{path:'/market',query:{name:'日常营销',new:false}}" @click.native="submenu=false">日常营销</router-link>
+          <router-link :to="{path:'/market',query:{name:'微信点餐'}}" @click.native="submenu=false">微信点餐</router-link>
+          <router-link :to="{path:'/market',query:{name:'外卖运营'}}" @click.native="submenu=false">外卖运营</router-link>
+          <router-link :to="{path:'/market',query:{name:'嗨！抖音'}}" @click.native="submenu=false">嗨！抖音</router-link>
         </div>        
         <div class="submenu-item" v-show="submenu=='加盟服务'">
-          <router-link to="/" @click.native="submenu=false">企业荣誉</router-link>
+          <router-link :to="{path:'/server',query:{name:'品牌资信'}}" @click.native="submenu=false">品牌资信</router-link>
           <router-link to="/">如何选择</router-link>
           <router-link to="/">加盟流程</router-link>
-          <router-link to="/">市场口碑</router-link>
+          <router-link to="/">在您身边</router-link>
           <router-link to="/">加盟方案</router-link>
           <router-link to="/">装修指导</router-link>
-          <router-link to="/">在线申请</router-link>
+          <router-link to="/">申请加盟</router-link>
           <router-link to="/">培训系统</router-link>
-          <router-link to="/">服务指导</router-link>
           <router-link to="/">常见问题</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新闻资讯'">

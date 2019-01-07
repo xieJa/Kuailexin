@@ -267,3 +267,12 @@ a:hover{color:#c8161e;}
   background: rgba(0,0,0,.5);
   z-index: 1000;
 }
+
+.page-qrcode{
+  text-align: center;
+  padding:48px 0;
+}
+.page-qrcode p {
+  padding-bottom: 30px;
+  font-weight: bold;
+}

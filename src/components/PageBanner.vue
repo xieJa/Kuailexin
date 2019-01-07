@@ -7,7 +7,7 @@
                     <span>{{pageBanner.enName}}</span>
                 </div>
                 <p class="vice-title">{{pageBanner.text}}</p>
-                <p class="describe">{{pageBanner.content}}</p>
+                <p class="describe" v-html="pageBanner.content"></p>
             </div>
         </div>   
     </div>

@@ -28,11 +28,7 @@
         <li @click="tapJump('showbehind',1)">
           <img src="../../assets/pic1.jpg" alt>
           <p>快乐星汉堡常州人民路店</p>
-        </li>
-        <li @click="tapJump('showbehind',2)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
-        </li>
+        </li>        
       </ul>
       <a href="#" class="moreBtn">加载更多</a>
     </div>

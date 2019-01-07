@@ -5,6 +5,9 @@ import About from '@/components/about/about'
 import Product from '@/components/product/product'
 import ProductDetail from '@/components/product/ProductDetail'
 import Brand from '@/components/brand/brand'
+import Market from '@/components/market/Marketing'
+import Marketingdetail from '@/components/market/Marketingdetail'
+import server from '@/components/server/server'
 
 Vue.use(Router)
 
@@ -37,6 +40,26 @@ export default new Router({
       path: '/brand',
       name: 'Brand',
       component: Brand,     
+    },
+    {
+      path: '/market',
+      name: 'Market',
+      component: Market, 
+    }, 
+    {
+      path:'/market/Marketingdetail',
+      name:'Marketingdetail',
+      component:Marketingdetail
+    },   
+    {
+      path:'/server',
+      name:'server',
+      component:server
+    },   
+    {
+      path: '*',
+      name: '404',
+      component: Home,     
     }
   ],
   scrollBehavior(to,from,savedPosition){
