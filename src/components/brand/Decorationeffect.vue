@@ -90,7 +90,6 @@ export default {
   },
   methods: {
     tapJump: function(el,index) {
-        console.log(el)        
         this.isShow=el;
         this.$nextTick(function(){
             new this.$Swiper("."+el, {

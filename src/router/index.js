@@ -8,11 +8,13 @@ import Brand from '@/components/brand/brand'
 import Market from '@/components/market/Marketing'
 import Marketingdetail from '@/components/market/Marketingdetail'
 import server from '@/components/server/server'
+import News from '@/components/new/news'
+import Newdetail from '@/components/new/newdetail'
+import Contact from '@/components/contact/Contact'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -55,7 +57,22 @@ export default new Router({
       path:'/server',
       name:'server',
       component:server
-    },   
+    }, 
+    {
+      path:'/news',
+      name:'news',
+      component:News
+    },
+    {
+      path:'/newdetail',
+      name:'newdetail',
+      component:Newdetail
+    },
+    {
+      path:'/contact',
+      name:'contact',
+      component:Contact
+    },  
     {
       path: '*',
       name: '404',

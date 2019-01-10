@@ -3,7 +3,8 @@
         <page-banner :pageBanner="pageBanner"></page-banner>
         <div class="cover">
             <PageTitle :title="pTitle" :description="description"></PageTitle> 
-            <DecorationEffect v-if="this.$route.query.name==='我们的店'"></DecorationEffect>
+            <Project v-if="this.$route.query.name==='店面规划'"></Project>
+            <DecorationEffect v-else-if="this.$route.query.name==='我们的店'"></DecorationEffect>
             <Cartoon v-else-if="this.$route.query.name==='卡通形象'"></Cartoon>
             <brandVI v-else-if="this.$route.query.name==='品牌VI'"></brandVI>
             <brandIP v-else-if="this.$route.query.name==='品牌IP'"></brandIP>
@@ -17,6 +18,7 @@
 import PageBanner from '../PageBanner'
 import PageTitle from '../PageTitle'
 import PageView from '../PageView'
+import Project from './project'
 import DecorationEffect from './Decorationeffect'
 import Cartoon from './cartoon'
 import brandVI from './brandVI'
@@ -41,7 +43,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,PageView,DecorationEffect,Cartoon,brandVI,brandIP
+        PageBanner,PageTitle,PageView,Project,DecorationEffect,Cartoon,brandVI,brandIP
     },
     watch:{
         '$route'(to,from){            

@@ -2,12 +2,12 @@
     <div class="newMarket">
            <ul class="clearfix">
                <li @click="tabJump()">
-                   <div class="newProPic">
+                   <div class="newProPic">                       
                        <img src="@/assets/market.jpg" alt="">
                    </div>
                    <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
                    <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="this.new"><img src="@/assets/new_icon.png" alt=""></em>
+                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
                </li>
                <li>
                    <div class="newProPic">
@@ -15,7 +15,7 @@
                    </div>
                    <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
                    <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="this.new"><img src="@/assets/new_icon.png" alt=""></em>
+                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
                </li>
                <li>
                    <div class="newProPic">
@@ -23,7 +23,7 @@
                    </div>
                    <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
                    <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="this.new"><img src="@/assets/new_icon.png" alt=""></em>
+                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
                </li>
                <li>
                    <div class="newProPic">
@@ -31,7 +31,7 @@
                    </div>
                    <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
                    <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="this.new"><img src="@/assets/new_icon.png" alt=""></em>
+                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
                </li>
            </ul>
            <a href="#" class="moreBtn">加载更多</a>           
@@ -43,7 +43,15 @@ export default {
     name:'Marketing',
     data(){
         return{
-           new:true
+           newIcon:true,
+           asb:'123'
+        }
+    },
+    created:function(){   
+        if(this.$route.query.name === '新品营销') {
+            this.newIcon =true
+        }else{
+            this.newIcon =false
         }
     },
     methods:{
@@ -55,8 +63,12 @@ export default {
         }
     },
     watch:{
-        '$route':function(){
-             this.new = this.$route.query.new
+        '$route':function(){     
+            if(this.$route.query.name === '新品营销') {
+                this.newIcon =true
+            }else{
+                this.newIcon =false
+            }
         }
     }
 }

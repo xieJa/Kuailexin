@@ -1,10 +1,11 @@
 *{padding:0;margin:0;}
 html,body{
-	font:14px/1.5 Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+  font:14px/1.5 Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+  letter-spacing: 1px;
 }
 body{overflow-x: hidden;color:#333;background:#FFF; text-align:left;}
 body, div, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4
-{margin:0;padding:0;font-style:normal;font-family:inherit;font-size:14px;font-weight:400;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;} 
+{margin:0;padding:0;font-style:normal;font-family:inherit;font-weight:400;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;} 
 ol, ul ,li{list-style: none;} 
 img {border: 0; vertical-align:top;max-width: 100%;} 
 .clearfix:after{content:'';display:block;clear:both;overflow:hidden;visibility: hidden;} 
@@ -275,4 +276,21 @@ a:hover{color:#c8161e;}
 .page-qrcode p {
   padding-bottom: 30px;
   font-weight: bold;
+}
+
+hr{
+  width:100%;
+  height:1px;
+  background:#dfdfdf;
+  border:0;
+  margin:10px 0;
+}
+
+h3{
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+#companymap img{
+  max-width: none;
 }
