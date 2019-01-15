@@ -1,114 +1,24 @@
 <template>
     <div>
         <div class="cd-timeline">
-            <div class="cd-timeline-block wow slideInLeft" @click="Popup()">
+            <div class="cd-timeline-block wow slideInLeft" :class="index%2==0?'slideInLeft':'slideInRight'" @click="Popup(index)"  v-for="(item,index) in historylist" :key="index">
                 <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
+                    <img :src="item.Image" alt="Picture">
                 </div><!-- cd-timeline-img -->
 
                 <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
+                    <span class="cd-date">{{item.Year}}</span>
                     <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
+                        <p v-for="(self,index) in item.Events" :key="index">{{self.Title}}</p>
                     </div>
                 </div>
             </div>
-            <div class="cd-timeline-block wow slideInRight" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInLeft" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInRight" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInLeft" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInRight" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInLeft" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cd-timeline-block wow slideInRight" @click="Popup()">
-                <div class="cd-timeline-img">
-                    <img src="@/assets/about05.jpg" alt="Picture">
-                </div><!-- cd-timeline-img -->
-
-                <div class="cd-timeline-content">
-                    <span class="cd-date">2008</span>
-                    <div>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <p class="tomorrow">未来，待续...</p>
-        <transition name="fade">
-            <div v-show="isshow">
+        <transition-group name="fade">
+            <div v-show="isshow===index" v-for="(item,index) in historylist" :key="index">
+                {{isshow}}
                 <div class="shade" @click="closePop()"></div>
                 <div class="pop-up-box">
                     <i class="close" @click="closePop()"></i>
@@ -121,7 +31,7 @@
                     
                 </div>
             </div>
-        </transition>
+        </transition-group>
         
     </div>
 </template>
@@ -131,8 +41,17 @@ export default {
     name:'TimeLine',
     data(){
         return{
+            historylist:[],
             isshow:false
         }
+    },
+    created:function(){
+        let that = this
+        this.$axios.get(this.HOST+'/ajaxdata.aspx?Action=historylist')
+        .then(function(res){
+            console.log(res)
+            that.historylist = res.data.list
+        })
     },
     mounted:function(){         	
        this.$nextTick(function(){
@@ -140,8 +59,8 @@ export default {
        })      
     },
     methods:{
-        Popup:function(){
-            this.isshow = true
+        Popup:function(index){
+            this.isshow = index
             document.body.classList.add('swiper-slide')
         },
         closePop:function(){

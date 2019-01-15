@@ -3,9 +3,16 @@ html,body{
   font:14px/1.5 Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
   letter-spacing: 1px;
 }
-body{overflow-x: hidden;color:#333;background:#FFF; text-align:left;}
 body, div, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4
 {margin:0;padding:0;font-style:normal;font-family:inherit;font-weight:400;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;} 
+body{overflow-x: hidden;color:#333;background:#FFF; text-align:left;padding-top: 120px;}
+.m-web{
+  padding-top:2.12rem;
+}
+.body-shade{
+  overflow: hidden;
+  height: 100vh;
+}
 ol, ul ,li{list-style: none;} 
 img {border: 0; vertical-align:top;max-width: 100%;} 
 .clearfix:after{content:'';display:block;clear:both;overflow:hidden;visibility: hidden;} 
@@ -14,6 +21,8 @@ a:hover{color:#c8161e;}
 .red{color: #c8161e;}
 .bg-gray{background:#f9f9f9;}
 .bg-black{background: #222222;}
+
+/* 过渡 */
 .fade-enter-active, .fade-leave-active {  
   position: relative;
   z-index: 1000;
@@ -22,6 +31,20 @@ a:hover{color:#c8161e;}
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.slide-fade-enter-active,.slide-fade-leave-active {
+  transition: all .3s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+{
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* 过渡 */
+
+
+
 .relative{position: relative;z-index: 0}
 .cover{max-width: 1200px;width:99%;margin:0 auto;}
 
@@ -293,4 +316,41 @@ h3{
 
 #companymap img{
   max-width: none;
+}
+
+.seeAll{
+  text-align: center;
+  font-size:.3rem;
+  width:3.7rem;
+  display:block;
+  height:.8rem;
+  line-height: .8rem;
+  margin:.6rem auto;
+  border:1px solid #b0b0b0;
+  border-radius:.4rem;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width:1000px){
+  .cover {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+  }
+  .modifying{
+    min-width: 100%;
+  }
+  .modifying img{
+    width:1rem;
+  }
+  .modifying01{
+    top: 30%;
+  }
+  .modifying02{
+    bottom: 30%;
+  }
+  .modifying03{
+    top:100px;
+  }
 }

@@ -12,9 +12,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
-import PageView from '../PageView'
 import newMarketing from './newMarketing'
 import festivalMarket from './festivalMarket'
 import trill from './trill'
@@ -38,7 +35,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,PageView,newMarketing,festivalMarket,trill
+        newMarketing,festivalMarket,trill
     },
     watch:{
         '$route'(to,from){            

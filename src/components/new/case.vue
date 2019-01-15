@@ -97,4 +97,23 @@ export default {
     height:42px;
     overflow: hidden;
 }
+
+@media screen and (max-width:600px){
+    .newMarket li{
+        width:100%;
+    }
+    .newMarket li:nth-child(2n){
+        margin-left:0;
+    }
+    .newMarket p{
+        line-height: 1.2;
+        margin-bottom:5px;
+    }
+}
+@media screen and (max-width:1200px){
+    .newMarket{
+        padding:0 10px;
+        padding-top: 40px;
+    }
+}
 </style>

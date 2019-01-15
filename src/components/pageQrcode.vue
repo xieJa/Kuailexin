@@ -29,4 +29,24 @@ export default {
 hr{
     margin-bottom:50px;
 }
+@media screen and (max-width:1000px){   
+    .page-qrcode{
+        padding:0;        
+    } 
+    .page-qrcode p{
+        padding:0 10px;        
+    } 
+    .tel{
+        margin-bottom: 20px;
+    }
+    .tel p{
+        font-size:.3rem;
+        
+    }
+    hr{
+        border-top: 10px solid #f1f1f1;
+        background: none;
+        margin-bottom: .5rem;
+    }
+}
 </style>

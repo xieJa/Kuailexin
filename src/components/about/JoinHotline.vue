@@ -22,4 +22,10 @@ export default {
 .joinHotline img{
     margin-bottom:20px;
 }
+@media screen and (max-width:1000px){    
+    .joinHotline{
+        font-size:.3rem;
+        padding:.3rem 0;
+    }
+}
 </style>

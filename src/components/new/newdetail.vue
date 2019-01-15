@@ -1,6 +1,6 @@
 <template>
     <div class="Market-detail cover">
-        <crumbs></crumbs>
+        <crumbs v-if="!this.$M"></crumbs>
         <div class="market-info">
             <div class="market-info-head">
                 <h2>快乐星汉堡加盟品牌带你解读权威4p营销理论</h2>
@@ -146,5 +146,31 @@ export default {
 }
 .back-list i{
     font-size: 26px;
+}
+@media screen and (max-width:1000px){
+    .market-info{
+        padding:10px;
+    }
+    .market-info-head span{
+        margin:0 10px;
+    }
+    .back-list{
+        display: none;
+    }
+    .page-turning .paging{
+        width:100%;
+        float:none;
+        margin-bottom:20px;
+        color:#c8161e;
+    }
+    .page-turning .page-next{
+        text-align: left;
+    }
+    .page-turning .paging a{
+        margin-bottom:5px;
+        border:0;
+        background:#c8161e;
+        color:#fff;
+    }
 }
 </style>

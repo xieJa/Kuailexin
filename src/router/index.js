@@ -11,6 +11,7 @@ import server from '@/components/server/server'
 import News from '@/components/new/news'
 import Newdetail from '@/components/new/newdetail'
 import Contact from '@/components/contact/Contact'
+import Search from '@/components/search/search'
 
 Vue.use(Router)
 
@@ -74,6 +75,11 @@ export default new Router({
       component:Contact
     },  
     {
+      path:'/search',
+      name:'search',
+      component:Search
+    },  
+    {
       path: '*',
       name: '404',
       component: Home,     
@@ -81,5 +87,5 @@ export default new Router({
   ],
   scrollBehavior(to,from,savedPosition){
     return{x:0,y:0}
-  }
+  },
 })

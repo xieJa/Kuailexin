@@ -1,25 +1,20 @@
 <template>
   <div id="app">
-    <my-header></my-header>    
+    <mHeader v-if="this.$M"></mHeader>
+    <Hearder v-else></Hearder>
     <router-view/>
-    <my-footer></my-footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Hearder from './components/Header.vue'
+import mHeader from './components/m_Header.vue'
 import Footer from './components/Footer.vue'
 export default {
   name: 'App',
   components: {
-    'my-header': Hearder,
-    'my-footer': Footer
-  }
+    Hearder,Footer,mHeader
+  },
 }
 </script>
-
-<style>
-body{
-  padding-top:120px;
-}
-</style>

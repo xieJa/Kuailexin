@@ -111,4 +111,31 @@ export default {
 .product-info a{    
     margin-left:20%;
 }
+@media screen and (max-width:1000px){
+    .GeneralProduct-list{
+        padding:0 8px;
+    }
+    .GeneralProduct-list li{
+        width:100%;
+        margin-bottom: 10px;
+    }
+    .GeneralProduct-list li:nth-child(2n){
+        margin-left:0;
+    }
+    .product-item{
+        height: 5rem;
+    }
+    .product-info .name{
+        font-size: .4rem;
+    }
+    .product-info a{
+        font-size: 14px;
+        line-height: .6rem;
+        width: 60%;
+        max-width: none;
+    }
+    .product-item .hot{
+        width: 20%;
+    }
+}
 </style>

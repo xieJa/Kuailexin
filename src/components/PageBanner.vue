@@ -1,5 +1,5 @@
 <template>
-    <div class="pageBanner" :style="'background:url('+ pageBanner.imageUrl +')'">
+    <div class="pageBanner" :style="'background-image:url('+ pageBanner.imageUrl +')'">
         <div class="cover">
             <div class="slogan">
                 <div class="pageTitle">
@@ -80,5 +80,33 @@ export default {
     height:3px;
     background:#fff;
     bottom:0;
+}
+@media screen and (max-width:1000px){
+    .pageBanner{
+        height:7rem;
+        background-size: auto 100%;
+        background-position: center;
+    }
+    .slogan{
+        width: 80%;
+        margin-left:10px;
+    }
+    .pageTitle{
+        padding-bottom: .3rem;
+    }
+    .pageTitle h1{
+        font-size:.48rem;
+    }
+    .pageTitle span{
+        font-size:.2rem;
+    }
+    .vice-title{
+        font-size:.24rem;
+        padding:.3rem 0;
+    }
+    .describe{
+        font-size:.2rem;
+        padding-bottom:.3rem;
+    }
 }
 </style>

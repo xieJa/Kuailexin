@@ -1,6 +1,6 @@
 <template>
     <div class="productDetail">
-        <crumbs></crumbs>
+        <crumbs v-if="!this.$M"></crumbs>
         <div class="cover">
             <h2 class="product-name">{{this.$route.query.name}}</h2>
             <div class="swiper-container product-show">
@@ -92,17 +92,14 @@ export default {
     },
     mounted:function(){
         new this.$Swiper ('.product-show', {
-            navigation: {
-            nextEl: '.product-next',
-            prevEl: '.product-prev',
-            },
+            prevButton:'.product-prev',
+		    nextButton:'.product-next',
         });
+        let other = this.$M ? 1 : 2;
         new this.$Swiper ('.product-other', {
-            slidesPerView : 2,
-            navigation: {
-            nextEl: '.product-other-next',
-            prevEl: '.product-other-prev',
-            },
+            slidesPerView : other,
+            prevButton:'.product-other-prev',
+		    nextButton:'.product-other-next',
         });
     },
     destroyed:function(){
@@ -156,5 +153,40 @@ export default {
 .product-item{
   height:230px;  
   margin:20px;
+}
+@media screen and (max-width:1000px){
+    .product-name{
+        font-size:.36rem;
+        margin-top:20px;
+        margin:20px 10px 0 10px;
+    }
+    .product-show{
+        margin:.2rem 10px;
+    }
+    .hot{
+        width:20%;
+    }
+    .product-inner,.share{
+        padding:10px;
+        font-size: 14px;        
+    }
+    .other-related{
+        margin-top:1rem;
+        border-top:10px solid #f1f1f1;
+        padding:0 10px;
+    }
+    .other-related:after{
+        left:10px;
+        width: 1.5em;
+    }
+    .product-other{
+        margin:0 20px;
+    }
+    .relative .swiper-button-black,.product-show .swiper-button-black{
+            transform: scale(.5);
+    }    
+    .product-info a{
+        line-height: .6rem;
+    }
 }
 </style>

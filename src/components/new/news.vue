@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
 import newList from './newList'
 import Case from './case'
 export default {
@@ -34,7 +32,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,newList,Case
+        newList,Case
     },
     watch:{
         '$route'(to,from){            

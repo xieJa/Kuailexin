@@ -54,7 +54,11 @@ export default {
 }
 .about-info p{
     padding-bottom:10px;
-    text-indent:2em;
     line-height: 24px;
+}
+@media screen and (max-width:1000px){    
+    .about-info{
+        padding:40px 10px 0 10px;
+    }
 }
 </style>

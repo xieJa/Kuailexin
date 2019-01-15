@@ -28,7 +28,7 @@
         <li @click="tapJump('showbehind',1)">
           <img src="../../assets/pic1.jpg" alt>
           <p>快乐星汉堡常州人民路店</p>
-        </li>        
+        </li>
       </ul>
       <a href="#" class="moreBtn">加载更多</a>
     </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="swiper-slide">
                 <img src="../../assets/pic1.jpg" alt>
-              </div>              
+              </div>
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
             <div class="swiper-button-next swiper-button-white entry"></div>
@@ -85,34 +85,46 @@ export default {
   name: "DecorationEffect",
   data() {
     return {
-      isShow:''
+      isShow: ""
     };
   },
   methods: {
-    tapJump: function(el,index) {
-        this.isShow=el;
-        this.$nextTick(function(){
-            new this.$Swiper("."+el, {
-                    pagination: {
-                        el: "."+el+"-pagination",
-                        type: "fraction"
-                    },
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev"
-                    },
-                    initialSlide: index
-            });
+    tapJump: function(el, index) {
+      this.isShow = el;
+      this.$nextTick(function() {
+        new this.$Swiper("." + el, {
+          pagination: "." + el + "-pagination",
+          paginationType: "fraction",
+          prevButton: ".swiper-button-prev",
+          nextButton: ".swiper-button-next",
+          initialSlide: index
         });
-        document.body.classList.add('swiper-slide')  
+      });
+      /*微信浏览器特殊处理*/
+      if (
+        window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) ==
+        "micromessenger"
+      ) {
+        document.addEventListener(
+          "touchmove",
+          function(event) {
+            event.preventDefault();
+          },
+          false
+        );
+      }
+      document.body.classList.add("swiper-slide");
     },
-    tapShade:function(e){
-        if(!(e.target instanceof Image) && e.target.className.indexOf('entry')===-1){
-            this.isShow=false;
-            document.body.classList.remove('swiper-slide')
-        }
+    tapShade: function(e) {
+      if (
+        !(e.target instanceof Image) &&
+        e.target.className.indexOf("entry") === -1
+      ) {
+        this.isShow = false;
+        document.body.classList.remove("swiper-slide");
+      }
     }
-  },
+  }
 };
 </script>
 
@@ -134,7 +146,7 @@ export default {
   position: relative;
   transition: all 0.5s;
   cursor: pointer;
-  margin-bottom:3%;
+  margin-bottom: 3%;
 }
 .shop-style li img {
   max-width: none;
@@ -168,7 +180,7 @@ export default {
 }
 
 .shop-behind .shop-style li {
-    width:48.5%;
+  width: 48.5%;
 }
 .shop-behind li:nth-child(2n) {
   margin-left: 3%;
@@ -214,5 +226,46 @@ export default {
 }
 .swiper-pagination-fraction > :first-child {
   font-size: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+  .shop-style li {
+    width: 80%;
+    height: 3.6rem;
+    padding-bottom: 30px;
+    margin: 0 10%;
+    border: 0;
+  }
+  .shop-front li:nth-child(3n-1) {
+    margin: 0 10%;
+  }
+  .shop-style li p {
+    transform: translateY(0);
+    background: #fff;
+    padding: 10px 0 20px 0;
+  }
+
+  .shop-behind .shop-style {
+    padding: 0 10px;
+  }
+  .shop-behind .shop-style li {
+    width: 100%;
+    padding-bottom: 0;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .shop-behind li:nth-child(2n) {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .shop-behind li p {
+    display: none;
+  }
+  .swiper-container {
+    height: auto;
+  }
+  .shade {
+    background: rgba(0, 0, 0, 0.8);
+  }
 }
 </style>

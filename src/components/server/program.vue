@@ -121,10 +121,8 @@ export default {
     methods:{
         swiper:function(){
              new this.$Swiper(".swiper1", {
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev"
-                    },
+                    prevButton:'.swiper-button-prev',
+		            nextButton:'.swiper-button-next',
             });
         }
     },
@@ -182,5 +180,45 @@ export default {
     margin-bottom: 20px;
     font-size:18px;
     font-weight:bold
+}
+@media screen and (max-width:1000px){
+    h3{
+        padding:0 10px;
+        font-size: .38rem;
+        font-weight: 400;
+    }
+    .program p{
+        padding:0 10px;
+    }
+    .program-item dt{
+        padding-bottom:0;
+        border:0;
+    }
+    .program-item{
+        padding:0 10px;
+        margin-top:10px;
+        border-top: 10px solid #f1f1f1;
+    }
+    .program-item .swiper-container{
+        position:relative;
+        width:100%;
+    }
+    .program-item-intro,.v-middle{
+        width: 100%;
+        position:initial;
+        transform: translateY(0);
+    }
+    .program-item-intro .name{
+        margin: 10px 0;
+    }
+    .program-item-intro p,.program-item dd p{
+        margin:0;
+        padding:0;
+    }
+    .program-item dd .title{
+        font-size: 16px;
+        margin-bottom:.2rem;
+        font-weight: 400;
+    }
 }
 </style>

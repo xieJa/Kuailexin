@@ -15,9 +15,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
-import PageView from '../PageView'
 import Project from './project'
 import DecorationEffect from './Decorationeffect'
 import Cartoon from './cartoon'
@@ -43,7 +40,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,PageView,Project,DecorationEffect,Cartoon,brandVI,brandIP
+        Project,DecorationEffect,Cartoon,brandVI,brandIP
     },
     watch:{
         '$route'(to,from){            

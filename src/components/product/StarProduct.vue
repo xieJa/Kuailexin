@@ -92,4 +92,24 @@ export default {
     max-width: 233px;
     margin-left:20%;
 }
+@media screen and (max-width:1000px){
+    .StarProduct-list li{
+        margin-bottom: 10px;
+    }
+    .product-item{
+        height: 5rem;
+    }
+    .product-info .name{
+        font-size: .4rem;
+    }
+    .product-info a{
+        font-size: 14px;
+        line-height: .6rem;
+        width: 60%;
+        max-width: none;
+    }
+    .product-item .hot{
+        width: 20%;
+    }
+}
 </style>

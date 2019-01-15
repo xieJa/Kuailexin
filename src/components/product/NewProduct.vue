@@ -6,7 +6,7 @@
                 <div class="ad-inner">
                     <div class="ad-bt">快乐星昔果乐</div>
                     <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                    <ol>
+                    <ol class="clearfix">
                         <li>新鲜西柚</li>
                         <li>鲜奶</li>
                     </ol>
@@ -102,5 +102,35 @@ export default {
     left:0;
     top:50%;
     margin-top:-4px;
+}
+@media screen and (max-width:1000px){
+    .newProduct{
+        background:#eaeaea;
+        margin: 40px 0 0 0;
+        padding-top:0;
+    }
+    .newProduct-list>li{
+        margin-bottom:10px;
+        background:#fff;
+        padding-bottom:.1rem;
+        border-color:#d8d8d8;
+    }
+    .newProduct-list .ad-pic{
+        width:100%;
+    }
+    .newProduct-list .ad-inner{
+        position:initial;
+        width: 100%;
+        box-sizing: border-box;
+        transform: translateY(0);
+    }
+    .newProduct-list .ad-bt{
+        font-size:.36rem;        
+        margin:.36rem 0 0 0;
+    }
+    .newProduct-list ol{
+        margin-top:.2rem;
+        margin-bottom:.2rem;
+    }
 }
 </style>

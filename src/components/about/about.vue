@@ -5,24 +5,32 @@
         <div class="cover">
             <ul class="information clearfix" v-if="pTitle=='公司简介'">
                 <li>
-                    <span class="t-num">2008</span>
+                    <span class="t-num">
+                        <animated-integer v-bind:value="2008"></animated-integer>
+                    </span>
+                    
                     <p>成立于2008年</p>
                 </li>
                 <li>
-                    <span class="t-num">100+</span>
+                    <span class="t-num">
+                        <animated-integer v-bind:value="100"></animated-integer>+
+                    </span>
                     <p>100+名专业伙伴为您服务</p>
                 </li>
                 <li>
-                    <span class="t-num">3000+</span>
+                    <span class="t-num">
+                        <animated-integer v-bind:value="3000"></animated-integer>+
+                    </span>
                     <p>3000+加盟商与您一起成长</p>
                 </li>
                 <li>
-                    <span class="t-num">190000+</span>
+                    <span class="t-num">
+                        <animated-integer v-bind:value="190000"></animated-integer>+
+                    </span>
                     <p>190000+全国粉丝会员客户</p>
                 </li>
             </ul>
-            <PageTitle :title="pTitle" :description="description" v-if="pTitle!='公司简介'"></PageTitle>        
-            
+            <PageTitle :title="pTitle" :description="description" v-if="pTitle!='公司简介'"></PageTitle>                    
             <TimeLine v-if="pTitle=='发展历程'"></TimeLine>
             <Team v-else-if="pTitle=='优秀团队'"></Team>
             <TeamView v-else-if="pTitle=='优秀个人'"></TeamView>
@@ -33,9 +41,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
-import PageView from '../PageView'
 import TimeLine from '../about/TimeLine'
 import Team from '../about/Team'
 import TeamView from '../about/TeamView'
@@ -57,7 +62,7 @@ export default {
         }
     },
     components:{
-        PageBanner,PageTitle,PageView,TimeLine,JoinHotline,Team,TeamView
+        TimeLine,JoinHotline,Team,TeamView
     },
     created:function(){
              
@@ -78,7 +83,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cover{
     position: relative;
 }
@@ -109,5 +114,24 @@ export default {
 .information li p{
     font-size:18px;
 }
-
+@media screen and (max-width: 1000px){
+    .information{
+        margin:0 10px;
+        transform: translateY(-30%);
+    }
+    .information li{
+        width:50%;
+        padding:.45rem 0;
+        border-top: 1px solid #eaeaea;
+    }
+    .information li .t-num{
+        font-size:.48rem;
+    }
+    .information li p{
+        font-size:.18rem;
+    }
+    .information+div{
+        top:-60px;
+    }
+}
 </style>

@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
 import Contactus from './contactus'
 import Message from './Message'
 import complain from './complain'
@@ -36,7 +34,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,Contactus,Message,complain
+        Contactus,Message,complain
     },
     watch:{
         '$route'(to,from){            
@@ -45,7 +43,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

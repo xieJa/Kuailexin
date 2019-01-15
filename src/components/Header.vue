@@ -29,7 +29,7 @@
     <div :style="{ background :'rgba(255,255,255,'+ headOpacity+' )'}">
       <div class="top-body">
         <div class="hd-logo">
-          <img src="../assets/logo.png">
+          <router-link to="/"><img src="../assets/logo.png"></router-link>
         </div>
         <ul class="hd-menu">
           <li>
@@ -313,7 +313,9 @@ export default {
     },
     topSearch: function() {
       if (this.searchbox) {
-        console.log("搜索");
+        this.$router.push({
+          path:'/search'
+        })
       }
     },
     handleClick: function() {
@@ -412,6 +414,7 @@ export default {
 .top-body .hd-logo {
   float: left;
   height: 100%;
+  width:165px;
 }
 .top-body .hd-logo:after {
   content: "";

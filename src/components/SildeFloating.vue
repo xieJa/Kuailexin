@@ -1,6 +1,6 @@
 <template>
   <div class="Silde-float">
-  	<div class="silde-contact">
+  	<div class="silde-contact" v-if="!this.$M">
   		<ul>
   			<li><a href="#"><i class="iconfont icon-kefu"></i><p>在线咨询</p></a></li>
   			<li><a href="#"><i class="iconfont icon-qq"></i><p>QQ咨询</p></a></li>
@@ -8,6 +8,9 @@
   			<li><a href="javascript:;"><img src="../assets/qrcode.jpg"><p>扫码咨询</p></a></li>
   		</ul>
   	</div>
+	<transition  name="fade">
+		<div class="shade"  v-if="this.$M"  v-show="message"></div>
+	</transition>
   	<div class="message-board" v-show="message">
   		<div class="message-board-inner">
   			<div class="cover relative">
@@ -93,8 +96,8 @@ export default {
 .silde-contact a:hover span{transform: translateX(-86px);}
 .silde-contact .iconfont{font-size: 30px;}
 .silde-contact img{width: 60px;}
-.message-board{height:170px;}
-.message-board-inner{position: fixed;left:0;bottom:0;width:100%;height:170px;background:rgba(0,0,0,.85);z-index: 998;}
+.message-board{height:170px;position: fixed;left:0;bottom:0;z-index: 998;width:100%;background:rgba(0,0,0,.85);}
+.message-board-inner{height:170px;}
 .message-board-inner .cover{height:100%;}
 .message-board-inner .icon-guanbi{position:absolute;display:block;right:0;top:10px;line-height:100%;background:#fff;border-radius: 50%;padding:5px;cursor: pointer;}
 .message-board-l{line-height: 54px;position: absolute;top:50%;transform:translateY(-50%);}
@@ -114,4 +117,73 @@ export default {
 .message-btn{bottom:44px;}
 .message-btn .iconfont{font-size:20px;}
 .fixedtool .a-tool:hover{transform: translateX(44px);}
+@media screen and (max-width:1000px){
+	.message-board{
+		background:#fff;
+		height:auto;
+		width:90%;
+		left:5%;
+		top:20%;
+		bottom:auto;
+		z-index: 1000;;
+	}
+	.message-board-inner{
+		padding:20px;
+		height:auto;
+	}
+	.message-board-l,.message-board-r{
+		position:inherit;
+		transform:translateY(0);
+		line-height: inherit;
+		right:auto;
+	}
+	.message-board-l p{
+		font-size:.36rem;
+		color:#000000;
+	}
+	.message-board-inner span{
+		font-size:.24rem;
+	}
+	.message-board-r{
+		position: relative;
+		padding-bottom:30px;
+	}
+	.message-board-r label{
+		border-color:#dfdfdf;
+		color:#666666;
+		width:100%;
+		margin:0;
+		margin-top:10px;
+		box-sizing: border-box;		
+	}
+	.message-board-r label span{
+		font-size: 14px;
+	}
+	.message-board-r label input{
+		color:#333;
+		font-size: 14px;
+		line-height: 40px;
+	}
+	.message-board-r input[type="submit"]{
+		width:100%;
+		padding:0;
+		margin-top:10px;
+	}
+	.message-board-r span.red{
+		position: absolute;
+		left:0;
+		bottom:0;
+		width:100%;
+		text-align: center;
+	}
+	.message-board-inner .icon-guanbi{
+		top:auto;
+		right:50%;
+		transform: translateX(50%);
+		bottom:-60px;
+	}
+	.fixedtool .a-tool{
+		background:rgba(0,0,0,.2);
+	}
+}
 </style>

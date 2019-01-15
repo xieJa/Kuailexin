@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
 import NewProduct from './NewProduct'
 import StarProduct from './StarProduct'
 import GeneralProduct from './GeneralProduct'
@@ -46,7 +44,7 @@ export default {
        }
     },
     components:{
-        PageBanner,PageTitle,NewProduct,StarProduct,GeneralProduct
+        NewProduct,StarProduct,GeneralProduct
     },
     watch:{
         '$route'(to,from){     

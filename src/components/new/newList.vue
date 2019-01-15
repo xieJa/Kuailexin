@@ -41,7 +41,7 @@
                 </div>
             </li>
         </ul>
-        <p style="text-align:center;margin-bottom:60px;">
+        <p style="text-align:center;">
             <button class="moreBtn">加载更多</button>       
         </p>
     </div>
@@ -111,5 +111,38 @@ export default {
     background:#c8161e;
     color:#fff;
     border:1px solid #c8161e;
+}
+.moreBtn{
+    margin-bottom:60px;
+}
+@media screen and (max-width:1000px){
+    .newlist{
+        background:#f1f1f1;
+    }
+    .newlist li{
+        padding:10px;
+        background:#fff;
+        margin-bottom:10px;
+    }
+    .newlist .newPic{
+        width: 100%;
+    }
+    .new-inner{
+        width: 100%;        
+        margin-left: 0;
+    }
+    .new-inner .new-intro{
+        margin:0;
+        height: 64px;
+    }
+    .new-inner a{
+        margin:20px auto;
+        border:0;
+        background:#c8161e;
+        color:#fff;
+        width: 180px;
+        height: 36px;
+        line-height: 36px;
+    }
 }
 </style>

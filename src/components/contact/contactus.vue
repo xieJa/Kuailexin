@@ -55,7 +55,7 @@ export default {
       strokeOpacity: 0.5
     }); //定义折线
     map.addOverlay(polyline); //添加折线到地图上
-    map.enableScrollWheelZoom(true);
+    map.disableDragging();
     // 公司地址地图
     
     //普通地图展示
@@ -124,5 +124,29 @@ export default {
   font-size:24px;
   color:#c8161e;
   line-height: 2;
+}
+@media screen and (max-width:1000px){
+    .contactus .intro{
+        font-size:.3rem;
+    }
+    #allmap{
+      width:calc(100% - 20px);
+      margin:0 10px;
+      height:6rem;
+    }
+    .here{
+      padding:10px;
+      display: table;
+    }
+    .here-info{
+      float:none;
+      width: 100%;
+      display: table-footer-group;
+    }
+    #companymap{
+      width:100%;
+       height:6rem;
+       display: table-header-group;
+    }
 }
 </style>

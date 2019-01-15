@@ -1,11 +1,11 @@
 <template>
   <div class="join-in">
-    <div class="title">请填写下列信息申请加盟（*为必填项）</div>
+    <div class="title" v-if="!this.$M">请填写下列信息申请加盟（*为必填项）</div>
     <el-form ref="form" :model="form" label-width="80px" :rules="rules">
-      <el-form-item label="姓名" prop="name">
+      <el-form-item label="姓名" prop="name" v-if="!this.$M">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
-      <el-form-item label="性别">
+      <el-form-item label="性别" v-if="!this.$M">
         <el-radio-group v-model="form.sex">
           <el-radio label="男">先生</el-radio>
           <el-radio label="女">女士</el-radio>
@@ -14,10 +14,10 @@
       <el-form-item label="手机" prop="tel">
         <el-input v-model="form.tel"></el-input>
       </el-form-item>
-      <el-form-item label="E-mail" prop="email">
+      <el-form-item label="E-mail" prop="email" v-if="!this.$M">
         <el-input v-model="form.email"></el-input>
       </el-form-item>
-      <el-form-item label="地址">
+      <el-form-item label="地址" v-if="!this.$M">
         <el-select v-model="form.region" placeholder="省份" style="width:49%;float:left;">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
@@ -27,10 +27,10 @@
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="!this.$M">
         <el-input v-model="form.name" placeholder="请输入详细地址"></el-input>
       </el-form-item>
-      <el-form-item label="餐饮经验">
+      <el-form-item label="餐饮经验" v-if="!this.$M">
         <el-radio-group v-model="form.resource">
           <el-radio label="男">有</el-radio>
           <el-radio label="女">无</el-radio>
@@ -54,16 +54,16 @@
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="预约时间">
+      <el-form-item label="预约时间" v-if="!this.$M">
         <el-date-picker v-model="value10" type="date" placeholder="选择日期" format="yyyy/MM/dd " :picker-options="pickerOptions0"></el-date-picker>
       </el-form-item>
-      <el-form-item label="获知渠道">
+      <el-form-item label="获知渠道" v-if="!this.$M">
         <el-select v-model="form.region" placeholder="请选择">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="需求信息">
+      <el-form-item label="需求信息" v-if="!this.$M">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
       <el-form-item>

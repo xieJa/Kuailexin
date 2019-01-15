@@ -8,7 +8,7 @@
 		  		<div class="ft-text"><b>联系电话：</b><span class="red">021-51853656</span></div>
 		  		<div class="qr-code"><img src="../assets/qrcode.jpg"><img src="../assets/qrcode.jpg"></div>
 		  	</div>
-		  	<div class="footer-r">
+		  	<div class="footer-r"  v-if="!this.$M">
 		  		<dl>
 		  			<dt>关于我们</dt>
 		  			<dd>
@@ -137,4 +137,36 @@ export default {
 .website-records a{margin:0 10px;}
 .copyright{text-align: center;line-height: 45px;background: #111111;color: #fff;}
 .copyright a{color: #fff;}
+
+@media screen and (max-width:1000px){
+	.footer{
+		border-top:.2rem solid #f4f4f4;
+		padding-top:30px;
+	}
+	.footer-l{
+		float:none;
+		text-align: center;
+		padding:0 10px;
+		font-size:.24rem
+	}
+	.website-records{
+		display:flex;
+		flex-wrap: wrap;
+		justify-content:center;
+		box-sizing: border-box;
+		padding:30px 10px;
+	}
+	.website-records a{
+		max-width:25%;
+		display: block;
+		margin:0;
+		padding:5px;
+		box-sizing: border-box;
+	}
+	.copyright{
+		line-height: 1.5;
+		font-size:.18rem;
+		padding:10px;
+	}
+}
 </style>

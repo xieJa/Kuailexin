@@ -17,9 +17,6 @@
 </template>
 
 <script>
-import PageBanner from '../PageBanner'
-import PageTitle from '../PageTitle'
-import PageView from '../PageView'
 import Credit from './Credit'
 import mapSide from './mapSide'
 import program from './program'
@@ -47,7 +44,7 @@ export default {
         this.pTitle=this.$route.query.name
     },
     components:{
-        PageBanner,PageTitle,PageView,Credit,mapSide,program,example,joinIn,Train,FAQ
+        Credit,mapSide,program,example,joinIn,Train,FAQ
     },
     watch:{
         '$route'(to,from){            
