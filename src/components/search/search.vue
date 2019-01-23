@@ -2,7 +2,7 @@
   <div class="search">
     <div class="cover" v-if="!this.$M">
       <crumbs>
-        <a href="javascript:;">{{this.$route.query.Key}}</a>
+        <a href="javascript:;">搜索</a>
       </crumbs>
       <div class="searchBox">
         <input type="text" placeholder="请输入搜索关键字" v-model="searchKeyValue">
