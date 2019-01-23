@@ -1,54 +1,65 @@
 <template>
     <div class="newProduct cover">
         <ul class="newProduct-list">
-            <li @click="tapJump()">
-                <div class="ad-pic"><img src="@/assets/ad_01.jpg"></div>
+            <li v-for="item in list" :key="item.Id">
+                <div class="ad-pic"><img :src="item.Image"></div>
                 <div class="ad-inner">
-                    <div class="ad-bt">快乐星昔果乐</div>
-                    <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
+                    <div class="ad-bt">{{item.Title}}</div>
+                    <p>{{item.Description}}</p>
                     <ol class="clearfix">
-                        <li>新鲜西柚</li>
-                        <li>鲜奶</li>
+                        <li v-for="self in item.Products" :key="self.Id">{{self.Title}}</li>
                     </ol>
                 </div>
-            </li>
-            <li>
-                <div class="ad-pic"><img src="@/assets/ad_01.jpg"></div>
-                <div class="ad-inner">
-                    <div class="ad-bt">快乐星昔果乐</div>
-                    <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                </div>
-            </li>
-            <li>
-                <div class="ad-pic"><img src="@/assets/ad_01.jpg"></div>
-                <div class="ad-inner">
-                    <div class="ad-bt">快乐星昔果乐</div>
-                    <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                </div>
-            </li>
-            <li>
-                <div class="ad-pic"><img src="@/assets/ad_01.jpg"></div>
-                <div class="ad-inner">
-                    <div class="ad-bt">快乐星昔果乐</div>
-                    <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                </div>
-            </li>
+            </li>            
         </ul>
-        <button class="moreBtn">加载更多</button>        
+        <LoadMore>            
+            <button class="moreBtn" @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+            <p v-else>没有更多信息了</p>
+        </LoadMore>   
     </div>
 </template>
 
 <script>
 export default {
     name:'NewProduct',
-    methods:{
-        tapJump:function(){
-            this.$router.push({
-                path:'/Product/ProductDetail',
-                query:{name:'快乐星昔果乐'}               
-            })
+    data(){
+        return{
+            list:[],
+            lastPage:true,
+            pageIndex:1,
         }
     },
+    created:function(){
+        this.loadList()
+    },
+    methods:{        
+        loadList:function(){
+            let that = this;
+            this.$axios.get('/ajaxdata.aspx?Action=newproductlist',{
+                params:{
+                    pageIndex:that.pageIndex,
+                    pageSize:6
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                    console.log(res)
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }                   
+            })
+        },
+        more:function(){
+            if(this.lastPage){
+                this.loadList()
+            }
+        }
+    }
+    
     
 }
 </script>
@@ -69,8 +80,8 @@ export default {
 .newProduct-list>li:hover{
     box-shadow: 0 5px 13px rgba(0,0,0,.16);
 }
-.newProduct-list .ad-pic{width: 60%;display:inline-block;}
-.newProduct-list .ad-pic img{width:100%;}
+.newProduct-list .ad-pic{width: 60%;position:relative;padding-bottom: 35.4%;overflow: hidden;}
+.newProduct-list .ad-pic img{width:100%;position: absolute;left:0;}
 .newProduct-list .ad-inner{width: 30%;text-align: left;position: absolute;left:60%;top:50%;transform:translateY(-50%);padding:0 5%;}
 .newProduct-list .ad-bt{font-size: 24px;margin-bottom: 36px;}
 .newProduct-list p{font-size: 14px;color: #999999;max-height: 64px;overflow: hidden;}
@@ -79,6 +90,9 @@ export default {
 }
 .newProduct-list li:nth-child(even) .ad-inner{
     left:0%;
+}
+.newProduct-list li:nth-child(even) .ad-pic{
+    left:40%;
 }
 .newProduct-list ol{
     margin-top:40px;

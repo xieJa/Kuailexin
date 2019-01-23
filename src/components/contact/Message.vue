@@ -2,39 +2,32 @@
   <div class="join-in">
     <div class="title">欢迎来到快乐星，以下填写的隐私信息，快乐星承诺绝不透露给第三方！</div>
     <el-form ref="form" :model="form" label-width="120px" :rules="rules">
-      <el-form-item label="姓名" prop="name">
-        <el-input v-model="form.name"></el-input>
+      <el-form-item label="姓名" prop="UserName">
+        <el-input v-model="form.UserName"></el-input>
       </el-form-item>
       <el-form-item label="性别">
-        <el-radio-group v-model="form.sex">
+        <el-radio-group v-model="form.Sex">
           <el-radio label="男">先生</el-radio>
           <el-radio label="女">女士</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="手机" prop="tel">
-        <el-input v-model="form.tel"></el-input>
+      <el-form-item label="手机" prop="Telephone">
+        <el-input v-model="form.Telephone"></el-input>
       </el-form-item>
-      <el-form-item label="接收QQ或微信" prop="email">
-        <el-input v-model="form.email"></el-input>
+      <el-form-item label="接收QQ或微信">
+        <el-input v-model="form.QQWechat"></el-input>
       </el-form-item>
-      <el-form-item label="地址">
-        <el-select v-model="form.region" placeholder="省份" style="width:49%;float:left;">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
-        <el-select v-model="form.region" placeholder="城市" style="width:49%;margin-left:2%;">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
+      <el-form-item label="地址" v-if="!this.$M">
+        <el-cascader :options="siteOptions" @active-item-change="handleItemChange" :props="props"></el-cascader>
       </el-form-item>
-      <el-form-item>
-        <el-input v-model="form.name" placeholder="请输入详细地址"></el-input>
+      <el-form-item v-if="!this.$M">
+        <el-input v-model="Address" placeholder="请输入详细地址"></el-input>
       </el-form-item>
-      <el-form-item label="留言内容:">
-        <el-input type="textarea" v-model="form.desc" :rows="7"></el-input>
+      <el-form-item label="留言内容">
+        <el-input type="textarea" v-model="form.Content" :rows="7"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox >接收开店资料</el-checkbox>
+        <el-checkbox v-model="form.Receive">接收开店资料</el-checkbox>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('form')">立即提交</el-button>
@@ -46,41 +39,36 @@
 
 <script>
 import pageQrcode from "../pageQrcode";
+import siteData from "@/json/sitedata_bas.js";
+import Qs from 'qs'
 export default {
   name: "Message",
   data() {
     return {
       form: {
-        name: "",
-        tel:'',
-        email:'',
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        sex: "男",
-        resource: "有",
-        desc: ""
-      },
-      value10: "",
-      pickerOptions0: {
-          disabledDate(time) {
-            return time.getTime() < Date.now() - 8.64e7;
-          }
-      },
+        UserName: "",
+        Sex:'',
+        Telephone:'',
+        Receive: "",
+        QQWechat: "",
+        Address: "",
+        Content: ""
+      },   
+      siteOptions: siteData.arrCity,  //城市数据
+      site:'',  //城市
+      Address:'',  //详细地址
+      props: {
+        value: 'label',
+        children:'sub'
+      },   
       rules: {
-        name: [
+        UserName: [
           { required: true, message: "请输入姓名", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
         ],
-        tel: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { pattern: /^1[345678]\d{9}$/, message: '请输入正确的手机号', trigger: ['blur', 'change'] }
-        ],
-        email: [
-          { type: 'email',  message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-        ]        
+        Telephone: [
+          { pattern: /^1[345678]\d{9}$/, message: '请输入正确的手机号', trigger: ['change'] }
+        ]     
       }
     };
   },
@@ -89,14 +77,33 @@ export default {
       simulatorform.radioButton(name, $event);
     },
     submitForm(formName) {
+      this.form.Address = this.site+','+this.Address
+      this.form.Receive = this.form.Receive=='true'?'是':'否'
+      let that = this;
       this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("submit!");
+        if (valid) {          
+          this.$axios.post("/ajaxdata.aspx?Action=Message",Qs.stringify(that.form))
+          .then(function(res){
+            if(res.data.result){
+              alert("留言成功")
+            }else{
+              alert("留言失败")
+            }
+            for(let name in that.form){
+              that.form[name]="";
+            }
+          })
+          .catch(function(err){
+            console.log(err)
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    handleItemChange(val) {
+      this.site = val
     }
   },
   components: {
@@ -120,7 +127,7 @@ export default {
     margin:0 auto;
     margin-top:50px;
 }
-.el-select{
+.el-select,.el-cascader{
     width:100%;
 }
 .el-button{

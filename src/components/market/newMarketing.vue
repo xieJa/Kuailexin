@@ -1,40 +1,19 @@
 <template>
     <div class="newMarket">
            <ul class="clearfix">
-               <li @click="tabJump()">
+               <li @click="tabJump(item.Id)" v-for="item in list" :key="item.Id">
                    <div class="newProPic">                       
-                       <img src="@/assets/market.jpg" alt="">
+                       <img :src="item.Image" alt="">
                    </div>
-                   <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
-                   <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
-                   <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
-                   <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</p>
-                   <span>2015-07-20 — 2015-07-21</span>
-                   <em class="new-icon" v-if="newIcon"><img src="@/assets/new_icon.png" alt=""></em>
-               </li>
+                   <p>{{item.Title}}</p>
+                   <span>{{item.StartDate}} — {{item.EndDate}}</span>
+                   <em class="new-icon" v-if="item.New=='是'"><img src="@/assets/new_icon.png" alt=""></em>
+               </li>               
            </ul>
-           <a href="#" class="moreBtn">加载更多</a>           
+           <LoadMore>            
+                <button class="moreBtn"  @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+                <p v-else>没有更多信息了</p>
+            </LoadMore> 
     </div>    
 </template>
 
@@ -43,32 +22,55 @@ export default {
     name:'Marketing',
     data(){
         return{
+           list:[],
            newIcon:true,
-           asb:'123'
+           asb:'123',
+           lastPage:true,
+           pageIndex:1
         }
     },
     created:function(){   
-        if(this.$route.query.name === '新品营销') {
-            this.newIcon =true
-        }else{
-            this.newIcon =false
-        }
+        this.list = [];
+        this.loadNewProduct();
     },
     methods:{
-        tabJump:function(){
+        tabJump:function(id){
             this.$router.push({
                 path:'/market/Marketingdetail',
-                query:{name:111}
+                query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:id}
             })
+        },
+        loadNewProduct:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=list",{
+                params:{
+                    Object:that.$route.query.Object,
+                    pageIndex:that.pageIndex,
+                    pageSize:6,
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }  
+            })
+        },       
+        more:function(){
+            if(this.lastPage){
+                this.loadNewProduct()
+            }
         }
     },
     watch:{
-        '$route':function(){     
-            if(this.$route.query.name === '新品营销') {
-                this.newIcon =true
-            }else{
-                this.newIcon =false
-            }
+        '$route'(to,from){   
+            this.list = [];
+            this.pageIndex = 1;
+            this.loadNewProduct();
         }
     }
 }
@@ -94,7 +96,7 @@ export default {
 .newMarket li .newProPic{
     transition:all .5s;
     position: relative;
-    padding-bottom: 61%;
+    padding-bottom: 59%;
     overflow: hidden;
 }
 .newMarket li .newProPic img{

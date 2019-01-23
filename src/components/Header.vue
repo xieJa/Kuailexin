@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header pc-head">
     <div class="site-nav" :style="{ background :'rgba(0,0,0,'+ headOpacity+' )'}">
       <div class="site-nav-bd">
         <div class="site-nav-bd-l">
@@ -17,6 +17,7 @@
               <em v-show="!searchbox">搜索</em>
               <input
                 type="text"
+                v-model="searchKeyValue"
                 placeholder="请输入关键字"
                 :class="searchbox?'active':''"
                 @keyup.enter="topSearch"
@@ -31,34 +32,35 @@
         <div class="hd-logo">
           <router-link to="/"><img src="../assets/logo.png"></router-link>
         </div>
-        <ul class="hd-menu">
+        <ul class="hd-menu" ref="hd-menu">
           <li>
-            <router-link to="/" @click.native="submenu=false">首页</router-link>
+            <router-link to="/" >首页</router-link>
           </li>
-          <li @click.stop="submenu='关于我们'">
-            <a href="javascript:;">关于我们</a>
+          <li data-value="关于我们">
+            <router-link to="/about/公司简介" data-value="关于我们">关于我们</router-link>
           </li>
-          <li @click.stop="submenu='新鲜美食'">
-            <a href="javascript:;">新鲜美食</a>
+          <li data-value="新鲜美食">
+            <router-link :to="{path:'/Product',query:{name:'新品动态'}}" data-value="新鲜美食">新鲜美食</router-link>
           </li>
-          <li @click.stop="submenu='品牌形象'">
-            <a href="javascript:;">品牌形象</a>
+          <li data-value="品牌形象">
+            <router-link :to="{path:'/brand',query:{name:'店面规划'}}" data-value="品牌形象">品牌形象</router-link>
           </li>
-          <li @click.stop="submenu='营销活动'">
-            <a href="javascript:;">营销活动</a>
+          <li data-value="营销活动">
+            <router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" data-value="营销活动">营销活动</router-link>
           </li>
-          <li @click.stop="submenu='加盟服务'">
-            <a href="javascript:;">加盟服务</a>
+          <li data-value="加盟服务">
+            <router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" data-value="加盟服务">加盟服务</router-link>
           </li>
-          <li @click.stop="submenu='新闻资讯'">
-            <a href="javascript:;">新闻资讯</a>
+          <li data-value="新闻资讯">
+            <router-link :to="{path:newNav[0].Title=='成功案例'?'/case':'/news',query:{Id:newNav[0].Id}}"  data-value="新闻资讯">新闻资讯</router-link>
           </li>
-          <li @click.stop="submenu='联系我们'">
-            <a href="javascript:;">联系我们</a>
+          <li data-value="联系我们">
+            <router-link :to="{path:'/contact',query:{name:'联系我们'}}" data-value="联系我们">联系我们</router-link>
           </li>
         </ul>
       </div>
     </div>
+    <transition name="fade" >
     <div
       class="submenu"
       v-show="submenu"
@@ -68,244 +70,126 @@
       <div class="cover relative">
         <i class="iconfont icon-guanbi" @click="submenu=!submenu"></i>
         <div class="submenu-item" v-show="submenu=='关于我们'">
-          <router-link to="/about/公司简介" @click.native="submenu=false">公司简介</router-link>
-          <router-link to="/about/企业愿景" @click.native="submenu=false">企业愿景</router-link>
-          <router-link to="/about/发展历程" @click.native="submenu=false">发展历程</router-link>
-          <router-link to="/about/体系建设" @click.native="submenu=false">体系建设</router-link>
-          <router-link to="/about/优秀团队" @click.native="submenu=false">优秀团队</router-link>
+          <router-link to="/about/公司简介" >公司简介</router-link>
+          <router-link to="/about/企业愿景" >企业愿景</router-link>
+          <router-link to="/about/发展历程" >发展历程</router-link>
+          <router-link to="/about/体系建设" >体系建设</router-link>
+          <router-link to="/about/优秀团队" >优秀团队</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新鲜美食'">
           <dl class="new-product clearfix">
             <dt>
-              <router-link
-                :to="{path:'/Product',query:{name:'新品动态'}}"
-                @click.native="submenu=false"
-              >新品动态 ></router-link>
+              <router-link :to="{path:'/Product',query:{name:'新品动态'}}">新品动态 ></router-link>
             </dt>
             <dd>
-              <div class="new-product-item">
-                <router-link
-                  :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                  @click.native="submenu=false"
-                >
+              <div class="new-product-item" v-for="item in newproductlist" :key="item.Id">
+                <router-link :to="{path:'/Product',query:{name:'新品动态'}}" @click.native="submenu=false">
                   <span>
-                    <img src="../assets/ad_03.jpg">
+                    <img :src="item.Image" :onerror="errorImg">
                   </span>
-                  <p>快乐星昔果乐</p>
+                  <p>{{item.Title}}</p>
                 </router-link>
-              </div>
-              <div class="new-product-item">
-                <router-link
-                  :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                  @click.native="submenu=false"
-                >
-                  <span>
-                    <img src="../assets/ad_03.jpg">
-                  </span>
-                  <p>快乐星昔果乐</p>
-                </router-link>
-              </div>
-              <div class="new-product-item">
-                <router-link
-                  :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                  @click.native="submenu=false"
-                >
-                  <span>
-                    <img src="../assets/ad_03.jpg">
-                  </span>
-                  <p>快乐星昔果乐</p>
-                </router-link>
-              </div>
-              <div class="new-product-item">
-                <router-link
-                  :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                  @click.native="submenu=false"
-                >
-                  <span>
-                    <img src="../assets/ad_03.jpg">
-                  </span>
-                  <p>快乐星昔果乐</p>
-                </router-link>
-              </div>
+              </div>              
             </dd>
           </dl>
-          <dl>
+          <dl v-for="item in loadPro" :key="item.Id">
             <dt>
               <router-link
-                :to="{path:'/Product',query:{name:'明星产品'}}"
-                @click.native="submenu=false"
-              >明星产品 ></router-link>
+                :to="{path:'/Product',query:{name:item.Title,id:item.Id}}"                
+              >{{item.Title}} ></router-link>
             </dt>
             <dd>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >快乐鸡腿堡</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >脆皮全鸡</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >香辣鸡翅</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >招牌奶茶</router-link>
+              <router-link :to="{path:'/Product/ProductDetail',query:{Id:pro.Id}}" v-for="pro in item.child" :key="pro.Id">{{pro.Title}}</router-link>              
             </dd>
-          </dl>
-          <dl>
-            <dt>
-              <router-link
-                :to="{path:'/Product',query:{name:'时尚饮品'}}"
-                @click.native="submenu=false"
-              >时尚饮品 ></router-link>
-            </dt>
-            <dd>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >蓝莓冰沙</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >香溢可可</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >焦糖拿铁咖啡</router-link>
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <router-link
-                :to="{path:'/Product',query:{name:'经典主食'}}"
-                @click.native="submenu=false"
-              >经典主食 ></router-link>
-            </dt>
-            <dd>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >快乐鸡腿堡</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >奥尔良鸡腿堡</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >超级牛肉堡</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >劲烧牛肉煲</router-link>
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <router-link
-                :to="{path:'/Product',query:{name:'超值套餐'}}"
-                @click.native="submenu=false"
-              >超值套餐 ></router-link>
-            </dt>
-            <dd>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >快乐鸡腿堡套餐</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >全家桶</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >奥尔良套餐</router-link>
-            </dd>
-          </dl>
-          <dl>
-            <dt>
-              <router-link
-                :to="{path:'/Product',query:{name:'精美小食'}}"
-                @click.native="submenu=false"
-              >精美小食 ></router-link>
-            </dt>
-            <dd>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >快乐鸡腿堡套餐</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >全家桶</router-link>
-              <router-link
-                :to="{path:'/Product/ProductDetail',query:{name:'快乐星昔果乐'}}"
-                @click.native="submenu=false"
-              >奥尔良套餐</router-link>
-            </dd>
-          </dl>
+          </dl>          
         </div>
         <div class="submenu-item" v-show="submenu=='品牌形象'">
-          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" @click.native="submenu=false">店面规划</router-link>
-          <router-link :to="{path:'/brand',query:{name:'我们的店'}}" @click.native="submenu=false">我们的店</router-link>
-          <router-link :to="{path:'/brand',query:{name:'卡通形象'}}" @click.native="submenu=false">卡通形象</router-link>
-          <router-link :to="{path:'/brand',query:{name:'品牌VI'}}" @click.native="submenu=false">品牌VI</router-link>
-          <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" @click.native="submenu=false">品牌IP</router-link>
+          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" >店面规划</router-link>
+          <router-link :to="{path:'/brand',query:{name:'我们的店'}}" >我们的店</router-link>
+          <router-link :to="{path:'/brand',query:{name:'卡通形象'}}" >卡通形象</router-link>
+          <router-link :to="{path:'/brand',query:{name:'品牌VI'}}" >品牌VI</router-link>
+          <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" >品牌IP</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='营销活动'">
-          <router-link :to="{path:'/market',query:{name:'新品营销'}}" @click.native="submenu=false">新品营销</router-link>
-          <router-link :to="{path:'/market',query:{name:'节日营销'}}" @click.native="submenu=false">节日营销</router-link>
-          <router-link
-            :to="{path:'/market',query:{name:'日常营销'}}"
-            @click.native="submenu=false"
-          >日常营销</router-link>
-          <router-link :to="{path:'/market',query:{name:'微信点餐'}}" @click.native="submenu=false">微信点餐</router-link>
-          <router-link :to="{path:'/market',query:{name:'外卖运营'}}" @click.native="submenu=false">外卖运营</router-link>
-          <router-link :to="{path:'/market',query:{name:'嗨！抖音'}}" @click.native="submenu=false">嗨！抖音</router-link>
+          <router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
+          <router-link :to="{path:'/market/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
+          <router-link :to="{path:'/market/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
+          <router-link :to="{path:'/market',query:{name:'微信点餐'}}" >微信点餐</router-link>
+          <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
+          <a href="https://weibo.com/hanbaodian?topnav=1&wvr=6&topsug=1" target="_blank">晒！微博</a>
+          <router-link :to="{path:'/market/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='加盟服务'">
-          <router-link :to="{path:'/server',query:{name:'品牌资信'}}" @click.native="submenu=false">品牌资信</router-link>
-          <router-link :to="{path:'/server',query:{name:'如何选择'}}" @click.native="submenu=false">如何选择</router-link>
-          <router-link :to="{path:'/server',query:{name:'加盟流程'}}" @click.native="submenu=false">加盟流程</router-link>
-          <router-link :to="{path:'/server',query:{name:'在您身边'}}" @click.native="submenu=false">在您身边</router-link>
-          <router-link :to="{path:'/server',query:{name:'加盟方案'}}" @click.native="submenu=false">加盟方案</router-link>
-          <router-link :to="{path:'/server',query:{name:'装修指导'}}" @click.native="submenu=false">装修指导</router-link>
-          <router-link :to="{path:'/server',query:{name:'申请加盟'}}" @click.native="submenu=false">申请加盟</router-link>
-          <router-link :to="{path:'/server',query:{name:'培训系统'}}" @click.native="submenu=false">培训系统</router-link>
-          <router-link :to="{path:'/server',query:{name:'常见问题'}}" @click.native="submenu=false">常见问题</router-link>
+          <router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
+          <router-link :to="{path:'/server',query:{name:'如何选择'}}" >如何选择</router-link>
+          <router-link :to="{path:'/server',query:{name:'加盟流程'}}" >加盟流程</router-link>
+          <router-link :to="{path:'/server',query:{name:'在您身边'}}" >在您身边</router-link>
+          <router-link :to="{path:'/server/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
+          <router-link :to="{path:'/server/example',query:{name:'装修指导'}}" >装修指导</router-link>
+          <router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
+          <router-link :to="{path:'/server/Train',query:{name:'培训系统'}}" >培训系统</router-link>
+          <router-link :to="{path:'/server/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新闻资讯'">
-          <router-link :to="{path:'/news',query:{name:'品牌新闻'}}" @click.native="submenu=false">品牌新闻</router-link>
-          <router-link :to="{path:'/news',query:{name:'成功案例'}}" @click.native="submenu=false">成功案例</router-link>
-          <router-link :to="{path:'/news',query:{name:'加盟资讯'}}" @click.native="submenu=false">加盟资讯</router-link>
+          <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  v-for="(item,index) in newNav" :key="index">{{item.Title}}</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='联系我们'">
-          <router-link :to="{path:'/contact',query:{name:'联系我们'}}" @click.native="submenu=false">联系我们</router-link>
-          <router-link :to="{path:'/contact',query:{name:'在线留言'}}" @click.native="submenu=false">在线留言</router-link>
-          <router-link :to="{path:'/contact',query:{name:'投诉建议'}}" @click.native="submenu=false">投诉建议</router-link>
+          <router-link :to="{path:'/contact',query:{name:'联系我们'}}" >联系我们</router-link>
+          <router-link :to="{path:'/contact',query:{name:'在线留言'}}" >在线留言</router-link>
+          <router-link :to="{path:'/contact',query:{name:'投诉建议'}}" >投诉建议</router-link>
         </div>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   name: "Header",
+  metaInfo:function(){
+    return{
+      title:this.metaInfo.Title, // set a title
+      meta: [{                 // set meta
+        name: 'keyWords',
+        content: this.metaInfo.Keyword
+      },{                 // set meta
+        name: 'description',
+        content: this.metaInfo.Description
+      },{
+        name:'viewport',
+        content:'width=device-width,initial-scale=1.0'
+      }]
+    }
+  },
   data() {
     return {
+      metaInfo:{Title:'快乐星汉堡加盟总部唯一官方网站,汉堡店加盟,西式快餐加盟,汉堡包加盟',Keyword:'汉堡加盟,汉堡店加盟,西式快餐加盟,炸鸡汉堡加盟,快乐星汉堡加盟',Description:'快乐星汉堡是一家汉堡店加盟连锁企业,专业致力于西式快餐加盟领域,做好汉堡店,汉堡,汉堡包,西式快餐,汉堡培训,汉堡店加盟等合作事宜,汉堡加盟品牌就选快乐星汉堡!加盟热线:400-035-2688'}, // meta
       msg: "Welcome to Your Vue.js App",
       searchbox: false,
       submenu: false,
-      headOpacity: 1
+      headOpacity: 1,
+      loadPro:[],
+      newNav:[{Title:'',Id:''}],
+      searchKeyValue:'',
+      newproductlist:'', //新品动态      
     };
   },
+  created:function(){
+    this.seoSet();
+    this.loadProParent();
+    this.navNewpro();
+  },
   mounted: function() {
+    let that = this
     window.addEventListener("click", this.handleClick);
     window.addEventListener("scroll", this.handleScroll);
+    let oNav =this.$refs['hd-menu']
+    this.$refs['hd-menu'].onmouseover=function(e){
+      if(e.target.dataset.value != undefined){
+        that.submenu = e.target.dataset.value
+      }
+    }
   },
   methods: {
     searchInput: function() {
@@ -314,7 +198,8 @@ export default {
     topSearch: function() {
       if (this.searchbox) {
         this.$router.push({
-          path:'/search'
+          path:'/search',
+          query:{Key:this.searchKeyValue}
         })
       }
     },
@@ -332,6 +217,66 @@ export default {
       } else {
         this.headOpacity = 1;
       }
+    },
+    loadProParent:function(){
+      let that = this;
+      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=产品分类")
+      .then(function(res){
+        that.loadPro = res.data.list;
+        for(let i=0;i<that.loadPro.length;i++){
+          that.$axios.get('/ajaxdata.aspx?Action=list&Object=ProductView&SearchKey=TypeId&pageIndex=1&pageSize=4',{
+            params:{
+              SearchTypeId:that.loadPro[i].Id
+            }
+          })
+          .then(function(res){
+            that.loadPro[i].child=res.data.list
+          })
+        }        
+      })
+      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类")
+      .then(function(res){
+        that.newNav = res.data.list
+      })
+    },
+    navNewpro:function(){
+      // 新品动态
+      let that = this;
+      this.$axios.get('/ajaxdata.aspx?Action=newproductlist&pageIndex=1&pageSize=4&Recommend=1')
+      .then(function(res){
+        that.newproductlist = res.data.list        
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
+    navProList:function(){
+      // 产品
+      let that = this;      
+    },
+    seoSet:function(){
+      // seo数据    
+      let that = this;
+      this.$axios.get('/ajaxdata.aspx?Action=SEO',{
+        params:{
+          Page:that.$route.meta.title || that.$route.query.name || that.$route.params.Name || '首页'
+        }
+      })
+      .then(function (res) {
+        if(res.data.list.length != 0){
+          that.metaInfo = res.data.list[0]  
+        } 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  },
+  watch:{
+    '$route'(to,from){
+      this.seoSet();
+      this.submenu=false;
+      this.navNewpro();
     }
   }
 };

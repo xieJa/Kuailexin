@@ -1,47 +1,21 @@
 <template>
   <div class="train">
     <ul>
-      <li class="clearfix">
-        <div class="title">选址培训</div>
+      <li class="clearfix" v-for="(item,index) in list" :key="index">
+        <div class="title">{{item.Title}}</div>
         <div class="trainPic">
-          <img src="@/assets/train.jpg" alt="">
+          <img :src="item.Image" alt="">
         </div>
         <div class="train-info">
-          <div class="train-name">快乐星汉堡培训系统</div>
-          <div class="train-inner">
-            <p>快乐星汉堡（KDS BURGER）凭借数年来的稳扎稳打、精益求精，获得了诸多荣誉和加盟商、消费者的口碑。快乐星以美式高品质西式快餐为卖点，主要经营市场流行的多种系列西式餐饮美食。其中，明星产品为快乐鸡腿堡、黄金脆皮鸡、招牌奶茶、脆皮手枪腿等，定期还有新品上市。</p>
-            <p>加盟店来公司总部进行技术培训，培训费全免，总部安排住宿；也可以向总部申请培训师上门进行营运培训和技术指导，但您需要为培训师提供食宿以及报销来回车费。</p>
-            </div>
+          <div class="train-name">{{item.SubTitle}}</div>
+          <div class="train-inner" v-html="item.Description"></div>
         </div>
-      </li>
-      <li class="clearfix">
-        <div class="title">选址培训</div>
-        <div class="trainPic">
-          <img src="@/assets/train.jpg" alt="">
-        </div>
-        <div class="train-info">
-          <div class="train-name">快乐星汉堡培训系统</div>
-          <div class="train-inner">
-            <p>快乐星汉堡（KDS BURGER）凭借数年来的稳扎稳打、精益求精，获得了诸多荣誉和加盟商、消费者的口碑。快乐星以美式高品质西式快餐为卖点，主要经营市场流行的多种系列西式餐饮美食。其中，明星产品为快乐鸡腿堡、黄金脆皮鸡、招牌奶茶、脆皮手枪腿等，定期还有新品上市。</p>
-            <p>加盟店来公司总部进行技术培训，培训费全免，总部安排住宿；也可以向总部申请培训师上门进行营运培训和技术指导，但您需要为培训师提供食宿以及报销来回车费。</p>
-            </div>
-        </div>
-      </li>
-      <li class="clearfix">
-        <div class="title">选址培训</div>
-        <div class="trainPic">
-          <img src="@/assets/train.jpg" alt="">
-        </div>
-        <div class="train-info">
-          <div class="train-name">快乐星汉堡培训系统</div>
-          <div class="train-inner">
-            <p>快乐星汉堡（KDS BURGER）凭借数年来的稳扎稳打、精益求精，获得了诸多荣誉和加盟商、消费者的口碑。快乐星以美式高品质西式快餐为卖点，主要经营市场流行的多种系列西式餐饮美食。其中，明星产品为快乐鸡腿堡、黄金脆皮鸡、招牌奶茶、脆皮手枪腿等，定期还有新品上市。</p>
-            <p>加盟店来公司总部进行技术培训，培训费全免，总部安排住宿；也可以向总部申请培训师上门进行营运培训和技术指导，但您需要为培训师提供食宿以及报销来回车费。</p>
-            </div>
-        </div>
-      </li>
+      </li>      
     </ul>
-    <button class="moreBtn">加载更多</button>     
+    <LoadMore>            
+        <button class="moreBtn"  @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+        <p v-else>没有更多信息了</p>
+    </LoadMore> 
     <pageQrcode></pageQrcode>
   </div>
 </template>
@@ -52,7 +26,40 @@ export default {
   name: "Train",
   data() {
     return {
+      list:[],
+      lastPage:true,
+      pageIndex:1,
     };
+  },
+  created:function(){   
+      this.loadList();
+  },
+  methods:{
+    loadList:function(){
+      let that = this;
+      this.$axios.get("/ajaxdata.aspx?Action=list&Object=Training",{
+        params:{
+          pageIndex:that.pageIndex,
+          pageSize:6,
+        }
+      })
+      .then(function(res){
+          for(let i=0;i<res.data.list.length;i++){
+              that.list.push(res.data.list[i])
+          }
+          if(res.data.list.length==6){
+              that.pageIndex++
+          }else{
+              that.lastPage = false;
+          }  
+          console.log(res)
+      })
+    },
+    more:function(){
+        if(this.lastPage){
+            this.loadList()
+        }
+    }
   },
   components: {
     pageQrcode

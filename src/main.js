@@ -5,10 +5,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Swiper from 'swiper'
-import WOW from 'wowjs' 
+import WOW from 'wowjs'
 import ElementUI from 'element-ui';
 import MetaInfo from 'vue-meta-info'
 import Axios from 'axios'
+
 // css
 import './font/iconfont.css';
 import 'swiper/dist/css/swiper.css';
@@ -20,12 +21,15 @@ import MyComponent from './components/integer';
 import PageBanner from './components/PageBanner';
 import PageTitle from './components/PageTitle';
 import PageView from './components/PageView';
+import LoadMore from './components/LoadMore';
 
 Vue.config.productionTip = false;
 Vue.prototype.$Swiper = Swiper;
 Vue.prototype.$WOW = WOW;
 Vue.prototype.$axios = Axios;
-Vue.prototype.HOST = '/api';
+Vue.prototype.errorImg = 'this.src="' + require('@/assets/errorImg.jpg') + '"';
+Axios.defaults.baseURL = '/';
+Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.use(ElementUI);
 Vue.use(MetaInfo);
 
@@ -34,16 +38,21 @@ Vue.component('animated-integer', MyComponent); //初始化数字组件
 Vue.component('PageTitle', PageTitle); //title
 Vue.component('PageBanner', PageBanner); //banner
 Vue.component('PageView', PageView); //富文本
+Vue.component('LoadMore', LoadMore); //富文本
 
 
+screenInit()
 // 移动PC
-let bodyW = document.documentElement.offsetWidth || document.body.offsetWidth
-if(bodyW<1000){
-  Vue.prototype.$M = true;
-  document.body.classList.add('m-web');
-  document.documentElement.style.fontSize = bodyW/7.5+'px'
-}else{
-  Vue.prototype.$M = false;
+function screenInit(){
+  let bodyW = document.documentElement.offsetWidth || document.body.offsetWidth
+  if (bodyW > 1000) {
+    Vue.prototype.$M = false;
+    document.body.classList.remove('m-web');
+  } else {
+    Vue.prototype.$M = true;
+    document.body.classList.add('m-web');
+    document.documentElement.style.fontSize = bodyW / 7.5 + 'px'    
+  }
 }
 
 /* eslint-disable no-new */
@@ -51,5 +60,5 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>',
+  template: '<App/>'
 })

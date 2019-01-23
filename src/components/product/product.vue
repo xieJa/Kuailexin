@@ -9,7 +9,6 @@
             <StarProduct v-else-if="this.$route.query.name=='明星产品'"></StarProduct> 
             <GeneralProduct v-else></GeneralProduct>        
         </div>
-        <router-view @childViewShow="childViewShow"></router-view>
     </div>
 </template>
 
@@ -35,20 +34,13 @@ export default {
         }
     },
     created:function(){        
-        console.log(this.$route)
         this.pTitle=this.$route.query.name
-    },
-    methods:{
-       childViewShow:function(childViewShow){
-           this.isChildViewShow = childViewShow
-       }
     },
     components:{
         NewProduct,StarProduct,GeneralProduct
     },
     watch:{
         '$route'(to,from){     
-             console.log(this.$route)       
             this.pTitle=this.$route.query.name            
         }
     }

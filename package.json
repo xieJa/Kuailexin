@@ -18,6 +18,7 @@
     "ajv": "^5.0.0",
     "element-ui": "^2.4.11",
     "prerender-spa-plugin": "^3.4.0",
+    "qs": "^6.6.0",
     "vue": "^2.5.2",
     "vue-meta-info": "^0.1.7",
     "vue-router": "^3.0.1"

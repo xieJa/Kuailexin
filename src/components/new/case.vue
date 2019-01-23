@@ -1,36 +1,18 @@
 <template>
     <div class="newMarket">
            <ul class="clearfix">
-               <li @click="tabJump()">
+               <li @click="tabJump(item.Id)" v-for="item in list" :key="item.Id">
                    <div class="newProPic">                       
-                       <img src="@/assets/market.jpg" alt="">
+                       <img :src="item.Image" alt="">
                    </div>
-                   <p>快乐星怎么样|产品口味好才是核心竞争力！云南王先生一吃定情</p>
-                   <span>有些人忙碌拼搏了一辈子，可能也攒不了多少积蓄；而有的人善于发现市场，并勇敢迈出实现的一步，成功突破阶级，从此不再为别人打工！可能大家听到...</span>                   
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星怎么样|产品口味好才是核心竞争力！云南王先生一吃定情</p>
-                   <span>有些人忙碌拼搏了一辈子，可能也攒不了多少积蓄；而有的人善于发现市场，并勇敢迈出实现的一步，成功突破阶级，从此不再为别人打工！可能大家听到...</span>                   
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星怎么样|产品口味好才是核心竞争力！云南王先生一吃定情</p>
-                   <span>有些人忙碌拼搏了一辈子，可能也攒不了多少积蓄；而有的人善于发现市场，并勇敢迈出实现的一步，成功突破阶级，从此不再为别人打工！可能大家听到...</span>                   
-               </li>
-               <li>
-                   <div class="newProPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <p>快乐星怎么样|产品口味好才是核心竞争力！云南王先生一吃定情</p>
-                   <span>有些人忙碌拼搏了一辈子，可能也攒不了多少积蓄；而有的人善于发现市场，并勇敢迈出实现的一步，成功突破阶级，从此不再为别人打工！可能大家听到...</span>                   
-               </li>
+                   <p>{{item.Title}}</p>
+                   <span>{{item.Description}}</span>                   
+               </li>               
            </ul>
-           <a href="#" class="moreBtn" style="margin-bottom:60px;margin-top:0;">加载更多</a>           
+           <LoadMore>            
+                <button class="moreBtn"  @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+                <p v-else>没有更多信息了</p>
+            </LoadMore> 
     </div>    
 </template>
 
@@ -39,16 +21,48 @@ export default {
     name:'Marketing',
     data(){
         return{
+           list:[],
            newIcon:true,
-           asb:'123'
+           asb:'123',
+           lastPage:true,
+           pageIndex:1
         }
     },
+    created:function(){
+        this.loadCase();
+    },
     methods:{
-        tabJump:function(){
+        tabJump:function(id){
             this.$router.push({
                 path:'/newdetail',
-                query:{name:111}
+                query:{TypeId:this.$route.query.Id,Id:id}
             })
+        },
+        loadCase:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=list&Object=news&SearchKey=TypeId",{
+                params:{
+                    SearchTypeId:that.$route.query.Id,
+                    pageIndex:that.pageIndex,
+                    pageSize:6,
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }  
+                console.log(res)
+            })
+        },       
+        more:function(){
+            if(this.lastPage){
+                this.loadCase()
+            }
         }
     }
 }

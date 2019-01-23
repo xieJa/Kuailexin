@@ -1,55 +1,74 @@
 <template>
     <div class="newlist">
         <ul>
-            <li class="clearfix">
+            <li class="clearfix" v-for="(item,index) in list" :key="index">
                 <div class="newPic">
-                    <img src="@/assets/newpic.jpg" alt="">
+                    <img :src="item.Image" alt="">
                 </div>
                 <div class="new-inner">
-                    <div class="new-title">快乐星汉堡加盟品牌带你解读权威4p营销理论</div>
-                    <div class="new-date">2018-10-26</div>
-                    <div class="new-intro">其实现在火爆的餐饮店，或多或少都离不开恰到好处的营销。不少加盟商就是看中快乐星汉堡有计划性、
-能洞察市场爆点的营销策略方案，这也是未来店铺长期运营，人气依旧火爆的主要原因。对于营销这块，
-快乐星汉堡设立了专业的营销中心，总结全国千家门店，将西式快餐加盟店与4P营销...</div>
-                    <router-link to="/newdetail">查看详情    ></router-link>
+                    <div class="new-title">{{item.Title}}</div>
+                    <div class="new-date">{{item.CreateDate}}</div>
+                    <div class="new-intro">{{item.Description}}</div>
+                    <router-link :to="{path:'/newdetail',query:{TypeId:$route.query.Id,Id:item.Id}}">查看详情    ></router-link>
                 </div>
-            </li>
-            <li class="clearfix">
-                <div class="newPic">
-                    <img src="@/assets/newpic.jpg" alt="">
-                </div>
-                <div class="new-inner">
-                    <div class="new-title">快乐星汉堡加盟品牌带你解读权威4p营销理论</div>
-                    <div class="new-date">2018-10-26</div>
-                    <div class="new-intro">其实现在火爆的餐饮店，或多或少都离不开恰到好处的营销。不少加盟商就是看中快乐星汉堡有计划性、
-能洞察市场爆点的营销策略方案，这也是未来店铺长期运营，人气依旧火爆的主要原因。对于营销这块，
-快乐星汉堡设立了专业的营销中心，总结全国千家门店，将西式快餐加盟店与4P营销...</div>
-                    <router-link to="/newdetail">查看详情    ></router-link>
-                </div>
-            </li>
-            <li class="clearfix">
-                <div class="newPic">
-                    <img src="@/assets/newpic.jpg" alt="">
-                </div>
-                <div class="new-inner">
-                    <div class="new-title">快乐星汉堡加盟品牌带你解读权威4p营销理论</div>
-                    <div class="new-date">2018-10-26</div>
-                    <div class="new-intro">其实现在火爆的餐饮店，或多或少都离不开恰到好处的营销。不少加盟商就是看中快乐星汉堡有计划性、
-能洞察市场爆点的营销策略方案，这也是未来店铺长期运营，人气依旧火爆的主要原因。对于营销这块，
-快乐星汉堡设立了专业的营销中心，总结全国千家门店，将西式快餐加盟店与4P营销...</div>
-                    <router-link to="/newdetail">查看详情    ></router-link>
-                </div>
-            </li>
+            </li>           
         </ul>
-        <p style="text-align:center;">
-            <button class="moreBtn">加载更多</button>       
-        </p>
+        <LoadMore>            
+            <button class="moreBtn" @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+            <p v-else>没有更多信息了</p>
+        </LoadMore>
     </div>
 </template>
 
 <script>
 export default {
-    name:'newlist'
+    name:'newlist',
+    data(){
+        return{
+            list:[],
+            lastPage:true,
+            pageIndex:1,
+        }
+    },
+    created:function(){
+        this.loadNewProduct()
+    },
+    methods:{
+        loadNewProduct:function(){
+            console.log(this.pageIndex)
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=list&Object=news&SearchKey=TypeId",{
+                params:{
+                    SearchTypeId:that.$route.query.Id,
+                    pageIndex:that.pageIndex,
+                    pageSize:6,
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }  
+                console.log(res)
+            })
+        },       
+        more:function(){
+            if(this.lastPage){
+                this.loadNewProduct()
+            }
+        }
+    },
+    watch:{
+        '$route'(to,from){   
+            this.list = [];
+            this.pageIndex = 1;
+            this.loadNewProduct();
+        }
+    }
 }
 </script>
 
@@ -112,9 +131,7 @@ export default {
     color:#fff;
     border:1px solid #c8161e;
 }
-.moreBtn{
-    margin-bottom:60px;
-}
+
 @media screen and (max-width:1000px){
     .newlist{
         background:#f1f1f1;

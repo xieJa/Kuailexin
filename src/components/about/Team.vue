@@ -2,70 +2,67 @@
     <div class="team">
         <p class="describe">我们拥有一支结构完善优秀且高效的团队，他们肩负着对加盟商一丝不苟的服务...</p>
         <ul class="team-list clearfix">
-            <li @click="tapJump()">
+            <li @click="tapJump(item.Id)" v-for="item in list" :key="item.Id">
                 <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
+                    <img :src="item.Image" alt="" :onerror="errorImg">
                 </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li @click="tapJump()">
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li @click="tapJump()">
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li @click="tapJump()">
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li @click="tapJump()">
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li @click="tapJump()">
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
+                <p class="item-name">{{item.Title}}</p>
+                <p class="item-job">{{item.Department}}</p>
+                <p class="item-intro">{{item.Description}}</p>
+            </li>            
         </ul>
-        <button class="moreBtn">加载更多</button>
+        <LoadMore>            
+            <button class="moreBtn" @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+            <p v-else>没有更多信息了</p>
+        </LoadMore>
     </div>
 </template>
 
 <script>
 export default {
     name:'team',
+    data(){
+        return{
+            list:[],
+            lastPage:true,
+            pageIndex:1
+        }
+    },
+    created:function(){
+        this.loadList()
+    },
     methods:{
-        tapJump:function(){
+        tapJump:function(id){
             this.$router.push({
                 path: '/about/优秀个人',
                 query:{
-                    name:'周云重'
+                    id:id
                 }
             })
+        },
+        loadList:function(){
+            let that =this
+            this.$axios.get('/ajaxdata.aspx?Action=list&Object=Team',{
+                params:{
+                    pageIndex:that.pageIndex,
+                    pageSize:6
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }                   
+            })
+        },
+        more:function(){
+            if(this.lastPage){
+                this.loadList()
+            }
         }
     }
 }
@@ -100,7 +97,7 @@ export default {
 }
 .item-img{
     position: relative;
-    height:276px;
+    padding-bottom: 100%;
     overflow: hidden;
 }
 .item-img img{

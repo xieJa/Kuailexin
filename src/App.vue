@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <mHeader v-if="this.$M"></mHeader>
-    <Hearder v-else></Hearder>
+    <Hearder></Hearder>
+    <mHeader></mHeader>
     <router-view/>
     <Footer></Footer>
   </div>
@@ -18,3 +18,12 @@ export default {
   },
 }
 </script>
+
+<style>
+.m-head{display:none;}
+.pc-head{display:block;}
+@media screen and (max-width:1000px){
+  .pc-head{display:none;}
+  .m-head{display:block;}
+}
+</style>

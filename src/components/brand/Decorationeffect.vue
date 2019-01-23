@@ -1,53 +1,42 @@
 <template>
   <div class="decorationEffect">
     <div class="shop-front">
-      <div class="title">门面效果</div>
+      <div class="title">{{list[0].Title}}</div>
       <ul class="shop-style clearfix">
-        <li @click="tapJump('showfront',0)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
-        </li>
-        <li @click="tapJump('showfront',1)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
-        </li>
-        <li @click="tapJump('showfront',2)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
-        </li>
-      </ul>
-      <a href="#" class="moreBtn">加载更多</a>
+        <li @click="tapJump('showfront',index)" v-for="(item,index) in list[0].child" :key="index">
+          <img :src="item.Image" alt>
+          <p>{{item.Title}}</p>
+        </li>        
+      </ul> 
+      <LoadMore>            
+          <button class="moreBtn"  @click="more(0)" v-if="pageIndex1" slot="moreBtn">加载更多</button>
+          <p v-else>没有更多信息了</p>
+      </LoadMore> 
     </div>
     <div class="shop-behind">
-      <div class="title">餐厅效果</div>
+      <div class="title">{{list[1].Title}}</div>
       <ul class="shop-style clearfix">
-        <li @click="tapJump('showbehind',0)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
-        </li>
-        <li @click="tapJump('showbehind',1)">
-          <img src="../../assets/pic1.jpg" alt>
-          <p>快乐星汉堡常州人民路店</p>
+        <li @click="tapJump('showbehind',index)" v-for="(item,index) in list[1].child" :key="index">
+          <img :src="item.Image" alt>
+          <p>{{item.Title}}</p>
         </li>
       </ul>
-      <a href="#" class="moreBtn">加载更多</a>
+      <LoadMore>            
+          <button class="moreBtn"  @click="more(1)" v-if="pageIndex2" slot="moreBtn">加载更多</button>
+          <p v-else>没有更多信息了</p>
+      </LoadMore> 
     </div>
     <transition name="fade">
       <div v-show="isShow==='showfront'" @click="tapShade($event)">
         <div class="shade"></div>
         <div class="shop-style-slide">
-          <p class="entry">快乐星汉堡常州人民路店</p>
+          
           <div class="swiper-container showfront">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="../../assets/pic1.jpg" alt>
-              </div>
-              <div class="swiper-slide">
-                <img src="../../assets/pic1.jpg" alt>
-              </div>
-              <div class="swiper-slide">
-                <img src="../../assets/pic1.jpg" alt>
-              </div>
+              <div class="swiper-slide" v-for="(item,index) in list[0].child" :key="index">
+                <p class="entry">{{item.Title}}</p>
+                <img :src="item.Image" alt>
+              </div>              
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
             <div class="swiper-button-next swiper-button-white entry"></div>
@@ -60,14 +49,11 @@
       <div v-show="isShow==='showbehind'" @click="tapShade($event)">
         <div class="shade"></div>
         <div class="shop-style-slide">
-          <p class="entry">快乐星汉堡常州人民路店</p>
           <div class="swiper-container showbehind">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="../../assets/pic1.jpg" alt>
-              </div>
-              <div class="swiper-slide">
-                <img src="../../assets/pic1.jpg" alt>
+              <div class="swiper-slide" v-for="(item,index) in list[1].child" :key="index">
+                <p class="entry">{{item.Title}}</p>
+                <img :src="item.Image" alt>
               </div>
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
@@ -81,18 +67,25 @@
 </template>
 
 <script>
+let mySwiper;
 export default {
   name: "DecorationEffect",
   data() {
-    return {
-      isShow: ""
+    return {      
+      list:[{Id: '',Title: ''},{Id: '',Title: ''}],
+      isShow: "",    
+      pageIndex1:1,  
+      pageIndex2:1,  
     };
+  },
+  created:function(){
+    this.loadList()
   },
   methods: {
     tapJump: function(el, index) {
       this.isShow = el;
       this.$nextTick(function() {
-        new this.$Swiper("." + el, {
+        mySwiper = new this.$Swiper("." + el, {
           pagination: "." + el + "-pagination",
           paginationType: "fraction",
           prevButton: ".swiper-button-prev",
@@ -122,6 +115,71 @@ export default {
       ) {
         this.isShow = false;
         document.body.classList.remove("swiper-slide");
+        mySwiper.destroy(true,true)
+      }
+      
+    },
+    loadList:function(){
+      let that = this;
+      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=我们的店分类")
+      .then(function(res){        
+          that.list = res.data.list             
+          for(let i=0;i<that.list.length;i++){
+              that.$axios.get("/ajaxdata.aspx?Action=list&Object=shop&SearchKey=TypeId",{
+                params:{
+                  SearchTypeId:that.list[i].Id,
+                  pageIndex:1,
+                  pageSize:6          
+                }
+              })
+              .then(function(res){
+                 that.list[i].child=res.data.list;
+                 console.log(that.list)
+                  if(res.data.list.length<6 && i===0){
+                      that.pageIndex1=false
+                  }else if(res.data.list.length<6 && i===1){
+                      that.pageIndex2=false
+                  }else{
+                      that.pageIndex1++;
+                      that.pageIndex2++;
+                  }               
+              })
+          }    
+      })     
+                   
+    },
+    more:function(num){
+      let that = this;
+      let pageIndex;
+      if(num===0){
+        pageIndex = that.pageIndex1
+      }else{
+        pageIndex = that.pageIndex2
+      }
+      if(pageIndex){
+        that.$axios.get("/ajaxdata.aspx?Action=list&Object=shop&SearchKey=TypeId",{
+            params:{
+              SearchTypeId:that.list[num].Id,
+              pageIndex:pageIndex,
+              pageSize:6          
+            }
+          })
+          .then(function(res){
+              that.list[num].child.push(res.data.list)
+              if(num===0){
+                if(res.data.list.length<6){
+                  that.pageIndex1=false
+                }else{
+                  that.pageIndex1++
+                }              
+              }else{
+                if(res.data.list.length<6){
+                  that.pageIndex2=false
+                }else{
+                  that.pageIndex2++
+                }
+              }
+          })
       }
     }
   }

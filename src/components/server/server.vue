@@ -2,28 +2,14 @@
     <div class="server">
         <page-banner :pageBanner="pageBanner"></page-banner>
         <div class="cover">
-            <PageTitle :title="pTitle" :description="description"></PageTitle>             
-            <Credit v-if="this.$route.query.name=='品牌资信'"></Credit>
-            <mapSide v-else-if="this.$route.query.name=='在您身边'"></mapSide>
-            <program v-else-if="this.$route.query.name=='加盟方案'"></program>
-            <example v-else-if="this.$route.query.name=='装修指导'"></example>
-            <joinIn v-else-if="this.$route.query.name=='申请加盟'"></joinIn>
-            <Train v-else-if="this.$route.query.name=='培训系统'"></Train>
-            <FAQ v-else-if="this.$route.query.name=='常见问题'"></FAQ>
-            <PageView :content="pView" v-else></PageView>
+            <PageTitle :title="pTitle" :description="description"></PageTitle>                         
+            <router-view ></router-view>
         </div>
         
     </div>
 </template>
 
 <script>
-import Credit from './Credit'
-import mapSide from './mapSide'
-import program from './program'
-import example from './example'
-import joinIn from './joinIn'
-import Train from './Train'
-import FAQ from './FAQ'
 export default {
     name:'brand',
     data(){
@@ -42,9 +28,6 @@ export default {
     },
     created:function(){
         this.pTitle=this.$route.query.name
-    },
-    components:{
-        Credit,mapSide,program,example,joinIn,Train,FAQ
     },
     watch:{
         '$route'(to,from){            

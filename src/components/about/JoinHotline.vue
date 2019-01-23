@@ -1,6 +1,6 @@
 <template>
     <div class="joinHotline">
-        <img src="@/assets/about06.jpg" alt="">
+        <img src="@/assets/logo2.png" alt="">
         <p>加盟热线：400-035-2688</p>
         <p>官方网站： http://www.k2688.com</p>
     </div>
@@ -21,6 +21,8 @@ export default {
 }
 .joinHotline img{
     margin-bottom:20px;
+    max-width: 250px;
+    width:60%;
 }
 @media screen and (max-width:1000px){    
     .joinHotline{

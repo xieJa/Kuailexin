@@ -3,9 +3,8 @@
         <div class="cd-timeline">
             <div class="cd-timeline-block wow slideInLeft" :class="index%2==0?'slideInLeft':'slideInRight'" @click="Popup(index)"  v-for="(item,index) in historylist" :key="index">
                 <div class="cd-timeline-img">
-                    <img :src="item.Image" alt="Picture">
+                    <img :src="item.Image">
                 </div><!-- cd-timeline-img -->
-
                 <div class="cd-timeline-content">
                     <span class="cd-date">{{item.Year}}</span>
                     <div>
@@ -18,15 +17,13 @@
         <p class="tomorrow">未来，待续...</p>
         <transition-group name="fade">
             <div v-show="isshow===index" v-for="(item,index) in historylist" :key="index">
-                {{isshow}}
                 <div class="shade" @click="closePop()"></div>
                 <div class="pop-up-box">
                     <i class="close" @click="closePop()"></i>
-                    <span class="pop-up-date">2008</span>
+                    <span class="pop-up-date">{{item.Year}}</span>
                     <div>
-                        <p><img src="@/assets/about07.jpg" alt=""></p>
-                        <p>快乐星汉堡品牌全球运营中心正式成立</p>
-                        <p>快乐星汉堡员工向汶川灾区捐款捐物</p>
+                        <p style="padding-bottom:10px;text-align:center;"><img :src="item.Image1" alt=""></p>
+                        <p v-for="(self,index) in item.Events" :key="index">{{self.Title}}</p>
                     </div>
                     
                 </div>
@@ -47,16 +44,13 @@ export default {
     },
     created:function(){
         let that = this
-        this.$axios.get(this.HOST+'/ajaxdata.aspx?Action=historylist')
+        this.$axios.get('/ajaxdata.aspx?Action=historylist')
         .then(function(res){
-            console.log(res)
             that.historylist = res.data.list
+            that.$nextTick(function(){
+                new that.$WOW.WOW().init()
+            })
         })
-    },
-    mounted:function(){         	
-       this.$nextTick(function(){
-           new this.$WOW.WOW().init()
-       })      
     },
     methods:{
         Popup:function(index){

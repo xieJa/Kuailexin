@@ -3,11 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>快乐星</title>
+    <title>快乐星汉堡加盟总部唯一官方网站,汉堡店加盟,西式快餐加盟,汉堡包加盟</title>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8VaM61N5uAhGREmOVcL6sxtzqtfjxKhz"></script>
   </head>
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+        // 移动PC
+        window.onresize = function(){
+            let bodyW = document.documentElement.offsetWidth || document.body.offsetWidth
+            if(bodyW>1000){
+            document.body.classList.remove('m-web');  
+          }else{
+            document.body.classList.add('m-web');
+            document.documentElement.style.fontSize = bodyW/7.5+'px'
+          }
+        }        
+    </script>
   </body>
 </html>

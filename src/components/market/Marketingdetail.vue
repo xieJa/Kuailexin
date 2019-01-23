@@ -1,53 +1,25 @@
 <template>
     <div class="Market-detail cover">
-        <crumbs></crumbs>
+        <crumbs>
+            <router-link :to="{path:'/market/Marketing',query:{name:this.$route.query.name,Object:this.$route.query.Object}}">{{this.$route.query.name}}</router-link>>
+            <a href="javascript:;">{{list.Title}}</a>
+        </crumbs>
         <div class="market-info">
             <div class="market-info-head">
-                <h2>快乐星汉堡新品来袭！“性感”口味，在线撩你，还等什么~</h2>
-                <span><i class="icon iconfont icon-personal-center"></i>来源：快乐星汉堡</span>
-                <span><i class="icon iconfont icon-shijian"></i>时间：2018-08-10</span>
+                <h2>{{list.Title}}</h2>
+                <span><i class="icon iconfont icon-personal-center"></i>来源：{{list.Source}}</span>
+                <span><i class="icon iconfont icon-shijian"></i>时间：{{list.CreateDate}}</span>
             </div>
-            <div class="market-info-body">
-                <p style="text-align:center;padding-bottom:30px;"><img src="@/assets/market.jpg" alt=""></p>
-                <p style="text-align:center; white-space: pre-wrap;">〔海苔鸡排〕
-
-你说你喜欢大海
-而我却怕水
-
- 你喜欢熬夜
-而我总是倒头就睡
-
- 你喜欢吃海苔
-而我钟爱鸡排
-
- 连吃都没有默契
-我们还怎么做夫妻
-
- 别急！
-快乐星汉堡让吃货的爱情不再将就！
-
- 无论在哪里
-海苔永远是美味的点睛之笔
-千篇一律的鸡排因海苔焕发全新活力
-
- “我们不一样！
-
- 鲜味十足的海苔与弹嫩鸡肉酥香交织
-
-开演一场魔都热恋！
-
-外酥里嫩的夏日美味
-
-海苔鸡排来挑逗你的味蕾！</p>
+            <div class="market-info-body" v-html="list.Content">
             </div>
             <div class="page-turning clearfix">
                 <div class="paging page-prev">
-                    <router-link to="#">上一篇</router-link>         
-                    <p>快乐星汉堡不一样的美味选择，汉堡买一送一</p>           
+                    <router-link :to="{path:'/market/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Pid}}"  v-show="list.Pid!=''">上一篇</router-link>         
+                    <p>{{list.Ptitle}}</p>           
                 </div>
-                <div class="paging page-next">
-                    <router-link to="#">下一篇</router-link>         
-                    <p>快乐星汉堡不一样的美味选择，汉堡买一送一</p>           
+                <div class="paging page-next" style="float:right;">
+                    <router-link  :to="{path:'/market/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Nid}}"  v-show="list.Nid!=''">下一篇</router-link>         
+                    <p>{{list.Ntitle}}</p>           
                 </div>
             </div>
         </div>
@@ -64,11 +36,34 @@ export default {
     name:'Marketing',
     data(){
         return{
-
+            list:[]
+        }
+    },
+    created:function(){
+        this.loadList()
+    },
+    methods:{
+        loadList:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=loaddetail",{
+                params:{
+                    Object:that.$route.query.Object,
+                    Id:that.$route.query.Id
+                }
+            })
+            .then(function(res){
+                that.list=res.data.list[0]
+                console.log(res,1)
+            })
         }
     },
     components:{
         crumbs
+    },
+    watch:{
+        '$route'(to,from){
+            this.loadList()
+        }
     }
 }
 </script>

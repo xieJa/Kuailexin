@@ -6,35 +6,35 @@
             <ul class="information clearfix" v-if="pTitle=='公司简介'">
                 <li>
                     <span class="t-num">
-                        <animated-integer v-bind:value="2008"></animated-integer>
+                        <animated-integer v-bind:value="parseInt(memoinfo.Data1)"></animated-integer>
                     </span>
                     
-                    <p>成立于2008年</p>
+                    <p>成立于{{memoinfo.Data1}}年</p>
                 </li>
                 <li>
                     <span class="t-num">
-                        <animated-integer v-bind:value="100"></animated-integer>+
+                        <animated-integer v-bind:value="parseInt(memoinfo.Data2)"></animated-integer>+
                     </span>
-                    <p>100+名专业伙伴为您服务</p>
+                    <p>{{memoinfo.Data2}}名专业伙伴为您服务</p>
                 </li>
                 <li>
                     <span class="t-num">
-                        <animated-integer v-bind:value="3000"></animated-integer>+
+                        <animated-integer v-bind:value="parseInt(memoinfo.Data3)"></animated-integer>+
                     </span>
-                    <p>3000+加盟商与您一起成长</p>
+                    <p>{{memoinfo.Data3}}加盟商与您一起成长</p>
                 </li>
                 <li>
                     <span class="t-num">
-                        <animated-integer v-bind:value="190000"></animated-integer>+
+                        <animated-integer v-bind:value="parseInt(memoinfo.Data4)"></animated-integer>+
                     </span>
-                    <p>190000+全国粉丝会员客户</p>
+                    <p>{{memoinfo.Data4}}全国粉丝会员客户</p>
                 </li>
             </ul>
             <PageTitle :title="pTitle" :description="description" v-if="pTitle!='公司简介'"></PageTitle>                    
             <TimeLine v-if="pTitle=='发展历程'"></TimeLine>
             <Team v-else-if="pTitle=='优秀团队'"></Team>
             <TeamView v-else-if="pTitle=='优秀个人'"></TeamView>
-            <PageView :content="pView" v-else></PageView>
+            <PageView :content="memoinfo.Content" v-else></PageView>
             <JoinHotline  v-if="pTitle!='优秀团队' && pTitle!='优秀个人'"></JoinHotline>
         </div>
     </div>
@@ -58,26 +58,65 @@ export default {
             },
             pTitle:this.$route.params.Name,
             description:'',
-            pView:''
+            memoinfo:[{
+                "Data1": '', //成立时间
+                "Data2": '', //服务参数
+                "Data3": '', //加盟商参数
+                "Data4": '',   //会员客户参数
+                "Content":'' 
+            }]
         }
     },
     components:{
         TimeLine,JoinHotline,Team,TeamView
     },
     created:function(){
-             
-        
+        let that = this;
+        // 公司简介
+        this.$axios.get('/ajaxdata.aspx?Action=memoinfo',{
+            params:{
+                Type:'公司简介'
+            }
+        })
+        .then(function(res){             
+            that.memoinfo = res.data.list[0]
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+        this.$axios.get('/ajaxdata.aspx?Action=memoinfo',{
+            params:{
+                Type:this.$route.params.Name
+            }
+        })
+        .then(function(res){             
+            that.memoinfo.Content = res.data.list[0].Content
+        })
+        .catch(function(err){
+            console.log(err)
+        })
     },
     watch:{
         '$route'(to,from){
-            console.log(this.$route.params.Name)
             if(this.$route.params.Name == '优秀团队'){
                 this.description = '月度优秀个人和部门优秀人员展播'
             }else{
                 this.description = ''
             }
             this.pTitle=this.$route.params.Name
-            
+            let that = this;
+            this.$axios.get('/ajaxdata.aspx?Action=memoinfo',{
+                params:{
+                    Type:this.$route.params.Name
+                }
+            })
+            .then(function(res){                
+                that.memoinfo.Content = res.data.list[0].Content
+            })
+            .catch(function(err){
+                console.log(err)
+            })
         }
     }
 }

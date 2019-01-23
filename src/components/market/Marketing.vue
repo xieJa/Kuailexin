@@ -2,11 +2,8 @@
     <div class="Market">
         <page-banner :pageBanner="pageBanner"></page-banner>
         <div class="cover">
-            <PageTitle :title="pTitle" :description="description"></PageTitle> 
-            <newMarketing v-if="this.$route.query.name=='新品营销' || this.$route.query.name=='日常营销'"></newMarketing>
-            <festivalMarket v-else-if="this.$route.query.name=='节日营销'"></festivalMarket>
-            <trill v-else-if="this.$route.query.name=='嗨！抖音'"></trill>
-            <PageView :content="pView" v-else></PageView>
+            <PageTitle :title="pTitle" :description="description"></PageTitle>             
+            <router-view></router-view>
         </div>        
     </div>
 </template>
@@ -33,6 +30,22 @@ export default {
     },    
     created:function(){
         this.pTitle=this.$route.query.name
+        if(this.$route.query.Object ==''){
+            this.loadMemoinfo()
+        }
+    },
+    methods:{
+        loadMemoinfo:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=memoinfo",{
+                params:{
+                    Type:that.$route.query.name
+                }
+            })
+            .then(function(res){
+                that.pView = res.data.list[0].Content
+            })
+        }
     },
     components:{
         newMarketing,festivalMarket,trill
@@ -40,6 +53,9 @@ export default {
     watch:{
         '$route'(to,from){            
             this.pTitle=this.$route.query.name            
+            if(this.$route.query.Object ==''){
+                this.loadMemoinfo()
+            }
         }
     }
 }

@@ -1,85 +1,80 @@
 <template>
     <div class="GeneralProduct cover">
-        <ul class="GeneralProduct-list">
-            <li>
+        <ul class="GeneralProduct-list clearfix">
+            <li v-for="item in list" :key="item.Id">
                 <div class="product-item clearfix">
+                    <div class="hot" v-if="item.Hot=='True'"></div>  
                     <div class="product-info">
                         <div class="name">
-                            脆皮全鸡
+                            {{item.Title}}
                         </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
+                        <router-link :to="{path:'/Product/ProductDetail',query:{Id:item.Id}}">查看详情</router-link>
                     </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
+                    <div class="product-pic"><img :src="item.Image"></div>
                 </div>
-            </li>
-            <li>
-                <div class="product-item clearfix">
-                    <div class="product-info">
-                        <div class="name">
-                            脆皮全鸡
-                        </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
-                    </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
-                </div>
-            </li>
-            <li>
-                <div class="product-item clearfix">
-                    <div class="product-info">
-                        <div class="name">
-                            脆皮全鸡
-                        </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
-                    </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
-                </div>
-            </li>
-            <li>
-                <div class="product-item clearfix">
-                    <div class="product-info">
-                        <div class="name">
-                            脆皮全鸡
-                        </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
-                    </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
-                </div>
-            </li>
-            <li>
-                <div class="product-item clearfix">
-                    <div class="product-info">
-                        <div class="name">
-                            脆皮全鸡
-                        </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
-                    </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
-                </div>
-            </li>
-            <li>
-                <div class="product-item clearfix">
-                    <div class="product-info">
-                        <div class="name">
-                            脆皮全鸡
-                        </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{name:'脆皮全鸡'}}">查看详情</router-link>
-                    </div>                        
-                    <div class="product-pic"><img src="@/assets/pro01.jpg"></div>
-                </div>
-            </li>
+            </li>            
         </ul>
-        <button class="moreBtn">加载更多</button>        
+        <LoadMore>            
+            <button class="moreBtn" @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>
+            <p v-else>没有更多信息了</p>
+        </LoadMore>
+          
     </div>
 </template>
 
 <script>
 export default {
     name:'StarProduct',
+    data(){
+        return{
+            list:[],
+            lastPage:true,
+            pageIndex:1
+        }
+    },
+    created:function(){
+        this.loadList()
+    },
     mounted:function(){
         document.querySelector('body').setAttribute('style', 'background:url('+require('../../assets/bg.jpg')+') repeat')
     },
+    methods:{
+        loadList:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=list&Object=ProductView&SearchKey=TypeId",{
+                params:{
+                    SearchTypeId:that.$route.query.id,
+                    pageIndex:that.pageIndex,
+                    pageSize:6
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                } 
+            })
+        },
+        more:function(){
+            if(this.lastPage){
+                this.loadList()
+            }
+        }
+    },
     beforeDestroy () {
         document.querySelector('body').setAttribute('style', '')
+    },    
+    watch:{
+        '$route'(to,from){   
+            this.list=[];
+            this.pageIndex = 1;
+            this.lastPage = true;
+            this.loadList();
+        }
     }
 }
 </script>

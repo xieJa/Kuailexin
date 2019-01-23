@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header m-head">
     <div class="m-header">
       <div class="hd-logo">
         <router-link to="/">
@@ -18,10 +18,10 @@
       </div>
     </div>
     <div class="menu">
-      <router-link to="/">在线咨询</router-link>
-      <router-link to="/">微信咨询</router-link>
-      <router-link to="/">电话沟通</router-link>
-      <router-link :to="{path:'/server',query:{name:'申请加盟'}}">申请加盟</router-link>
+      <router-link to="#">在线咨询</router-link>
+      <router-link to="#">微信咨询</router-link>
+      <router-link to="#">电话沟通</router-link>
+      <router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}">申请加盟</router-link>
     </div>
     <transition name="fade">
       <div class="shade" v-show="isNav"></div>
@@ -39,46 +39,29 @@
             <router-link to="/about/公司简介">公司简介</router-link>
           </li>
           <li @click="navSubSide('新鲜美食')">
-            <router-link to="/">新鲜美食</router-link>
+            <a href="javascript:;">新鲜美食</a>
             <i class="iconfont icon-jiantou"></i>
           </li>
           <li @click="navSubSide('加盟服务')">
-            <router-link to="/">加盟服务</router-link>
+             <a href="javascript:;">加盟服务</a>
             <i class="iconfont icon-jiantou"></i>
-          </li>
-          <li>
-            <router-link :to="{path:'/news',query:{name:'成功案例'}}">成功案例</router-link>
-          </li>
-          <li>
-            <router-link :to="{path:'/news',query:{name:'加盟资讯'}}">加盟资讯</router-link>
-          </li>
+          </li>          
+          <li v-for="(item,index) in newNav" :key="index">
+            <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  >{{item.Title}}</router-link>
+          </li>          
           <li>
             <router-link :to="{path:'/contact',query:{name:'联系我们'}}">联系方式</router-link>
           </li>
+          
         </ul>
         <transition-group name="slide-fade">
           <dl v-show="isSubNav=='新鲜美食'" key="新鲜美食">
             <dt @click="isSubNav=false">新鲜美食<i class="iconfont icon-jiantou"></i></dt>
             <dd>
               <ul>
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'新品动态'}}">新品动态</router-link>
-                </li>
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'明星产品'}}">明星产品</router-link>
-                </li>
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'经典主食'}}">经典主食</router-link>
-                </li>               
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'精美小食'}}">精美小食</router-link>
-                </li>               
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'时尚饮品'}}">时尚饮品</router-link>
-                </li>               
-                <li>
-                  <router-link :to="{path:'/Product',query:{name:'超值套餐'}}">超值套餐</router-link>
-                </li>               
+                <li v-for="item in loadPro" :key="item.Id">
+                  <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}">{{item.Title}}</router-link>
+                </li>                
               </ul>
             </dd>
           </dl>
@@ -104,7 +87,7 @@
     <transition>
         <div class="searchbox" v-show="isSearch" @click.stop>
             <div class="searchdiv">
-              <input type="text" @keyup.enter="topSearch()">
+              <input type="text" @keyup.enter="topSearch()" v-model="searchKeyValue">
               <button @click="topSearch()">搜索</button>
             </div>
             <i class="iconfont icon-guanbi" @click="isSearch=false"></i>
@@ -116,12 +99,35 @@
 <script>
 export default {
   name: "Header",
+  metaInfo:function(){
+    return{
+      title:this.metaInfo.Title, // set a title
+      meta: [{                 // set meta
+        name: 'keyWords',
+        content: this.metaInfo.Keyword
+      },{                 // set meta
+        name: 'description',
+        content: this.metaInfo.Description
+      },{
+        name:'viewport',
+        content:'width=device-width,initial-scale=1.0'
+      }]
+    }
+  },
   data() {
     return {
+      metaInfo:{Title:'快乐星汉堡加盟总部唯一官方网站,汉堡店加盟,西式快餐加盟,汉堡包加盟',Keyword:'汉堡加盟,汉堡店加盟,西式快餐加盟,炸鸡汉堡加盟,快乐星汉堡加盟',Description:'快乐星汉堡是一家汉堡店加盟连锁企业,专业致力于西式快餐加盟领域,做好汉堡店,汉堡,汉堡包,西式快餐,汉堡培训,汉堡店加盟等合作事宜,汉堡加盟品牌就选快乐星汉堡!加盟热线:400-035-2688'}, // meta
+      loadPro:[],
       isNav: false,
       isSubNav:false,
-      isSearch:false
+      isSearch:false,
+      newNav:[],
+      searchKeyValue:''
     };
+  },
+  created:function(){
+    this.seoSet();
+    this.loadProParent()
   },
   mounted: function() {
     window.addEventListener("click", this.handleClick);
@@ -156,14 +162,44 @@ export default {
       this.isSearch=true
     },
     topSearch: function() {
-       this.isSearch=false
       this.$router.push({
-          path:'/search'
-        })
+        path:'/search',
+        query:{Key:this.searchKeyValue}
+      })
+      this.isSearch=false
+    },
+    loadProParent:function(){
+      let that = this;
+      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=产品分类")
+      .then(function(res){
+        that.loadPro = res.data.list;        
+      })  
+      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类")
+      .then(function(res){
+        that.newNav = res.data.list
+      })   
+    },
+    seoSet:function(){
+      // seo数据    
+      let that = this;
+      this.$axios.get('/ajaxdata.aspx?Action=SEO',{
+        params:{
+          Page:that.$route.meta.title || that.$route.query.name || that.$route.params.Name || '首页'
+        }
+      })
+      .then(function (res) {
+        if(res.data.list.length != 0){
+          that.metaInfo = res.data.list[0]  
+        } 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   },
   watch:{
      '$route'(to,from){
+       this.seoSet();
        this.handleClick()
      }
   }

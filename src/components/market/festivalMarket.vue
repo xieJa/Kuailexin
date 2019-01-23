@@ -1,63 +1,18 @@
 <template>
     <div class="festival">
            <ul class="clearfix">
-               <li @click="tabJump()">
+               <li @click="tabJump(item.Id)" v-for="item in list" :key="item.id">
                    <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
+                       <img :src="item.Image" alt="">
                    </div>
                    <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
+                       <div class="title">{{item.Title}}</div>
+                       <p>{{item.Description}}</p>
                    </div>
-               </li>
-               <li @click="tabJump()">
-                   <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
-                   </div>
-               </li>
-               <li @click="tabJump()">
-                   <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
-                   </div>
-               </li>
-               <li @click="tabJump()">
-                   <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
-                   </div>
-               </li>
-               <li @click="tabJump()">
-                   <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
-                   </div>
-               </li>
-               <li @click="tabJump()">
-                   <div class="festivalPic">
-                       <img src="@/assets/market.jpg" alt="">
-                   </div>
-                   <div class="festival-intro">
-                       <div class="title">情满五月五，快乐星汉堡祝大家端午安康！</div>
-                       <p>据史书记载，顺阳在上，五月是仲夏，它的第一个五日正是登高顺阳好天气之日，故五月初五亦称为“端阳节”...</p>
-                   </div>
-               </li>
-              
+               </li>                             
            </ul>
-           <a href="#" class="moreBtn">加载更多</a>           
+            <a href="javascript:;" class="moreBtn" @click="more" v-if="lastPage">加载更多</a>           
+           <span style="margin-bottom:20px;display:block;" v-else>没有更多信息了</span>          
     </div>    
 </template>
 
@@ -66,15 +21,44 @@ export default {
     name:'Marketing',
     data(){
         return{
-           
+           list:[],
+           lastPage:true,
+           pageIndex:1
         }
     },
+    created:function(){
+        this.loadHolidayMarke()
+    },
     methods:{
-        tabJump:function(){
+        tabJump:function(id){
             this.$router.push({
                 path:'/market/Marketingdetail',
-                query:{name:111}
+                query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:id}
             })
+        },
+        loadHolidayMarke:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=list&Object=HolidayMarketing",{
+                params:{
+                    pageIndex:that.pageIndex,
+                    pageSize:6,
+                }
+            })
+            .then(function(res){
+                for(let i=0;i<res.data.list.length;i++){
+                    that.list.push(res.data.list[i])
+                }
+                if(res.data.list.length==6){
+                    that.pageIndex++
+                }else{
+                    that.lastPage = false;
+                }  
+            })
+        },
+        more:function(){
+            if(this.lastPage){
+                this.loadHolidayMarke()
+            }
         }
     }
 }
@@ -102,7 +86,7 @@ export default {
 }
 .festival li .festivalPic{
     position: relative;
-    padding-bottom: 106%;
+    padding-bottom: 100%;
     overflow: hidden;
 }
 .festival li .festivalPic img{

@@ -1,52 +1,70 @@
 <template>
     <div class="teamView">
         <div class="nameJob">
-            培训部资深培训师---周云重
+            {{list.Department}}---{{list.Title}}
         </div>
         <div class="team-info">
             <h3>个人简介</h3>
-            <p>始终坚持服务为导向，加强公司内部管理，积极优化组织结构,公司经过硬件和软件的系统化建设及优化升级，体系的不断完善，使公同得以迅速发展。以“专心用心放心”的经营理念规范提升专业度和服务模块</p>
-            <p style="text-align:center;padding:30px 0;"><img src="@/assets/team01.jpg" alt=""></p>
+            <p>{{list.Description}}</p>
+            <p style="text-align:center;padding:30px 0;"><img :src="list.Image" alt=""></p>
             <h3>工作特长</h3>
-            <p>始终坚持服务为导向，加强公司内部管理，积极优化组织结构，公司经过硬件和软件的系统化建设及优化升级，体系的不断完善，使公司得以迅速发展。以“专心用心放心”的经营理念规范提升专业度和服务模块，从加盟开店前期选址、装修、开业、培训到后期门店营运、管理、产品、活动、线上线下推广，“快乐星汉堡” 已形成了加盟连锁经营的完整体系。</p>
-            <p style="text-align:center;padding:30px 0;"><img src="@/assets/team01.jpg" alt=""></p>
-            <p>始终坚持服务为导向，加强公司内部管理，积极优化组织结构，公司经过硬件和软件的系统化建设及优化升级，体系的不断完善，使公司得以迅速发展。以“专心用心放心”的经营理念规范提升专业度和服务模块，从加盟开店前期选址、装修、开业、培训到后期门店营运、管理、产品、活动、线上线下推广，“快乐星汉堡” 已形成了加盟连锁经营的完整体系。</p>
+            <p v-html="list.Content"></p>            
         </div>
         <div class="other-related">
             更多优秀团队
         </div>
         <ul class="team-list clearfix">
-            <li @click="tapJump()">
+            <li @click="tapJump(item.Id)" v-for="item in list.MoreData" :key="item.Id">
                 <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
+                    <img :src="item.Image" alt="">
                 </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li>
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>
-            <li>
-                <div class="item-img">
-                    <img src="@/assets/team-item.jpg" alt="">
-                </div>
-                <p class="item-name">周云重</p>
-                <p class="item-job">门店培训师</p>
-                <p class="item-intro">8年西式快餐门店和培训经验，做事一丝不苟</p>
-            </li>            
+                <p class="item-name">{{item.Title}}</p>
+                <p class="item-job">{{item.Department}}</p>
+                <p class="item-intro">{{item.Description}}</p>
+            </li>          
         </ul>
     </div>
 </template>
 
 <script>
 export default {
-    name:'teamView'
+    name:'teamView',
+    data(){
+        return{
+            list:{
+                "MoreData": [ ] //更多优秀团队
+            }
+        }
+    },
+    created:function(){
+        this.loadList()
+    },
+    methods:{
+         tapJump:function(id){
+            this.$router.push({
+                path: '/about/优秀个人',
+                query:{
+                    id:id
+                }
+            })
+        },
+        loadList:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=teamdetail",{
+                params:{
+                    Id:this.$route.query.id
+                }
+            })
+            .then(function(res){
+                that.list = res.data.list[0];            
+            })
+        }
+    },
+    watch:{
+        '$route'(to,from){
+            this.loadList()
+        }
+    }
 }
 </script>
 

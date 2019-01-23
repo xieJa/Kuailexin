@@ -5,27 +5,13 @@
       <p>快乐星汉堡（KDS BURGER）凭借数年来的稳扎稳打、精益求精，获得了诸多荣誉和加盟商、消费者的口碑。快乐星以美式高品质西式快餐为卖点，主要经营市场流行的多种系列西式餐饮美食。其中，明星产品为快乐鸡腿堡、黄金脆皮鸡、招牌奶茶、脆皮手枪腿等，定期还有新品上市。</p>
     </div>
     <ul>
-        <li>
-          <div class="title">斗石于2008年注册，随后股东实资1000万注入斗石银行账户，用于斗石系统建设和品牌发展</div>
-          <a href="https://www.abcdefg.com/" target="_blank">查看网站：WWW.abcdefg.com</a>
+        <li v-for="(item,index) in list" :key="index">
+          <div class="title">{{item.Title}}</div>
+          <a :href="item.Url" target="_blank">查看网站>></a>
           <div class="img">
-            <img src="@/assets/credit.jpg" alt="">
+            <img :src="item.Image" alt="">
           </div>
-        </li>
-        <li>
-          <div class="title">斗石于2008年注册，随后股东实资1000万注入斗石银行账户，用于斗石系统建设和品牌发展</div>
-          <a href="https://www.abcdefg.com/" target="_blank">查看网站：WWW.abcdefg.com</a>
-          <div class="img">
-            <img src="@/assets/credit.jpg" alt="">
-          </div>
-        </li>
-        <li>
-          <div class="title">斗石于2008年注册，随后股东实资1000万注入斗石银行账户，用于斗石系统建设和品牌发展</div>
-          <a href="https://www.abcdefg.com/" target="_blank">查看网站：WWW.abcdefg.com</a>
-          <div class="img">
-            <img src="@/assets/credit.jpg" alt="">
-          </div>
-        </li>
+        </li>        
     </ul>
   </div>
 </template>
@@ -34,7 +20,18 @@
 export default {
   name: "Credit",
   data() {
-    return {};
+    return {
+      list:[]
+    };
+  },
+  created:function(){
+    let that = this;
+    this.$axios.get("/ajaxdata.aspx?Action=list&Object=BrandCredit&pageIndex=1&pageSize=100")
+    .then(function(res){
+      console.log(res)
+      that.list=res.data.list
+      
+    })
   }
 };
 </script>
@@ -64,8 +61,13 @@ export default {
   font-size:18px;
   color:#47a5ff;
   text-decoration: underline;
+  background:url(~@/assets/site.png) no-repeat left center;
+  padding-left:25px;
 }
 .Credit li .img{
   margin:25px 0;
+}
+.Credit li a img{
+
 }
 </style>

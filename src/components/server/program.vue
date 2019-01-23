@@ -3,105 +3,34 @@
         <h3>特许加盟简述</h3>
         <p>特忤加盟也称之为特许经营,在中国习惯口语加盟.是指特许者将自已所押有的商耘、商号、声品、考利和寺有技木、 経菅模式等以特忤経菅合同的形式授予被特許者使用，被特許者按合同規定，在特忤者統- -的止旁模式下从事経營活劫, 并向特許者支付相虚斐用.由于特杵企止的存在形式具有達鎭経營統- -形象、 統- -管理等基本特征, 因此也称之カ持杵達執。</p>
         <p>禾而美在全国30多个省区几千家督斤，超辻95%的店都是由加盟商独資径菅管理。加盟禾而美又堡是↑巨大机会.我仞正在寺指人同我仞的経營理念且有一定投資経菅能力的作加入我仞</p>
-        <dl class="program-item">
+        
+        <dl class="program-item" v-for="(item,index) in list" :key="index" :id="item.Id">                    
             <dt class="clearfix">
                 <div class="swiper-container swiper1">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
+                    <div class="swiper-slide" v-for="image in item.Images">
+                        <img :src="image.Image" alt>
+                    </div>                    
                     </div>
                     <div class="swiper-button-prev swiper-button-white"></div>
                     <div class="swiper-button-next swiper-button-white"></div>
                 </div>
                 <div class="program-item-intro">
                     <div class="v-middle">
-                        <div class="name">快乐星汉堡概念店</div>
-                        <p>面积标准：10-50平米</p>
-                        <p>选址要求：中小学附近、居民区、商业或车站档口</p>
-                        <p>核心产品：汉堡、炸鸡、小食、饮料</p>
-                        <p>售卖方式：外卖为主</p>
-                        <p>经营方式：夫妻为主</p>
+                        <div class="name">{{item.Title}}</div>
+                        <p>面积标准：{{item.Area}}</p>
+                        <p>选址要求：{{item.Location}}</p>
+                        <p>核心产品：{{item.Products}}</p>
+                        <p>售卖方式：{{item.Sale}}</p>
+                        <p>经营方式：{{item.Operating}}</p>
                     </div>
                 </div>
             </dt>
             <dd>
                 <div class="title">店型分类说明</div>
-                <p>特忤加盟也称之为特许经营,在中国习惯口语加盟.是指特许者将自已所押有的商耘、商号、声品、考利和寺有技木、 経菅模式等以特忤経菅合同的形式授予被特許者使用，被特許者按合同規定，在特忤者統- -的止旁模式下从事経營活劫, 并向特許者支付相虚斐用.由于特杵企止的存在形式具有達鎭経營統- -形象、 統- -管理等基本特征, 因此也称之カ持杵達執.</p>
+                <p>{{item.Description}}</p>
             </dd>
-        </dl>
-        <dl class="program-item">
-            <dt class="clearfix">
-                <div class="swiper-container swiper1">
-                    <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    </div>
-                    <div class="swiper-button-prev swiper-button-white"></div>
-                    <div class="swiper-button-next swiper-button-white"></div>
-                </div>
-                <div class="program-item-intro">
-                    <div class="v-middle">
-                        <div class="name">快乐星汉堡概念店</div>
-                        <p>面积标准：10-50平米</p>
-                        <p>选址要求：中小学附近、居民区、商业或车站档口</p>
-                        <p>核心产品：汉堡、炸鸡、小食、饮料</p>
-                        <p>售卖方式：外卖为主</p>
-                        <p>经营方式：夫妻为主</p>
-                    </div>
-                </div>
-            </dt>
-            <dd>
-                <div class="title">店型分类说明</div>
-                <p>特忤加盟也称之为特许经营,在中国习惯口语加盟.是指特许者将自已所押有的商耘、商号、声品、考利和寺有技木、 経菅模式等以特忤経菅合同的形式授予被特許者使用，被特許者按合同規定，在特忤者統- -的止旁模式下从事経營活劫, 并向特許者支付相虚斐用.由于特杵企止的存在形式具有達鎭経營統- -形象、 統- -管理等基本特征, 因此也称之カ持杵達執.</p>
-            </dd>
-        </dl>
-        <dl class="program-item">
-            <dt class="clearfix">
-                <div class="swiper-container swiper1">
-                    <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../assets/pic1.jpg" alt>
-                    </div>
-                    </div>
-                    <div class="swiper-button-prev swiper-button-white"></div>
-                    <div class="swiper-button-next swiper-button-white"></div>
-                </div>
-                <div class="program-item-intro">
-                    <div class="v-middle">
-                        <div class="name">快乐星汉堡概念店</div>
-                        <p>面积标准：10-50平米</p>
-                        <p>选址要求：中小学附近、居民区、商业或车站档口</p>
-                        <p>核心产品：汉堡、炸鸡、小食、饮料</p>
-                        <p>售卖方式：外卖为主</p>
-                        <p>经营方式：夫妻为主</p>
-                    </div>
-                </div>
-            </dt>
-            <dd>
-                <div class="title">店型分类说明</div>
-                <p>特忤加盟也称之为特许经营,在中国习惯口语加盟.是指特许者将自已所押有的商耘、商号、声品、考利和寺有技木、 経菅模式等以特忤経菅合同的形式授予被特許者使用，被特許者按合同規定，在特忤者統- -的止旁模式下从事経營活劫, 并向特許者支付相虚斐用.由于特杵企止的存在形式具有達鎭経營統- -形象、 統- -管理等基本特征, 因此也称之カ持杵達執.</p>
-            </dd>
-        </dl>
+        </dl>        
         <pageQrcode></pageQrcode>
     </div>
 </template>
@@ -112,11 +41,11 @@ export default {
     name:'program',
     data(){
         return{
-                 
+            list:[]
         }
     },
-    mounted:function(){
-        this.swiper()
+    created:function(){
+        this.loadList();
     },
     methods:{
         swiper:function(){
@@ -124,6 +53,16 @@ export default {
                     prevButton:'.swiper-button-prev',
 		            nextButton:'.swiper-button-next',
             });
+        },
+        loadList:function(){
+            let that = this;
+            this.$axios.get("/ajaxdata.aspx?Action=AffiliateSolutionslist&Object=AffiliateSolutions&pageIndex=1&pageSize=100")
+            .then(function(res){
+                that.list = res.data.list
+                that.$nextTick(function(){
+                    this.swiper()                    
+                })
+            })
         }
     },
     components:{

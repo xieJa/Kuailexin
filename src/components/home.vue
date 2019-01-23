@@ -2,15 +2,9 @@
   <div class="home">
     <div class="swiper-container home-banner">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(item,index) in ad" :key="index">
+        <div class="swiper-slide" v-for="(item,index) in Banner" :key="index">
           <router-link :to="item.Url"><img :src="item.Image" :title="item.Title"></router-link>
-        </div>
-        <div class="swiper-slide">
-          <img src="../assets/banner01.jpg">
-        </div>
-        <div class="swiper-slide">
-          <img src="../assets/banner01.jpg">
-        </div>
+        </div>        
       </div>
       <!-- 如果需要分页器 -->
       <div class="swiper-pagination banner-swiper-pagination"></div>
@@ -21,59 +15,33 @@
           <h2>{{threehearts[0].Keyword}}</h2>
           <p>{{threehearts[0].Description}}</p>
         </div>
-        <ul class="zx-hb-bd" v-if="!this.$M">
-          <li>
+        <ul class="zx-hb-bd pc-show clearfix" v-if="!this.$M">          
+          <li v-for="(item,index) in typelist" :key="index" @click="this.$router.push({path:'/Product',query:{name:item.Title,id:item.Id}})">
             <div class="flipper">
-              <img src="../assets/zx_hb01.jpg">
+              <img :src="item.Image" :onerror="errorImg">
               <div class="zx-hb-inner">
                 <div class="zx-hb-item">
-                  <div class="zx-hb-hd">新品动态</div>
-                  <p>快乐星汉堡拥有专业的研发团队，定时推出新品，增加产品的吸引力和门店活跃度，吸引消费者的眼球，俘虏吃货的心</p>
-                  <router-link to="/">查看详情 ></router-link>
+                  <div class="zx-hb-hd">{{item.Title}}</div>
+                  <p>{{item.Description}}</p>
+                  <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}">查看详情 ></router-link>
                 </div>
               </div>
             </div>
-            <div class="zx-bt">新品动态</div>
-          </li>
-          <li>
-            <div class="flipper">
-              <img src="../assets/zx_hb01.jpg">
-              <div class="zx-hb-inner">
-                <div class="zx-hb-item">
-                  <div class="zx-hb-hd">精美小食</div>
-                  <p>快乐星汉堡拥有专业的研发团队，定时推出新品，增加产品的吸引力和门店活跃度，吸引消费者的眼球，俘虏吃货的心</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="zx-bt">精美小食</div>
-          </li>
-          <li>
-            <div class="flipper">
-              <img src="../assets/zx_hb01.jpg">
-              <div class="zx-hb-inner">
-                <div class="zx-hb-item">
-                  <div class="zx-hb-hd">明星产品</div>
-                  <p>快乐星汉堡拥有专业的研发团队，定时推出新品，增加产品的吸引力和门店活跃度，吸引消费者的眼球，俘虏吃货的心</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="zx-bt">明星产品</div>
-          </li>
+            <div class="zx-bt">{{item.Title}}</div>
+          </li>          
         </ul>
-        <div class="m-zx-hb-bd" v-if="this.$M">
+        <div class="m-zx-hb-bd m-show" v-else>
           <div class="m-zx-bt">
-            <button @click="reds(1)" :class="zx==1?'active':''">新品动态</button>
-            <button @click="reds(2)" :class="zx==2?'active':''">精美小食</button>
-            <button @click="reds(3)" :class="zx==3?'active':''">明星产品</button>
+            <button @click="reds(index)" :class="zx==index?'active':''" v-for="(item,index) in typelist" :key="index">{{item.Title}}</button>
           </div>
-          <transition>
-            <div class="m-zx-inner" :key="zx">              
-              <img src="../assets/zx_hb01.jpg">
-              <p>快乐星汉堡拥有专业的研发团队，定时推出新品，增加产品的吸引力和门店活跃度，吸引消费者的眼球，俘虏吃货的心{{zx}}</p>
-            </div>
-          </transition>
+          <transition-group>
+            <div class="m-zx-inner" v-for="(item,index) in typelist" :key="index" v-show="index== zx"> 
+              <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}" >
+              <img :src="item.Image">
+              <p>{{item.Description}}</p>
+              </router-link>             
+            </div>            
+          </transition-group>
         </div>
       </div>
       <div class="modifying modifying01">
@@ -87,36 +55,16 @@
       <div class="cover ad-propaganda-cover">
         <div class="swiper-container ad-propaganda">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="ad-pic">
-                <img src="../assets/ad_01.jpg">
+            <div class="swiper-slide" v-for="(item,index) in newproductlist" :key="index">              
+              <div class="ad-pic" @click="this.$router.push({path:'/Product',query:{name:'新品动态'}})">
+                <img :src="item.Image" :onerror="errorImg">
               </div>
               <div class="ad-inner">
-                <div class="ad-bt">快乐星昔果乐</div>
-                <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                <router-link to>查看详情 ></router-link>
+                <div class="ad-bt">{{item.Title}}</div>
+                <p>{{item.Description}}</p>
+                <router-link :to="{path:'/Product',query:{name:'新品动态'}}" @click.native="submenu=false">查看详情 ></router-link>
               </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="ad-pic">
-                <img src="../assets/ad_01.jpg">
-              </div>
-              <div class="ad-inner">
-                <div class="ad-bt">快乐星昔果乐</div>
-                <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                <router-link to>查看详情 ></router-link>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="ad-pic">
-                <img src="../assets/ad_01.jpg">
-              </div>
-              <div class="ad-inner">
-                <div class="ad-bt">快乐星昔果乐</div>
-                <p>果中“C”女王——西柚驾到！饱满果肉搭配香溢鲜奶，一场维C盛宴舞动开场。更多营养，更低卡路里，味感香滑，入口即化。昔果乐，吃出美丽健康！</p>
-                <router-link to>查看详情 ></router-link>
-              </div>
-            </div>
+            </div>            
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination propaganda-swiper-pagination"></div>
@@ -129,7 +77,7 @@
       </div>
     </div>
     <div class="ad-activity" v-if="!this.$M">
-      <img src="../assets/ad_02.jpg" alt>
+      <router-link :to="ad[0].Url"><img :src="ad[0].Image" :title="ad[0].Title"></router-link>
     </div>
     <div class="layer clearfix relative">
       <div class="cover yx-cover">
@@ -139,55 +87,48 @@
         </div>
         <ul class="yx-server clearfix" v-if="!this.$M">
           <li>
-            <img src="../assets/server_icon1.png">
-            <span>微信点餐</span>
-            <p>通过微信自助点餐更加方便快捷，建立属于自己的消费者社群</p>
+            <router-link :to="{path:'/market',query:{name:'微信点餐'}}" >
+              <img src="../assets/server_icon1.png">
+              <span>微信点餐</span>
+              <p>通过微信自助点餐更加方便快捷，建立属于自己的消费者社群</p>
+            </router-link>
           </li>
           <li>
+            <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >
             <img src="../assets/server_icon2.png">
             <span>外卖运营</span>
             <p>深度对接，专业的外卖的接单系统自动接收第三方平台订单</p>
+            </router-link>
           </li>
           <li>
+            <router-link :to="{path:'/server/program',query:{name:'加盟方案'}}" >
             <img src="../assets/server_icon3.png">
             <span>加盟方案</span>
             <p>让每一位加盟快乐星汉堡店的加盟商，都能更加轻松经营，助力加盟者成就梦想</p>
+            </router-link>
           </li>
           <li>
+            <router-link :to="{path:'/server',query:{name:'如何选择'}}" >
             <img src="../assets/server_icon4.png">
             <span>如何选择</span>
             <p>精心挑选每一个食材，精心烹饪每一种产品，通过专业、科学、严格的制作工艺而成</p>
+            </router-link>
           </li>
         </ul>
         <div class="join-new" v-if="this.$M">
           <PageTitle title="加盟资讯"></PageTitle>
           <ul>
-            <li>
+            <li v-for="item in newJoin" :key="item.Id" @click="jumpNew(item.Id)">
               <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
+                <img :src="item.Image" alt>
               </div>
               <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟品牌带你解读权威4p营销理论</div>
-                <div class="new-intro">
-                  其实现在火爆的餐饮店，或多或少都离不开恰到好处的营销。不少加盟商就是看中快乐星汉堡有计划性、
-                  能洞察市场爆点的营销策略方案，这也是未来店铺长期运营，人气依旧火爆的主要原因。对于营销这块...
-                </div>
+                <div class="new-title">{{item.Title}}</div>
+                <div class="new-intro">{{item.Description}}</div>
               </div>
-            </li>
-            <li>
-              <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
-              </div>
-              <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟品牌带你解读权威4p营销理论</div>
-                <div class="new-intro">
-                  其实现在火爆的餐饮店，或多或少都离不开恰到好处的营销。不少加盟商就是看中快乐星汉堡有计划性、
-                  能洞察市场爆点的营销策略方案，这也是未来店铺长期运营，人气依旧火爆的主要原因。对于营销这块...
-                </div>
-              </div>
-            </li>
+            </li>            
           </ul>
-          <router-link to="/" class="seeAll">查看全部</router-link>
+          <router-link :to="{path:'/news',query:{name:'加盟资讯',Id:newJoinM}}" class="seeAll">查看全部</router-link>
         </div>
       </div>
       <div class="modifying modifying04">
@@ -207,13 +148,13 @@
               :class="campaignTab=='1'?'cur':''"
               data-num="1"
               @click="campaignTabTrigger($event)"
-            >日常营销</span>
+            >新品营销</span>
             <span
               class="tab-btn"
               :class="campaignTab=='2'?'cur':''"
               data-num="2"
               @click="campaignTabTrigger($event)"
-            >新品营销</span>
+            >日常营销</span>
             <span
               class="tab-btn"
               :class="campaignTab=='3'?'cur':''"
@@ -223,151 +164,43 @@
           </div>
         </div>
         <ul class="campaign clearfix" v-show="campaignTab=='1'">
-          <li>
+          <li v-for="item in NewProductMarketing" :key="item.id">
             <div class="campaign-item">
               <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
+                <img :src="item.Image" :onerror="errorImg">
               </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
+              <div class="campaign-item-bt">{{item.Title}}</div>
+              <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
+                <router-link :to="{path:'/market/Marketingdetail',query:{name:'新品营销',Object:'NewProductMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新的口味，体验不一样的好...</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">官宣！！快乐星汉堡3款新...</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">餐饮加盟盛典：快乐星...</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
+          </li>          
         </ul>
         <ul class="campaign clearfix" v-show="campaignTab=='2'">
-          <li>
+          <li v-for="item in DailyMarketing" :key="item.id">
             <div class="campaign-item">
               <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
+                <img :src="item.Image" :onerror="errorImg">
               </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
+              <div class="campaign-item-bt">{{item.Title}}</div>
+              <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
+                <router-link :to="{path:'/market/Marketingdetail',query:{name:'日常营销',Object:'DailyMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
           </li>
         </ul>
         <ul class="campaign clearfix" v-show="campaignTab=='3'">
-          <li>
+          <li v-for="item in HolidayMarketing" :key="item.id">
             <div class="campaign-item">
               <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
+                <img :src="item.Image" :onerror="errorImg">
               </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
+              <div class="campaign-item-bt">{{item.Title}}</div>
+              <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="campaign-item">
-              <div class="campaign-item-pic">
-                <img src="../assets/ad_03.jpg">
-              </div>
-              <div class="campaign-item-bt">新品发布会</div>
-              <div class="campaign-item-text">番茄先生牛肉饼的出现，总能拯救每一次低谷，瞬间补满元气。每口弹...</div>
-              <div class="campaign-item-btn">
-                <router-link to>查看详情</router-link>
+                <router-link :to="{path:'/market/Marketingdetail',query:{name:'节日营销',Object:'HolidayMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
           </li>
@@ -386,102 +219,33 @@
         <div class="join-scheme clearfix" v-if="this.$M">
           <PageTitle title="加盟方案"></PageTitle>
           <ul>
-            <li>
+            <li v-for="item in AffiliateSolutions" :key="item.Id" @click="programTap(item.Id)">              
               <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
+                <img :src="item.Images[0].Image" alt>
               </div>
               <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟标准店</div>
+                <div class="new-title">{{item.Title}}</div>
               </div>
-            </li>
-            <li>
-              <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
-              </div>
-              <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟标准店</div>
-              </div>
-            </li>
-            <li>
-              <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
-              </div>
-              <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟标准店</div>
-              </div>
-            </li>
-            <li>
-              <div class="newPic">
-                <img src="@/assets/newpic.jpg" alt>
-              </div>
-              <div class="new-inner">
-                <div class="new-title">快乐星汉堡加盟标准店</div>
-              </div>
-            </li>
+            </li>            
           </ul>
         </div>
         <div class="cover-hd clearfix">
           <h2 class="cover-hd-title">成功案例</h2>
           <div class="cover-hd-r">
-            <router-link to="/">查看全部 ></router-link>
+            <router-link to="/case?Id=01024d30-9c2b-411c-b785-48b53d0777ed">查看全部 ></router-link>
           </div>
         </div>
         <div class="swiper-container fx-cases">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="../assets/ad_04.jpg">
+            <div class="swiper-slide" v-for="item in caseList" :key="item.Id" @click="caseTap(item.Id)">
+              <img :src="item.Image">
               <div class="fx-hb-inner">
                 <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
+                  <p>{{item.Title}}</p>
+                  <router-link :to="{path:'/newdetail',query:{typeName:'成功案例',Id:item.Id}}">查看详情 ></router-link>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/ad_05.jpg">
-              <div class="fx-hb-inner">
-                <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/ad_04.jpg">
-              <div class="fx-hb-inner">
-                <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/ad_05.jpg">
-              <div class="fx-hb-inner">
-                <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/ad_04.jpg">
-              <div class="fx-hb-inner">
-                <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img src="../assets/ad_05.jpg">
-              <div class="fx-hb-inner">
-                <div class="fx-hb-item">
-                  <p>98年妹子加盟快乐星汉堡，成最小加盟商</p>
-                  <router-link to="/">查看详情 ></router-link>
-                </div>
-              </div>
-            </div>
+            </div>            
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination cases-swiper-pagination"></div>
@@ -499,51 +263,15 @@
         </div>
         <div class="swiper-container team-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
+            <div class="swiper-slide" v-for="(item,index) in teamlist" :key="index">
               <div class="team-portraits">
-                <img src="../assets/ad_04.jpg">
+                <img :src="item.Image" :onerror="errorImg">
               </div>
-              <div class="team-name">周云重</div>
-              <div class="team-job">门店培训师</div>
-              <div class="team-intro">8年西式快餐门店和培训经验，做事一丝不苟</div>
-              <router-link to="/">查看详情</router-link>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-portraits">
-                <img src="../assets/team.png">
-              </div>
-              <div class="team-name">周云重</div>
-              <div class="team-job">门店培训师</div>
-              <div class="team-intro">8年西式快餐门店和培训经验，做事一丝不苟</div>
-              <router-link to="/">查看详情</router-link>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-portraits">
-                <img src="../assets/ad_04.jpg">
-              </div>
-              <div class="team-name">周云重</div>
-              <div class="team-job">门店培训师</div>
-              <div class="team-intro">8年西式快餐门店和培训经验，做事一丝不苟</div>
-              <router-link to="/">查看详情</router-link>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-portraits">
-                <img src="../assets/ad_04.jpg">
-              </div>
-              <div class="team-name">周云重</div>
-              <div class="team-job">门店培训师</div>
-              <div class="team-intro">8年西式快餐门店和培训经验，做事一丝不苟</div>
-              <router-link to="/">查看详情</router-link>
-            </div>
-            <div class="swiper-slide">
-              <div class="team-portraits">
-                <img src="../assets/ad_04.jpg">
-              </div>
-              <div class="team-name">周云重</div>
-              <div class="team-job">门店培训师</div>
-              <div class="team-intro">8年西式快餐门店和培训经验，做事一丝不苟</div>
-              <router-link to="/">查看详情</router-link>
-            </div>
+              <div class="team-name">{{item.Title}}</div>
+              <div class="team-job">{{item.Department}}</div>
+              <div class="team-intro">{{item.Description}}</div>
+              <router-link :to="{path: '/about/优秀个人',query:{id:item.Id}}">查看详情</router-link>
+            </div>            
           </div>
         </div>
         <!-- 如果需要分页器 -->
@@ -562,28 +290,11 @@
         <div
           class="storefront-intro"
         >店面规划和设计是门店取得成功的基础。厨房结构，设备规划摆放流程对于操作和产出率和出餐速度是极大的影响，油烟机、空调和炸炉、烤箱和裹粉台的关系决定门店的能耗的高低及粉尘的溅落和漂浮，进而决定机器的使用寿命。吧台和厨房适宜的高度差决定了员工的状态和激情，也能更好的提高配单效率，吧台和门的距离有店面大小和客户心理叠加系数决定，餐厅位置摆放决定主动客户和被动客户的占比等</div>
-        <ul class="storefront clearfix">
-          <li>
-            <router-link to>
-              <img src="../assets/ad_06.jpg">
-            </router-link>
-          </li>
-          <li>
-            <router-link to>
-              <img src="../assets/ad_06.jpg">
-            </router-link>
-          </li>
-          <li>
-            <router-link to>
-              <img src="../assets/ad_06.jpg">
-            </router-link>
-          </li>
-          <li>
-            <router-link to>
-              <img src="../assets/ad_06.jpg">
-            </router-link>
-          </li>
-        </ul>
+        <div class="storefront clearfix">
+          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" >
+            <img :src="shop[0].Image" alt="">
+          </router-link>
+        </div>
       </div>
       <div class="modifying modifying08">
         <img src="../assets/modifying_08.png">
@@ -594,25 +305,9 @@
 
 <script>
 export default {
-  name: "home",
-  metaInfo:function(){
-    return{
-      title:this.metaInfo.Title, // set a title
-      meta: [{                 // set meta
-        name: 'keyWords',
-        content: this.metaInfo.Keyword
-      },{                 // set meta
-        name: 'description',
-        content: this.metaInfo.Description
-      },{
-        name:'viewport',
-        content:'width=device-width,initial-scale=1.0'
-      }]
-    }
-  },
+  name: "home", 
   data: function() {
-    return {
-      metaInfo:[{Page:'',Title:'',Keyword:'',Description:''}], // meta
+    return {     
       threehearts:[{
             Title: "",
             Keyword: "",  //关键字
@@ -627,23 +322,27 @@ export default {
             Keyword: "",
             Description: "" 
             }],//三心标题
-      ad:[],
+      Banner:[],
+      typelist:[{Title:'新品动态',Description:'快乐星汉堡拥有专业的研发团队，定时推出新品，增加产品的吸引力和门店活跃度，吸引消费者的眼球，俘虏吃货的心',Image:'',Id:''}], //产品列表
+      ad:[{"Image":"","Url":"","Title":""}], //广告
+      newproductlist:[], //新品动态
+      teamlist:[],  // 优秀团队
+      shop:[{"Id":"","Title":"","Elements":"","ShowIndex":"","Description":"","Image":""}], //店铺规划
+      NewProductMarketing:[],
+      DailyMarketing:[],
+      HolidayMarketing:[],
+      caseList:[],
+      newJoin:[], //加盟资讯
+      newJoinM:{Id:''},
+      AffiliateSolutions:[],
       campaignTab: 1,
-      zx: "1"
+      zx:0,
     };
   },
-  created:function(){
-    // seo数据    
+  created:function(){    
     let that = this;
-    this.$axios.get(this.HOST+'/ajaxdata.aspx?Action=SEO&Page=首页')
-    .then(function (res) {
-      that.metaInfo = res.data.list[0]   
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
     // 专心,用心，放心
-    this.$axios.get(this.HOST+'/ajaxdata.aspx?Action=threehearts')
+    this.$axios.get('/ajaxdata.aspx?Action=threehearts')
     .then(function(res){
       that.threehearts = res.data.list   
     })
@@ -651,52 +350,194 @@ export default {
       console.log(err)
     })
     // Banner列表
-    this.$axios.get(this.HOST+'/ajaxdata.aspx?Action=ad')
+    this.$axios.get('/ajaxdata.aspx?Action=bannerlist')
+    .then(function(res){
+      that.Banner = res.data.list   
+      that.$nextTick(function(){
+        new that.$Swiper(".home-banner", {
+          autoplay: 5000,
+          loop: true,
+          // 如果需要分页器
+          pagination: ".banner-swiper-pagination",
+          paginationClickable: true
+        });
+      })
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 首页广告
+    this.$axios.get('/ajaxdata.aspx?Action=ad')
     .then(function(res){
       that.ad = res.data.list   
     })
     .catch(function(err){
       console.log(err)
     })
-  },
-  mounted: function() {    
-    new this.$Swiper(".home-banner", {
-      loop: true,
-      // 如果需要分页器
-      pagination: ".banner-swiper-pagination",
-      paginationClickable: true
-    });
-    new this.$Swiper(".ad-propaganda", {
-      loop: true,
-      // 如果需要分页器
-      pagination: ".propaganda-swiper-pagination",
-      paginationClickable: true,
-      prevButton: ".propaganda-prev",
-      nextButton: ".propaganda-next"
-    });
-    let fxcase = this.$M ? 2 : 4;
-    new this.$Swiper(".fx-cases", {
-      slidesPerView: fxcase,
-      slidesPerGroup: fxcase,
-      spaceBetween: 15,
-      // 如果需要分页器
-      pagination: ".cases-swiper-pagination",
-      paginationClickable: true
-    });
-    new this.$Swiper(".team-swiper", {
-      slidesPerView: 4,
-      slidesPerGroup: 4,
-      prevButton: ".team-prev",
-      nextButton: ".team-next"
-    });
-  },
+    // 首页产品列表
+    this.$axios.get('/ajaxdata.aspx?Action=typelist&Parent=产品分类&DefaultShow=1')
+    .then(function(res){
+      for(let i=0;i<2;i++){
+        that.typelist.push(res.data.list[i])
+      }
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 首页新品动态分类
+    this.$axios.get('/ajaxdata.aspx?Action=typelist&Parent=新品动态分类')
+    .then(function(res){
+      that.typelist[0]=res.data.list[0]
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 新品动态
+    this.$axios.get('/ajaxdata.aspx?Action=newproductlist&pageIndex=1&pageSize=5&Recommend=1')
+    .then(function(res){
+      that.newproductlist = res.data.list
+      console.log(res)
+      that.$nextTick(function(){
+        new this.$Swiper(".ad-propaganda", {
+          loop: true,
+          // 如果需要分页器
+          pagination: ".propaganda-swiper-pagination",
+          paginationClickable: true,
+          prevButton: ".propaganda-prev",
+          nextButton: ".propaganda-next"
+        });
+      })
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 优秀团队
+    this.$axios.get('/ajaxdata.aspx?Action=list&Object=Team&pageIndex=1&pageSize=100')
+    .then(function(res){
+      that.teamlist = res.data.list
+      that.$nextTick(function(){
+        new this.$Swiper(".team-swiper", {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+          prevButton: ".team-prev",
+          nextButton: ".team-next"
+        });
+      })
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+
+    // 店面规划
+    this.$axios("/ajaxdata.aspx?Action=list&Object=shopplanning&pageIndex=1&pageSize=1")
+    .then(function(res){
+      that.shop = res.data.list     
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 新品营销
+    this.$axios.get('/ajaxdata.aspx?Action=defaultclassicList&Object=NewProductMarketing&pageIndex=1&pageSize=4')
+    .then(function(res){
+      that.NewProductMarketing=res.data.list
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 日常营销
+    this.$axios.get('/ajaxdata.aspx?Action=defaultclassicList&Object=DailyMarketing&pageIndex=1&pageSize=4')
+    .then(function(res){
+      that.DailyMarketing=res.data.list
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 节日营销
+    this.$axios.get('/ajaxdata.aspx?Action=defaultclassicList&Object=HolidayMarketing&pageIndex=1&pageSize=4')
+    .then(function(res){
+      that.HolidayMarketing=res.data.list
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 成功案例
+    this.$axios.get('/ajaxdata.aspx?Action=recommendnewslist&pageIndex=1&pageSize=10')
+    .then(function(res){
+      that.caseList=res.data.list
+      that.$nextTick(function(){
+        let fxcase = this.$M ? 2 : 4;
+        new this.$Swiper(".fx-cases", {
+          slidesPerView: fxcase,
+          slidesPerGroup: fxcase,
+          spaceBetween: 15,
+          // 如果需要分页器
+          pagination: ".cases-swiper-pagination",
+          paginationClickable: true
+        });
+      })
+    })
+    .catch(function(err){
+      console.log(err)
+    })
+    // 加盟资讯
+    this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类")
+    .then(function(res){
+      for(let i = 0;i<res.data.list.length;i++){
+        if(res.data.list[i].Title=='加盟资讯'){   
+          that.newJoinM= res.data.list[i].Id;               
+           that.$axios.get("/ajaxdata.aspx?Action=list&Object=news&SearchKey=TypeId",{
+                params:{
+                    SearchTypeId:that.newJoinM,
+                    pageIndex:1,
+                    pageSize:2,
+                }
+            })
+            .then(function(res){
+               that.newJoin=res.data.list
+            })
+        }
+      }
+    })
+    // 加盟方案
+    this.$axios.get("/ajaxdata.aspx?Action=AffiliateSolutionslist&Object=AffiliateSolutions&pageIndex=1&pageSize=4")
+    .then(function(res){
+        that.AffiliateSolutions = res.data.list        
+    })
+  },  
   methods: {
     campaignTabTrigger: function(e) {
       this.campaignTab = e.target.dataset.num;
     },
     reds: function(index) {
       this.zx = index;
-    }
+    },
+    jumpNew:function(id){
+      this.$router.push({
+        path:'/newdetail',
+        query:{
+          typeName:'加盟资讯',
+          Id:id
+        }
+      })
+    },
+    caseTap:function(id){
+      this.$router.push({
+        path:'/newdetail',
+        query:{
+          typeName:'成功案例',
+          Id:id
+        }
+      })
+    },
+    programTap:function(id){
+      this.$router.push({
+        path:'/server/program',
+        query:{
+          name:'加盟方案', 
+        },
+        hash:id
+      })
+    },
   }
 };
 </script>
