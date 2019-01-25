@@ -403,7 +403,7 @@ export default {
     bottom: -60px;
   }
   .fixedtool .a-tool {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.6);
   }
 }
 </style>

@@ -582,7 +582,7 @@ export default {
   }
   .m-zx-bt {
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 8px 20px;
     display: flex;
     justify-content: space-between;
   }
@@ -619,6 +619,12 @@ export default {
   }
   .join-new {
     padding: 0 10px;
+  }
+  .join-new:after{
+    content: '';
+    display: block;
+    clear: both;
+    height: 1px;
   }
   .join-new li {
     margin-top: 30px;
