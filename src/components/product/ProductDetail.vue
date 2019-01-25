@@ -14,7 +14,7 @@
         <!-- 如果需要分页器 -->
         <div class="swiper-button-prev swiper-button-black product-prev"></div>
         <div class="swiper-button-next swiper-button-black product-next"></div>
-        <div class="hot"></div>
+        <!-- <div class="hot"></div> -->
       </div>
       <div class="product-inner" v-html="list.Content"></div>
       <dl class="share">
@@ -35,7 +35,7 @@
               @click="proLink(item.Id)"
             >
               <div class="product-item clearfix">
-                <div class="hot"></div>
+                <div class="hot" v-if="item.Hot=='True'"></div>
                 <div class="product-info">
                   <div class="name">{{item.Title}}</div>
                   <router-link :to="{name:'ProductDetail',params:{name:'脆皮全鸡'}}">查看详情</router-link>
@@ -82,7 +82,7 @@ export default {
             Id: that.$route.query.Id
           }
         })
-        .then(function(res) {
+        .then(function(res) {          
           that.list = res.data.list[0];
           that.$nextTick(function() {
             that.share();
@@ -100,7 +100,7 @@ export default {
         .get(
           "/ajaxdata.aspx?Action=list&Object=ProductView&SearchKey=Recommend&SearchRecommend=1&pageIndex=1&pageSize=6"
         )
-        .then(function(res) {
+        .then(function(res) {          
           that.rProduct = res.data.list;
           that.$nextTick(function() {
             let other = this.$M ? 1 : 2;
@@ -166,6 +166,7 @@ export default {
   border: 1px solid #cfcfcf;
   margin-top: 20px;
 }
+
 .swiper-slide {
   text-align: center;
 }

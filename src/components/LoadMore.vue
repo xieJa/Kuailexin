@@ -20,7 +20,7 @@ export default {
   display: inline-block;
   width:140px;
   height:50px;
-  background:#cfcfcf;
+  background:#e04e54;
   border:0;
   color:#fff;
   transition: all .5s;

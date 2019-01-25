@@ -356,6 +356,7 @@ export default {
       that.$nextTick(function(){
         new that.$Swiper(".home-banner", {
           autoplay: 5000,
+          autoplayDisableOnInteraction:false,
           loop: true,
           // 如果需要分页器
           pagination: ".banner-swiper-pagination",
@@ -467,6 +468,8 @@ export default {
       that.$nextTick(function(){
         let fxcase = this.$M ? 2 : 4;
         new this.$Swiper(".fx-cases", {
+          autoplay: 3000,
+          autoplayDisableOnInteraction:false,
           slidesPerView: fxcase,
           slidesPerGroup: fxcase,
           spaceBetween: 15,
@@ -553,7 +556,7 @@ export default {
 	  margin-top:.2rem;
   }
   .home-banner {
-    height: 5rem;
+    height: 3.8rem;
   }
   .home-banner img {
     position: absolute;
@@ -620,6 +623,9 @@ export default {
   .join-new li {
     margin-top: 30px;
   }
+   .join-new li img{
+     width: 100%;
+   }
   .join-new .new-title {
     font-size: 0.3rem;
     font-weight: bold;
@@ -646,33 +652,27 @@ export default {
   .join-scheme li:after {
     content: "";
     display: block;
-    padding-bottom: 50%;
   }
   .join-scheme li .newPic {
-    position: absolute;
     height: 100%;
+  }
+  .join-scheme li .newPic img{
+    max-width: 100%;
+    max-height:100%;
   }
   .join-scheme li .new-title {
     padding: 5px 0;
-    position: absolute;
     bottom: 0;
     text-align: center;
-    color: #fff;
+    color: #333;
     width: 100%;
-    box-shadow: 0 -15px 20px rgba(0, 0, 0, 0.8) inset;
   }
   .join-scheme li:nth-child(n + 3) {
     width: calc(50% - 5px);
     float: left;
     font-size: 0.24rem;
   }
-  .join-scheme li:nth-child(n + 3):after {
-    padding-bottom: 100%;
-  }
-  .join-scheme li:nth-child(n + 3) img {
-    max-width: none;
-    height: 100%;
-  }
+  
   .join-scheme li:nth-child(2n) {
     margin-left: 10px;
   }
@@ -713,6 +713,9 @@ export default {
   }
   .pageTitle {
     padding-top: 10px !important;
+  }
+  .fx-cases.swiper-container{
+    padding-bottom:60px;
   }
 }
 </style>

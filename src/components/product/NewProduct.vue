@@ -131,6 +131,11 @@ export default {
     }
     .newProduct-list .ad-pic{
         width:100%;
+        padding:0;
+        position: initial;
+    }
+    .newProduct-list .ad-pic img{
+        position:initial;
     }
     .newProduct-list .ad-inner{
         position:initial;

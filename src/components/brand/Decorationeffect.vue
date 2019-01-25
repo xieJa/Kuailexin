@@ -198,7 +198,6 @@ export default {
 }
 .shop-style li {
   width: 31%;
-  height: 366px;
   float: left;
   overflow: hidden;
   position: relative;
@@ -206,9 +205,23 @@ export default {
   cursor: pointer;
   margin-bottom: 3%;
 }
+.shop-front li:after{
+  content: '';
+  display: block;
+  width:100%;
+  padding-bottom:100%;
+}
+.shop-behind li:after{
+  content: '';
+  display: block;
+  width:100%;
+  padding-bottom:50%;
+}
 .shop-style li img {
-  max-width: none;
-  height: 100%;
+  position: absolute;
+  left:0;
+  top:0;
+  width: 100%;
 }
 .shop-style li p {
   position: absolute;
@@ -288,14 +301,13 @@ export default {
 
 @media screen and (max-width: 1000px) {
   .shop-style li {
-    width: 80%;
-    height: 3.6rem;
+    width: 90%;
     padding-bottom: 30px;
-    margin: 0 10%;
+    margin: 0 5%;
     border: 0;
   }
   .shop-front li:nth-child(3n-1) {
-    margin: 0 10%;
+    margin: 0 5%;
   }
   .shop-style li p {
     transform: translateY(0);

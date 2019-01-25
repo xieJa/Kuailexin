@@ -77,15 +77,15 @@ a:hover{color:#c8161e;}
 .zx-hb-bd{display: flex;justify-content: space-between;margin-top:15px;}
 .zx-hb-bd li{position: relative;float:left;padding:15px;width:33%;box-sizing: border-box;}
 .zx-hb-bd li img{width:100%;height:100%;transition: all .2s;position: absolute;top:50%;transform:translateY(-50%);}
-.zx-hb-bd li .zx-hb-inner{position:absolute;left:0;top:0;width:100%;height:100%;color:#fff;text-align: center;background: rgba(0,0,0,.4);transform: rotateY(180deg);visibility: hidden;transition: .8s;opacity: 0;}
+.zx-hb-bd li .zx-hb-inner{position:absolute;left:0;top:100%;width:100%;height:100%;color:#fff;text-align: center;background: rgba(0,0,0,.7);visibility: hidden;transition: .5s;opacity: 0;}
 .zx-hb-bd li .zx-hb-item{position: absolute;top:50%;transform:translateY(-50%);width:100%;}
 .zx-hb-bd li .zx-hb-hd{font-size: 22px;}
 .zx-hb-bd li p{width:80%;margin:0 auto;font-size: 14px;line-height: 24px;padding:15px 0;}
 .zx-hb-bd li a{font-size: 14px;color: #fff;display: inline-block;width:140px;height:35px;background:linear-gradient(to right,#c8181e,#ffaf53);border-radius: 17px;line-height: 35px;}
 .zx-hb-bd li .flipper{transition: all 1s;overflow: hidden;padding-bottom:100%;position: relative;width:100%;}
 .zx-hb-bd li:hover img{ filter: blur(3px);}
-.zx-hb-bd li:hover .flipper{transform: rotateY(180deg);box-shadow: 0 0 10px rgba(0,0,0,.6)}
-.zx-hb-bd li:hover .zx-hb-inner{visibility: visible;opacity: 1}
+.zx-hb-bd li:hover .flipper{box-shadow: 0 0 10px rgba(0,0,0,.6)}
+.zx-hb-bd li:hover .zx-hb-inner{visibility: visible;opacity: 1;top:0;}
 .zx-hb-bd li .zx-bt{text-align: center;font-size: 18px;margin-top:15px;}
 
 .ad-propaganda-cover{padding:50px 0;}
@@ -317,6 +317,18 @@ h3{
 
 .m-show{display: none;}
 .pc-show{display: block;}
+
+#newBridge .icon-right-bottom{
+  bottom:120px !important;
+}
+#newBridge .nb-right-bottom{
+  right: 180px  !important;
+  bottom: 120px  !important;
+  letter-spacing:0;
+}
+.el-message-box{
+  width:90%;
+}
 @media screen and (max-width:1000px){
   .m-show{display: block;}
   .pc-show{display: none;}
@@ -352,4 +364,8 @@ h3{
   .fx-cases .fx-hb-inner{
     display: none;
   }
+  #newBridge .icon-right-bottom{
+    display:none  !important;
+  }
 }
+

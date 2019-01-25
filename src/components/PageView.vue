@@ -39,6 +39,7 @@ export default {
 .about-info {
     position: relative;
     padding-top:40px;
+    overflow: hidden;
 }
 .about-info h3{
     font-size: 24px;

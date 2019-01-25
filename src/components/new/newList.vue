@@ -144,6 +144,10 @@ export default {
     .newlist .newPic{
         width: 100%;
     }
+    .newlist .newPic img{
+        height:auto;
+        width:100%;
+    }
     .new-inner{
         width: 100%;        
         margin-left: 0;

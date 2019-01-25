@@ -26,7 +26,7 @@ export default {
 </script>
 <style scoped>
 .pageBanner{
-    height:700px;
+    height:500px;
     color:#fff;
     position: relative;
 }

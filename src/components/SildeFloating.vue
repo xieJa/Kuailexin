@@ -3,17 +3,17 @@
     <div class="silde-contact" v-if="!this.$M">
       <ul>
         <li>
-          <a href="#">
+          <a href="http://p.qiao.baidu.com/cps/chat?siteId=20704&userId=654182" target="_blank">
             <i class="iconfont icon-kefu"></i>
             <p>在线咨询</p>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="#">
             <i class="iconfont icon-qq"></i>
             <p>QQ咨询</p>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="javascript:;">
             <i class="iconfont icon-dianhua"></i>
@@ -23,8 +23,14 @@
         </li>
         <li>
           <a href="javascript:;">
-            <img src="../assets/qrcode.jpg">
-            <p>扫码咨询</p>
+            <img src="../assets/wechat_zx1.jpg">
+            <p>微信客服1</p>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;">
+            <img src="../assets/wechat_zx2.jpg">
+            <p>微信客服2</p>
           </a>
         </li>
       </ul>
@@ -156,7 +162,7 @@ export default {
 .silde-contact {
   position: fixed;
   right: 0;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   z-index: 999;
 }
@@ -206,7 +212,6 @@ export default {
   width: 60px;
 }
 .message-board {
-  height: 170px;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -215,7 +220,7 @@ export default {
   background: rgba(0, 0, 0, 0.85);
 }
 .message-board-inner {
-  height: 170px;
+  height: 120px;
 }
 .message-board-inner .cover {
   height: 100%;
@@ -232,13 +237,13 @@ export default {
   cursor: pointer;
 }
 .message-board-l {
-  line-height: 54px;
+  line-height: 40px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 .message-board-l p {
-  font-size: 36px;
+  font-size: 32px;
   color: #fff;
 }
 .message-board-inner span {
@@ -289,6 +294,7 @@ export default {
   background: #c8161e;
   font-size: 18px;
   color: #fff;
+  -webkit-appearance : none ;
 }
 .fixedtool .a-tool {
   color: #fff;
@@ -336,7 +342,7 @@ export default {
     height: auto;
     width: 90%;
     left: 5%;
-    top: 20%;
+    top: 40%;
     bottom: auto;
     z-index: 1000;
   }

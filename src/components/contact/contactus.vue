@@ -6,7 +6,7 @@
       <h3>我们在这里</h3>
     <div class="here-info">
       <div class="title">上海斗石餐饮管理有限公司</div>
-      <div class="here-inner" v-html="list.Data3" style="white-space:pre;"></div>
+      <div class="here-inner" v-html="list.Data3" style="white-space:pre-wrap;"></div>
       <div class="share">        
         <dd class="bdsharebuttonbox" data-tag="share_1">         
           <a class="bds_tsina" data-cmd="tsina"><img src="@/assets/sina.png" data-cmd="tsina"></a>
@@ -15,7 +15,7 @@
       </div>
       <div class="pay">
         <div class="title">付款方式</div>
-        <div class="here-inner" v-html="list.Data5" style="white-space:pre;"></div>
+        <div class="here-inner" v-html="list.Data5" style="white-space:pre-wrap;"></div>
       </div>
     </div>
     <div id="companymap"></div>

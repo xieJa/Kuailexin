@@ -18,9 +18,9 @@
       </div>
     </div>
     <div class="menu">
-      <router-link to="#">在线咨询</router-link>
-      <router-link to="#">微信咨询</router-link>
-      <router-link to="#">电话沟通</router-link>
+      <a href="http://p.qiao.baidu.com/cps/chat?siteId=20704&userId=654182" target="_blank">在线咨询</a>
+      <a href="javascript:;" @click="wechat('123456')">微信咨询</a>
+      <a href="tel:02151853656">电话沟通</a>
       <router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}">申请加盟</router-link>
     </div>
     <transition name="fade">
@@ -76,7 +76,7 @@
                   <router-link :to="{path:'/brand',query:{name:'我们的店'}}">我们的店</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/server',query:{name:'加盟方案'}}">加盟方案</router-link>
+                  <router-link :to="{path:'/server/program',query:{name:'加盟方案'}}">加盟方案</router-link>
                 </li>               
               </ul>
             </dd>
@@ -110,7 +110,7 @@ export default {
         content: this.metaInfo.Description
       },{
         name:'viewport',
-        content:'width=device-width,initial-scale=1.0'
+        content:'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'
       }]
     }
   },
@@ -195,6 +195,11 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    wechat:function(){
+      this.$alert(' <img src='+require('../assets/wechat_zx1.jpg')+'>', '微信扫描销售二维码', {
+          dangerouslyUseHTMLString: true
+        });
     }
   },
   watch:{
@@ -219,6 +224,8 @@ export default {
   height: 1.16rem;
   padding: 0 5px;
   display: flex;
+  display: -webkit-flex;
+  -webkit-align-items: center;
   align-items: center;
   position: relative;
 }
@@ -236,11 +243,13 @@ export default {
   line-height: 1.3;
   border-left: 1px solid #d2d2d2;
 }
-.searchBtn {
+.m-header .searchBtn {
   position: absolute;
   color: #c8161e;
   right: 3.5em;
   height: 1.9em;
+  top:50%;
+  transform: translateY(-50%);
 }
 .searchBtn i {
   font-size: 1.4em;
@@ -253,6 +262,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  top:50%;
+  transform: translateY(-50%);
 }
 
 .navBtn:after,
@@ -405,6 +416,8 @@ export default {
   color:#fff;
   position: absolute;
   bottom:30%;
+  left:50%;
+  transform: translateX(-50%);
   font-size:.8rem
 }
 </style>

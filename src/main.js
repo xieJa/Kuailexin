@@ -51,6 +51,9 @@ function screenInit(){
   } else {
     Vue.prototype.$M = true;
     document.body.classList.add('m-web');
+    if(bodyW<240){
+      bodyW = 240
+    }
     document.documentElement.style.fontSize = bodyW / 7.5 + 'px'    
   }
 }

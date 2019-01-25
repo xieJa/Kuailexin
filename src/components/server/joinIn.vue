@@ -66,12 +66,12 @@
     <div class="wechat">
         <h3>欢迎加顾问微信进行沟通</h3>
         <span>
-            <img src="@/assets/timg.jpg" alt="">
-            <p>微信号：15216646273</p>
+            <img src="@/assets/wechat_zx1.jpg" alt="">
+            <p>微信顾问1</p>
         </span>
         <span>
-            <img src="@/assets/timg.jpg" alt="">
-            <p>微信号：15216646273</p>
+            <img src="@/assets/wechat_zx2.jpg" alt="">
+            <p>微信顾问2</p>
         </span>
     </div>
     <pageQrcode></pageQrcode>
@@ -197,5 +197,10 @@ export default {
 }
 @media screen and (max-width:1000px){
   .join-in{padding:0 10px;}
+  .wechat span{
+    max-width: calc(50% - 30px);
+    margin:0 10px;
+    font-size: 12px;
+  }
 }
 </style>
