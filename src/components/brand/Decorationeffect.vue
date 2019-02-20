@@ -133,16 +133,23 @@ export default {
                 }
               })
               .then(function(res){
-                 that.list[i].child=res.data.list;
-                 console.log(that.list)
-                  if(res.data.list.length<6 && i===0){
-                      that.pageIndex1=false
-                  }else if(res.data.list.length<6 && i===1){
-                      that.pageIndex2=false
+                  that.list[i].child=res.data.list;      
+                  if(i===0){
+                    if(res.data.list.length<6){
+                        that.pageIndex1=false
+                    }else{
+                        that.pageIndex1++;
+                    }
                   }else{
-                      that.pageIndex1++;
-                      that.pageIndex2++;
-                  }               
+                    if(res.data.list.length<6){
+                        that.pageIndex2=false
+                    }else{
+                        that.pageIndex2++;
+                    }
+                  }                                     
+                  
+                  
+
               })
           }    
       })     
@@ -165,7 +172,9 @@ export default {
             }
           })
           .then(function(res){
-              that.list[num].child.push(res.data.list)
+              if(res.data.list>0){
+                that.list[num].child.push(res.data.list)
+              }
               if(num===0){
                 if(res.data.list.length<6){
                   that.pageIndex1=false

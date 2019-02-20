@@ -20,7 +20,7 @@
     <div class="menu">
       <a href="http://p.qiao.baidu.com/cps/chat?siteId=20704&userId=654182" target="_blank">在线咨询</a>
       <a href="javascript:;" @click="wechat('123456')">微信咨询</a>
-      <a href="tel:02151853656">电话沟通</a>
+      <a href="tel:4000352688">电话沟通</a>
       <router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}">申请加盟</router-link>
     </div>
     <transition name="fade">
@@ -69,6 +69,9 @@
             <dt @click="isSubNav=false">加盟服务<i class="iconfont icon-jiantou"></i></dt>
             <dd>
               <ul>
+                <li>
+                  <router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
+                </li>
                 <li>
                   <router-link :to="{path:'/server',query:{name:'如何选择'}}">如何选择</router-link>
                 </li>

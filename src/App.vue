@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Hearder></Hearder>
-    <mHeader></mHeader>
+    <Hearder v-if="!this.$M"></Hearder>
+    <mHeader v-else></mHeader>
     <router-view/>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Hearder from './components/Header.vue'
-import mHeader from './components/m_Header.vue'
-import Footer from './components/Footer.vue'
+import Hearder from './components/Header'
+import mHeader from './components/m_Header'
+import Footer from './components/Footer'
 export default {
   name: 'App',
   components: {

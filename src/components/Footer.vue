@@ -5,7 +5,7 @@
   			<div class="footer-l">
 		  		<div class="ft-logo"><img src="../assets/logo.png"></div>
 		  		<div class="ft-text"><b>联系地址：</b>上海市嘉定区金沙江西路1555弄35号705室</div>
-		  		<div class="ft-text"><b>联系电话：</b><span class="red">021-51853656</span></div>
+		  		<div class="ft-text"><b>联系电话：</b><span class="red">400-035-2688</span></div>
 		  		<div class="qr-code"><img src="../assets/qrcode.png"></div>
 		  	</div>
 		  	<div class="footer-r"  v-if="!this.$M">
@@ -79,13 +79,13 @@
 		  	</div>
   		</div>
 	  	<div class="website-records">
-	  		<a href="javascript:;"><img src="../assets/cert01.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert02.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert03.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert04.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert05.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert06.jpg"></a>
-	  		<a href="javascript:;"><img src="../assets/cert07.jpg"></a>
+	  		<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank"><img src="../assets/cert01.jpg"></a>
+	  		<a href="http://www.12377.cn/" target="_blank"><img src="../assets/cert02.jpg"></a>
+	  		<a href="http://www.cyberpolice.cn/wfjb/" target="_blank"><img src="../assets/cert03.jpg"></a>
+	  		<a href="http://txjy.syggs.mofcom.gov.cn/index.do?method=entpsearch" target="_blank"><img src="../assets/cert04.jpg"></a>
+	  		<a href="http://www.noagroup.org/" target="_blank"><img src="../assets/cert05.jpg"></a>
+	  		<a href="http://www.cxqycx.cn/AllCompanys.aspx?type=jingque&str=上海斗石餐饮管理有限公司" target="_blank"><img src="../assets/cert06.jpg"></a>
+	  		<a href="http://www.sgs.gov.cn/shaic/index_new.html" target="_blank"><img src="../assets/cert07.jpg"></a>
 	  	</div>
   	</div>
   	<div class="copyright">上海斗石餐饮管理有限公司 沪公网安备31010702003802号 沪ICP备11021478号      Powered by <a href="http://www.by1983.com/" target="_bland">BEIYU</a>	
@@ -131,12 +131,11 @@ export default {
 <style scoped>
 .footer{padding:50px 0 0 0;}
 .footer-l{float: left;}
-.ft-logo{margin-bottom: 30px;}
+.ft-logo{margin-bottom: 10px;}
 .ft-logo img{max-width: 270px;}
 .ft-text{color: #666;line-height: 24px;}
 .ft-text b{color: #333}
 .ft-text span{font-size: 18px;}
-.qr-code{margin-top: 20px;}
 .qr-code img{max-width: 300px;width:70%;margin-right: 20px;}
 .footer-r{float: right;}
 .footer-r dl{float: left;margin-left: 40px;}

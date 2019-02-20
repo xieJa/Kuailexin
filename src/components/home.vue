@@ -2,8 +2,8 @@
   <div class="home">
     <div class="swiper-container home-banner">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(item,index) in Banner" :key="index">
-          <router-link :to="item.Url"><img :src="item.Image" :title="item.Title"></router-link>
+        <div class="swiper-slide" v-for="item in Banner" :key="item.Id">
+          <a :href="item.Url"><img :src="item.Image" :title="item.Title"></a>
         </div>        
       </div>
       <!-- 如果需要分页器 -->
@@ -16,7 +16,7 @@
           <p>{{threehearts[0].Description}}</p>
         </div>
         <ul class="zx-hb-bd pc-show clearfix" v-if="!this.$M">          
-          <li v-for="(item,index) in typelist" :key="index" @click="this.$router.push({path:'/Product',query:{name:item.Title,id:item.Id}})">
+          <li v-for="item in typelist" :key="item.Id" @click="this.$router.push({path:'/Product',query:{name:item.Title,id:item.Id}})">
             <div class="flipper">
               <img :src="item.Image" :onerror="errorImg">
               <div class="zx-hb-inner">
@@ -35,7 +35,7 @@
             <button @click="reds(index)" :class="zx==index?'active':''" v-for="(item,index) in typelist" :key="index">{{item.Title}}</button>
           </div>
           <transition-group>
-            <div class="m-zx-inner" v-for="(item,index) in typelist" :key="index" v-show="index== zx"> 
+            <div class="m-zx-inner" v-for="item in typelist" :key="item.Id" v-show="index== zx"> 
               <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}" >
               <img :src="item.Image">
               <p>{{item.Description}}</p>
@@ -77,8 +77,8 @@
       </div>
     </div>
     <div class="ad-activity" v-if="!this.$M">
-      <router-link :to="ad[0].Url"><img :src="ad[0].Image" :title="ad[0].Title"></router-link>
-    </div>
+      <a :href="ad[0].Url"><img :src="ad[0].Image" :title="ad[0].Title"></a>
+    </div>`
     <div class="layer clearfix relative">
       <div class="cover yx-cover">
         <div class="mod-hd yx-hd">
@@ -397,7 +397,6 @@ export default {
     this.$axios.get('/ajaxdata.aspx?Action=newproductlist&pageIndex=1&pageSize=5&Recommend=1')
     .then(function(res){
       that.newproductlist = res.data.list
-      console.log(res)
       that.$nextTick(function(){
         new this.$Swiper(".ad-propaganda", {
           loop: true,
@@ -581,10 +580,12 @@ export default {
 	  padding-bottom:30px;
   }
   .m-zx-bt {
-    margin-top: 20px;
-    padding: 8px 20px;
+    margin-top: 20px;    
+    padding: 2px 10px 0;
     display: flex;
     justify-content: space-between;
+    background: #c8161e;
+    height: 40px;
   }
   .m-zx-bt button {
     border: 0;
@@ -592,20 +593,16 @@ export default {
     font-size: 0.36rem;
     position: relative;
     outline: none;
-    padding-bottom: 5px;
+    color: #fff;
+    flex-grow: 1;
+    height: 40px;
+    transition: all .3s;
   }
   .m-zx-bt .active {
-    color: #c9151e;
+    background: #fff;
+    color: #c8161e;
   }
-  .m-zx-bt .active:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: #c9151e;
-  }
+  
   .m-zx-inner {
     margin: 0 10px;
     text-align: center;

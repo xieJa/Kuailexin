@@ -44,7 +44,6 @@ export default {
             .then(function(res){
                 for(let i=0;i<res.data.list.length;i++){
                     that.list.push(res.data.list[i])
-                    console.log(res)
                 }
                 if(res.data.list.length==6){
                     that.pageIndex++

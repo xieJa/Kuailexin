@@ -1,36 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/home'
-import About from '@/components/about/about'
-import Product from '@/components/product/product'
-import ProductDetail from '@/components/product/ProductDetail'
-import Brand from '@/components/brand/brand'
-import Market from '@/components/market/Marketing'
-import Marketingdetail from '@/components/market/Marketingdetail'
-import server from '@/components/server/server'
-import News from '@/components/new/news'
-import Newdetail from '@/components/new/newdetail'
-import Contact from '@/components/contact/Contact'
-import Search from '@/components/search/search'
-
-// 加盟服务
-import Credit from '@/components/server/Credit'
-import mapSide from '@/components/server/mapSide'
-import program from '@/components/server/program'
-import example from '@/components/server/example'
-import joinIn from '@/components/server/joinIn'
-import Train from '@/components/server/Train'
-import FAQ from '@/components/server/FAQ'
-import PageView from '@/components/PageView';
-
-//新闻资讯
-import newList from '@/components/new/newList'
-import Case from '@/components/new/case'
-
-// 营销活动
-import newMarketing from '@/components/market/newMarketing'
-import festivalMarket from '@/components/market/festivalMarket'
-import trill from '@/components/market/trill'
 
 Vue.use(Router)
 
@@ -41,88 +10,144 @@ export default new Router({
       path: '/',
       name: 'Home',
       meta:{title:'首页'},
-      component: Home
+      component: function(resolve){
+        require(["@/components/home"],resolve)
+      },
     },
     {
       path: '/about/:Name',
       name: 'About',      
-      component: About,
+      component: function(resolve){
+        require(["@/components/about/about"],resolve)
+      },
     },
     {
       path: '/Product',
       name: 'Product',
-      component: Product,
+      component: function(resolve){
+        require(["@/components/product/product"],resolve)
+      },
     },
     {
       path: '/Product/ProductDetail',
       name: 'ProductDetail',
-      component: ProductDetail,  
+      component: function(resolve){
+        require(["@/components/product/ProductDetail"],resolve)
+      },
+      
     },
     {
       path: '/brand',
       name: 'Brand',
-      component: Brand,     
+      component: function(resolve){
+        require(["@/components/brand/brand"],resolve)
+      },
     },
     {
       path: '/market',
       name: 'Market',
-      component: Market, 
+      component: function(resolve){
+        require(["@/components/market/Marketing"],resolve)
+      },
       children:[
-          {path:'/market/Marketing',component:newMarketing},        
-          {path:'/market/festivalMarket',component:festivalMarket},        
-          {path:'/market/trill',component:trill},        
-          {path:'',component:PageView},        
+          {path:'/market/Marketing',component: function(resolve){
+            require(["@/components/market/newMarketing"],resolve)
+          }},        
+          {path:'/market/festivalMarket',component: function(resolve){
+            require(["@/components/market/festivalMarket"],resolve)
+          }},        
+          {path:'/market/trill',component: function(resolve){
+            require(["@/components/market/trill"],resolve)
+          }},        
+          {path:'',component: function(resolve){
+            require(["@/components/PageView"],resolve)
+          }},        
       ]
     }, 
     {
       path:'/market/Marketingdetail',
       name:'Marketingdetail',
-      component:Marketingdetail
+      component: function(resolve){
+        require(["@/components/market/Marketingdetail"],resolve)
+      },
     },   
     {
       path:'/server',
       name:'server',
-      component:server,
+      name:'Marketingdetail',
+      component: function(resolve){
+        require(["@/components/server/server"],resolve)
+      },
       children:[
-        {path:'/server/Credit',component:Credit},
-        {path:'/server/mapSide',component:mapSide},
-        {path:'/server/program',component:program},
-        {path:'/server/example',component:example},
-        {path:'/server/joinIn',component:joinIn},
-        {path:'/server/Train',component:Train},
-        {path:'/server/FAQ',component:FAQ},
-        {path:'',component:PageView},        
+        {path:'/server/Credit',component: function(resolve){
+          require(["@/components/server/Credit"],resolve)
+        }},
+        {path:'/server/mapSide',component: function(resolve){
+          require(["@/components/server/mapSide"],resolve)
+        }},
+        {path:'/server/program',component: function(resolve){
+          require(["@/components/server/program"],resolve)
+        }},
+        {path:'/server/example',component: function(resolve){
+          require(["@/components/server/example"],resolve)
+        }},
+        {path:'/server/joinIn',component: function(resolve){
+          require(["@/components/server/joinIn"],resolve)
+        }},
+        {path:'/server/Train',component: function(resolve){
+          require(["@/components/server/Train"],resolve)
+        }},
+        {path:'/server/FAQ',component: function(resolve){
+          require(["@/components/server/FAQ"],resolve)
+        }},
+        {path:'',component: function(resolve){
+          require(["@/components/PageView"],resolve)
+        }},        
       ]
     }, 
     {
       path:'/news',
       name:'news',
-      component:News,
+      component: function(resolve){
+        require(["@/components/new/news"],resolve)
+      },
       children:[
-        {path:"",component:newList,meta:{title:'品牌新闻'}},
-        {path:"/case",component:Case,meta:{title:'成功案例'}},
+        {path:"",component: function(resolve){
+          require(["@/components/new/newList"],resolve)
+        },meta:{title:'品牌新闻'}},
+        {path:"/case",component: function(resolve){
+          require(["@/components/new/case"],resolve)
+        },meta:{title:'成功案例'}},
       ]
     },
     {
       path:'/newdetail',
       name:'newdetail',
-      component:Newdetail,
+      component: function(resolve){
+        require(["@/components/new/newdetail"],resolve)
+      },
       meta:{title:'品牌新闻'}
     },
     {
       path:'/contact',
       name:'contact',
-      component:Contact
+      component: function(resolve){
+        require(["@/components/contact/Contact"],resolve)
+      }
     },  
     {
       path:'/search',
       name:'search',
-      component:Search
+      component: function(resolve){
+        require(["@/components/search/search"],resolve)
+      }
     },  
     {
       path: '*',
       name: '404',
-      component: Home,     
+      component: function(resolve){
+        require(["@/components/home"],resolve)
+      }, 
     }
   ],
   scrollBehavior(to,from,savedPosition){

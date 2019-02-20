@@ -12,8 +12,8 @@
           </div>
         </div>
         <!-- 如果需要分页器 -->
-        <div class="swiper-button-prev swiper-button-black product-prev"></div>
-        <div class="swiper-button-next swiper-button-black product-next"></div>
+        <router-link v-if="list.Pid" :to="{path:'/Product/ProductDetail',query:{Id:list.Pid}}" class="swiper-button-prev swiper-button-black product-prev" :title="'上一条:'+list.Ptitle"></router-link>
+        <router-link v-if="list.Nid" :to="{path:'/Product/ProductDetail',query:{Id:list.Nid}}"  class="swiper-button-next swiper-button-black product-next" :title="'下一条:'+list.Ntitle"></router-link>
         <!-- <div class="hot"></div> -->
       </div>
       <div class="product-inner" v-html="list.Content"></div>
@@ -86,12 +86,8 @@ export default {
           that.list = res.data.list[0];
           that.$nextTick(function() {
             that.share();
-            new that.$Swiper(".product-show", {
-              prevButton: ".product-prev",
-              nextButton: ".product-next"
-            });
           });
-        });
+        });    
     },
     // 推荐产品
     recommendProduct: function() {
@@ -112,6 +108,7 @@ export default {
           });
         });
     },
+    
     proLink: function(id) {
       this.$router.push({
         path: "/Product/ProductDetail",
@@ -121,7 +118,6 @@ export default {
     share: function() {     
       let bdPic = '';
       for(let i=0;i<this.list.Images.length;i++){
-        console.log( this.list.Images[i].Image)
         bdPic+= this.list.Images[i].Image+' || '
       }
       window._bd_share_config = {
@@ -171,6 +167,9 @@ export default {
   text-align: center;
 }
 .product-show .swiper-button-black {
+  opacity: 0.2;
+}
+.product-show .swiper-button-black:hover {
   opacity: 0.6;
 }
 .product-show .swiper-button-disabled {

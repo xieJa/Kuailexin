@@ -67,7 +67,9 @@ export default {
 .Credit li .img{
   margin:25px 0;
 }
-.Credit li a img{
-
+@media screen and (max-width:1000px){
+  .Credit{
+    padding:0 10px;
+  }
 }
 </style>

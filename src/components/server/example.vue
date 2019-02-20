@@ -46,7 +46,6 @@ export default {
             
             this.$axios.get("/ajaxdata.aspx?Action=list&Object=DecorationGuide&pageIndex=1&pageSize=100")
             .then(function(res){
-                console.log(res)
                 that.list = res.data.list
             })
         }

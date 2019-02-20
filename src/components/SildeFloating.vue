@@ -36,7 +36,7 @@
       </ul>
     </div>
     <transition name="fade">
-      <div class="shade" v-if="this.$M" v-show="message"></div>
+      <div class="shade m-shade" v-if="this.$M" v-show="message"></div>
     </transition>
     <div class="message-board" v-show="message">
       <div class="message-board-inner">
@@ -95,6 +95,9 @@ export default {
   },
   created: function() {
     if (sessionStorage.message === "false") {
+      this.message = false;
+    }
+    if(this.$M){
       this.message = false;
     }
   },
@@ -335,6 +338,9 @@ export default {
 }
 .fixedtool .a-tool:hover {
   transform: translateX(44px);
+}
+@media screen and (min-width: 1000px){
+  .m-shade{display: none;}
 }
 @media screen and (max-width: 1000px) {
   .message-board {

@@ -17,7 +17,7 @@
       <el-form-item label="接收QQ或微信">
         <el-input v-model="form.QQWechat"></el-input>
       </el-form-item>
-      <el-form-item label="地址" v-if="!this.$M">
+      <el-form-item label="意向省市" v-if="!this.$M">
         <el-cascader :options="siteOptions" @active-item-change="handleItemChange" :props="props"></el-cascader>
       </el-form-item>
       <el-form-item v-if="!this.$M">

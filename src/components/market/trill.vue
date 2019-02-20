@@ -16,7 +16,7 @@
       <img src="@/assets/qrcode2.jpg" alt>
     </div>
     <transition-group name="fade">
-      <div v-show="tapIndex == index" v-for="(item,index) in video" :key="index" class="videoPop">
+      <div v-show="tapIndex == index" v-for="(item,index) in video" :key="item.Id" class="videoPop">
         <div class="shade"></div>
         <div class="trill-video" @click="close($event)">
           <video :src="item.Video" :poster="item.Image" width="100%" controls @click.stop></video>

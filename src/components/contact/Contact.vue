@@ -9,7 +9,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import Contactus from './contactus'
 import Message from './Message'

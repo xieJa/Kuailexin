@@ -4,24 +4,18 @@ import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Axios from 'axios'
+import MetaInfo from 'vue-meta-info'
 import Swiper from 'swiper'
 import WOW from 'wowjs'
 import ElementUI from 'element-ui';
-import MetaInfo from 'vue-meta-info'
-import Axios from 'axios'
-
 // css
 import './font/iconfont.css';
 import 'swiper/dist/css/swiper.css';
 import 'animate.css';
 import '../theme/index.css'
 import './css/style.css';
-// 组件
-import MyComponent from './components/integer';
-import PageBanner from './components/PageBanner';
-import PageTitle from './components/PageTitle';
-import PageView from './components/PageView';
-import LoadMore from './components/LoadMore';
+
 
 Vue.config.productionTip = false;
 Vue.prototype.$Swiper = Swiper;
@@ -33,6 +27,12 @@ Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 Vue.use(ElementUI);
 Vue.use(MetaInfo);
 
+// 组件
+import MyComponent from './components/integer';
+import PageBanner from './components/PageBanner';
+import PageTitle from './components/PageTitle';
+import PageView from './components/PageView';
+import LoadMore from './components/LoadMore';
 
 Vue.component('animated-integer', MyComponent); //初始化数字组件
 Vue.component('PageTitle', PageTitle); //title
@@ -63,5 +63,17 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  mounted:function(){
+    this.$nextTick(function(){
+      var _hmt = _hmt || [];
+      let bodyW = document.documentElement.offsetWidth || document.body.offsetWidth
+      if(bodyW>1000){
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?83f68e12355250e64cbd57b2e51c57ad";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      }      
+    })
+  }
 })
