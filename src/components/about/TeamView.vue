@@ -4,14 +4,14 @@
             {{list.Department}}---{{list.Title}}
         </div>
         <div class="team-info">
-            <h3>个人简介</h3>
+            <h3>简介</h3>
             <p>{{list.Description}}</p>
             <p style="text-align:center;padding:30px 0;"><img :src="list.Image" alt=""></p>
             <h3>工作特长</h3>
             <p v-html="list.Content"></p>            
         </div>
         <div class="other-related">
-            更多优秀团队
+            更多优秀团队和员工
         </div>
         <ul class="team-list clearfix">
             <li @click="tapJump(item.Id)" v-for="item in list.MoreData" :key="item.Id">
@@ -42,7 +42,7 @@ export default {
     methods:{
          tapJump:function(id){
             this.$router.push({
-                path: '/about/优秀个人',
+                path: '/about/优秀员工',
                 query:{
                     id:id
                 }

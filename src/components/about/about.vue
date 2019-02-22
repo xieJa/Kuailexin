@@ -33,9 +33,9 @@
             <PageTitle :title="pTitle" :description="description" v-if="pTitle!='公司简介'"></PageTitle>                    
             <TimeLine v-if="pTitle=='发展历程'"></TimeLine>
             <Team v-else-if="pTitle=='优秀团队'"></Team>
-            <TeamView v-else-if="pTitle=='优秀个人'"></TeamView>
+            <TeamView v-else-if="pTitle=='优秀员工'"></TeamView>
             <PageView :content="memoinfo.Content" v-else></PageView>
-            <JoinHotline  v-if="pTitle!='优秀团队' && pTitle!='优秀个人'"></JoinHotline>
+            <JoinHotline  v-if="pTitle!='优秀团队' && pTitle!='优秀员工'"></JoinHotline>
         </div>
     </div>
 </template>
@@ -96,11 +96,17 @@ export default {
         .catch(function(err){
             console.log(err)
         })
+
+        if(this.$route.params.Name == '优秀团队'){
+            this.description = '月度优秀部门和优秀员工展播'
+        }else{
+            this.description = ''
+        }
     },
     watch:{
-        '$route'(to,from){
+        '$route'(to,from){            
             if(this.$route.params.Name == '优秀团队'){
-                this.description = '月度优秀个人和部门优秀人员展播'
+                this.description = '月度优秀部门和优秀员工展播'
             }else{
                 this.description = ''
             }

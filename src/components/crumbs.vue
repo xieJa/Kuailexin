@@ -21,4 +21,9 @@ export default {
     margin:0 5px;
 }
 .crumbs a:last-child{color:#c8161e;}
+@media screen and (max-width:1000px){ 
+    .crumbs{        
+        display: none;
+    }
+}
 </style>

@@ -34,7 +34,7 @@ export default {
     methods:{
         tapJump:function(id){
             this.$router.push({
-                path: '/about/优秀个人',
+                path: '/about/优秀员工',
                 query:{
                     id:id
                 }

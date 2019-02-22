@@ -18,7 +18,7 @@
         <div class="here-inner" v-html="list.Data5" style="white-space:pre-wrap;"></div>
       </div>
     </div>
-    <div id="companymap"></div>
+    <div id="companymap"></div>    
     </div>
     <div class="tel">
       <p>咨询热线：400-035-2688</p>
@@ -44,7 +44,30 @@ export default {
         that.mapNew();
         that.share();
       })
-    })   
+    })       
+  },
+  mounted:function(){
+    window.gotobaidu = function(type){
+      let origin = document.getElementById('origin')
+      let mode = document.getElementById('mode')
+      let gotobaiduform = document.getElementById('gotobaiduform')
+      console.log(origin.getAttribute("value"))
+      if(origin.getAttribute("value")=="")  
+        {  
+            alert("请输入起点！");  
+            return;  
+        }else{  
+            if(type==1)  
+            {  
+                mode.setAttribute("value","transit");  
+                gotobaiduform.submit();  
+            }else if(type==2)  
+            {      
+                mode.setAttribute("value","driving");          
+                gotobaiduform.submit();  
+            }  
+        }  
+    }
   },
   methods:{
     mapNew:function(){
@@ -60,14 +83,39 @@ export default {
         if (point) {
           map.centerAndZoom(point, 16);
           map.addOverlay(new BMap.Marker(point));
+          var marker=new BMap.Marker(point);  
         }else{
           map.centerAndZoom(new BMap.Point(121.337775, 31.243044), 16);
           map.addOverlay(new BMap.Point(121.337775, 31.243044));
-          console.log(that.list.Data2,"您选择地址没有解析到结果!");          
+          var marker=new BMap.Marker(new BMap.Point(121.337775, 31.243044));         
+          console.log(that.list.Data2,"您选择地址没有解析到结果!");   
         }
+        //         
+        map.addOverlay(marker);          
+      
+        var content1 =`<form id="gotobaiduform" action="http://api.map.baidu.com/direction" target="_blank" method="get">
+            <b>上海斗石餐饮管理有限公司</b><br/>
+            <span><strong>地址：</strong>${that.list.Data2}</span><br/>
+            <span><strong>电话：</strong>400-035-2688</span>
+            <span class="input"><strong></strong>
+            <input class="outset" type="text" name="origin" value="上海市" id="origin"/>
+            <input class="outset-but" type="button" value="公交" onclick="gotobaidu(1)" />
+            <input class="outset-but" type="button" value="驾车"  onclick="gotobaidu(2)"/>   
+            <input type="hidden" value="上海市" name="region" />  
+            <input type="hidden" value="html" name="output" />
+            <input type="hidden" value="driving" name="mode" id="mode"/>    
+            <input type="hidden" value="latlng:${marker.getPosition().lat},${marker.getPosition().lng}|name:${that.list.Data2}" name="destination" />                   
+        </form>`;
+      
+        var opts1 = { width: 300 };              
+        var  infoWindow = new BMap.InfoWindow(content1, opts1);  
+        marker.openInfoWindow(infoWindow);  
+        marker.addEventListener('click',function(){
+            marker.openInfoWindow(infoWindow);
+        });  
       }, "上海市");
-      map.enableScrollWheelZoom(true);
-    },
+      map.enableScrollWheelZoom(true);            
+    },        
     share: function() {     
       let bdPic = '';      
       window._bd_share_config = {

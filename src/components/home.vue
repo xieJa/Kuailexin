@@ -35,7 +35,7 @@
             <button @click="reds(index)" :class="zx==index?'active':''" v-for="(item,index) in typelist" :key="index">{{item.Title}}</button>
           </div>
           <transition-group>
-            <div class="m-zx-inner" v-for="item in typelist" :key="item.Id" v-show="index== zx"> 
+            <div class="m-zx-inner" v-for="(item,index) in typelist" :key="item.Id" v-show="index== zx"> 
               <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}" >
               <img :src="item.Image">
               <p>{{item.Description}}</p>
@@ -270,7 +270,7 @@
               <div class="team-name">{{item.Title}}</div>
               <div class="team-job">{{item.Department}}</div>
               <div class="team-intro">{{item.Description}}</div>
-              <router-link :to="{path: '/about/优秀个人',query:{id:item.Id}}">查看详情</router-link>
+              <router-link :to="{path: '/about/优秀员工',query:{id:item.Id}}">查看详情</router-link>
             </div>            
           </div>
         </div>
@@ -376,7 +376,7 @@ export default {
       console.log(err)
     })
     // 首页产品列表
-    this.$axios.get('/ajaxdata.aspx?Action=typelist&Parent=产品分类&DefaultShow=1')
+    this.$axios.get(encodeURI('/ajaxdata.aspx?Action=typelist&Parent=产品分类&DefaultShow=1'))
     .then(function(res){
       for(let i=0;i<2;i++){
         that.typelist.push(res.data.list[i])
@@ -386,7 +386,7 @@ export default {
       console.log(err)
     })
     // 首页新品动态分类
-    this.$axios.get('/ajaxdata.aspx?Action=typelist&Parent=新品动态分类')
+    this.$axios.get(encodeURI('/ajaxdata.aspx?Action=typelist&Parent=新品动态分类'))
     .then(function(res){
       that.typelist[0]=res.data.list[0]
     })
@@ -482,7 +482,7 @@ export default {
       console.log(err)
     })
     // 加盟资讯
-    this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类")
+    this.$axios.get(encodeURI("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类"))
     .then(function(res){
       for(let i = 0;i<res.data.list.length;i++){
         if(res.data.list[i].Title=='加盟资讯'){   
@@ -670,15 +670,7 @@ export default {
     color: #333;
     width: 100%;
   }
-  .join-scheme li:nth-child(n + 3) {
-    width: calc(50% - 5px);
-    float: left;
-    font-size: 0.24rem;
-  }
-  
-  .join-scheme li:nth-child(2n) {
-    margin-left: 10px;
-  }
+
   .join-scheme li:nth-child(2) {
     margin-left: 0px;
   }

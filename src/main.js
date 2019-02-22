@@ -8,7 +8,7 @@ import Axios from 'axios'
 import MetaInfo from 'vue-meta-info'
 import Swiper from 'swiper'
 import WOW from 'wowjs'
-import ElementUI from 'element-ui';
+import { Button, Select,Form,Input,Option,Radio,RadioGroup,OptionGroup,DatePicker,FormItem,Cascader,Checkbox} from 'element-ui';
 // css
 import './font/iconfont.css';
 import 'swiper/dist/css/swiper.css';
@@ -24,8 +24,20 @@ Vue.prototype.$axios = Axios;
 Vue.prototype.errorImg = 'this.src="' + require('@/assets/errorImg.jpg') + '"';
 Axios.defaults.baseURL = '/';
 Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-Vue.use(ElementUI);
 Vue.use(MetaInfo);
+// element-ui
+Vue.use(Button)
+Vue.use(Select)
+Vue.use(Form)
+Vue.use(Input)
+Vue.use(Option)
+Vue.use(OptionGroup)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(DatePicker)
+Vue.use(Cascader)
+Vue.use(FormItem)
+Vue.use(Checkbox)
 
 // 组件
 import MyComponent from './components/integer';

@@ -28,7 +28,6 @@ export default {
     let that = this;
     this.$axios.get("/ajaxdata.aspx?Action=list&Object=BrandCredit&pageIndex=1&pageSize=100")
     .then(function(res){
-      console.log(res)
       that.list=res.data.list
       
     })

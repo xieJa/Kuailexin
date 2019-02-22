@@ -2,7 +2,7 @@
   <div class="join-in">
     <div class="title" v-if="!this.$M">请填写下列信息申请加盟（*为必填项）</div>
     <el-form ref="form" :model="form" label-width="80px" :rules="rules">
-      <el-form-item label="姓名" prop="UserName" v-if="!this.$M">
+      <el-form-item label="姓名" prop="UserName" >
         <el-input v-model="form.UserName"></el-input>
       </el-form-item>
       <el-form-item label="性别" v-if="!this.$M">
@@ -17,7 +17,7 @@
       <el-form-item label="E-mail" prop="Email" v-if="!this.$M">
         <el-input v-model="form.Email"></el-input>
       </el-form-item>
-      <el-form-item label="意向省市" v-if="!this.$M">
+      <el-form-item label="意向省市">
         <el-cascader :options="siteOptions" @active-item-change="handleItemChange" :props="props"></el-cascader>
       </el-form-item>
       <el-form-item v-if="!this.$M">
@@ -46,7 +46,7 @@
           <el-option label="350㎡以上" value="350㎡以上"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="意向位置">
+      <el-form-item label="意向位置" v-if="!this.$M">
         <el-select v-model="form.Position" placeholder="请选择">
           <el-option label="学校附近" value="学校附近"></el-option>
           <el-option label="商业街" value="商业街"></el-option>

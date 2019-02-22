@@ -72,10 +72,7 @@ export default {
       }
     };
   },
-  methods: {
-    radioButton: function(name, $event) {
-      simulatorform.radioButton(name, $event);
-    },
+  methods: {    
     submitForm(formName) {
       this.form.Address = this.site+','+this.Address
       this.form.Receive = this.form.Receive=='true'?'是':'否'

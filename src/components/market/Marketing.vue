@@ -9,9 +9,6 @@
 </template>
 
 <script>
-import newMarketing from './newMarketing'
-import festivalMarket from './festivalMarket'
-import trill from './trill'
 export default {
     name:'Marketing',
     data(){
@@ -46,9 +43,6 @@ export default {
                 that.pView = res.data.list[0].Content
             })
         }
-    },
-    components:{
-        newMarketing,festivalMarket,trill
     },
     watch:{
         '$route'(to,from){            

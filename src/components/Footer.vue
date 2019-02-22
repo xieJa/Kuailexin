@@ -88,7 +88,7 @@
 	  		<a href="http://www.sgs.gov.cn/shaic/index_new.html" target="_blank"><img src="../assets/cert07.jpg"></a>
 	  	</div>
   	</div>
-  	<div class="copyright">上海斗石餐饮管理有限公司 沪公网安备31010702003802号 沪ICP备11021478号      Powered by <a href="http://www.by1983.com/" target="_bland">BEIYU</a>	
+  	<div class="copyright"><span style="margin-right:20px;">上海斗石餐饮管理有限公司</span> 沪公网安备31010702003802号 沪ICP备11021478号      <a href="http://www.by1983.com/" target="_bland" style="display:none;">Powered by BEIYU</a>	
   	</div>
   	<silde-float></silde-float>
   </div>

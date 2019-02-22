@@ -45,6 +45,10 @@
           <li @click="navSubSide('加盟服务')">
              <a href="javascript:;">加盟服务</a>
             <i class="iconfont icon-jiantou"></i>
+          </li>
+          <li @click="navSubSide('营销活动')">
+             <a href="javascript:;">营销经典</a>
+            <i class="iconfont icon-jiantou"></i>
           </li>          
           <li v-for="(item,index) in newNav" :key="index">
             <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  >{{item.Title}}</router-link>
@@ -81,6 +85,22 @@
                 <li>
                   <router-link :to="{path:'/server/program',query:{name:'加盟方案'}}">加盟方案</router-link>
                 </li>               
+              </ul>
+            </dd>
+          </dl>
+          <dl v-show="isSubNav=='营销活动'" key="营销活动">
+            <dt @click="isSubNav=false">营销经典<i class="iconfont icon-jiantou"></i></dt>
+            <dd>
+              <ul>
+                <li>
+                  <router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
+                </li>
+                <li>
+                  <router-link :to="{path:'/market/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
+                </li>
+                <li>
+                  <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
+                </li>
               </ul>
             </dd>
           </dl>

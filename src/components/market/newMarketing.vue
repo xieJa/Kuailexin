@@ -120,4 +120,18 @@ export default {
     top:-2.2%;
     width:18%;
 }
+
+@media screen and (max-width:1000px){ 
+    .newMarket li{
+        width:100%;
+        padding:0 10px;
+        box-sizing: border-box;
+    }
+    .newMarket li em{
+        right: 0.6%;
+    }
+    .newMarket li:nth-child(2n){
+        margin-left: 0;
+    }
+}
 </style>

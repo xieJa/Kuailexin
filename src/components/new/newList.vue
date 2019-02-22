@@ -35,7 +35,6 @@ export default {
     },
     methods:{
         loadNewProduct:function(){
-            console.log(this.pageIndex)
             let that = this;
             this.$axios.get("/ajaxdata.aspx?Action=list&Object=news&SearchKey=TypeId",{
                 params:{
@@ -53,7 +52,6 @@ export default {
                 }else{
                     that.lastPage = false;
                 }  
-                console.log(res)
             })
         },       
         more:function(){

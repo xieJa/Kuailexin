@@ -53,7 +53,6 @@ export default {
             })
             .then(function(res){
                 that.list=res.data.list[0]
-                console.log(res,1)
             })
         }
     },
@@ -132,5 +131,17 @@ export default {
 }
 .page-turning .page-next{
     text-align: right;
+}
+@media screen and (max-width:1000px){ 
+    .market-info{        
+        padding:10px;
+    }
+    .market-info h2{
+        font-size: 20px;
+    }
+    .market-info-head span{
+        margin:0 5px;
+        padding-bottom: 10px;
+    }
 }
 </style>

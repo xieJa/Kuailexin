@@ -16,9 +16,9 @@
         </div>
         <p class="tomorrow">未来，待续...</p>
         <transition-group name="fade">
-            <div v-show="isshow===index" v-for="item in historylist" :key="item.Id">
+            <div v-show="isshow===index" v-for="(item,index) in historylist" :key="index">                
                 <div class="shade" @click="closePop()"></div>
-                <div class="pop-up-box">
+                <div class="pop-up-box">                                
                     <i class="close" @click="closePop()"></i>
                     <span class="pop-up-date">{{item.Year}}</span>
                     <div>

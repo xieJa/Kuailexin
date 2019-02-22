@@ -75,8 +75,9 @@ export default {
   transform:translateY(-50%)
 }
 .brand-intro b{
-  font-size: 18px;
+  font-size: 24px;
   padding-bottom: 10px;
   display: block;
+  color: #cb1e27;
 }
 </style>

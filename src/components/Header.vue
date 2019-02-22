@@ -220,7 +220,7 @@ export default {
     },
     loadProParent:function(){
       let that = this;
-      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=产品分类")
+      this.$axios.get(encodeURI("/ajaxdata.aspx?Action=typelist&Parent=产品分类"))
       .then(function(res){
         that.loadPro = res.data.list;
         for(let i=0;i<that.loadPro.length;i++){
@@ -234,7 +234,7 @@ export default {
           })
         }        
       })
-      this.$axios.get("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类")
+      this.$axios.get(encodeURI("/ajaxdata.aspx?Action=typelist&Parent=新闻资讯分类"))
       .then(function(res){
         that.newNav = res.data.list
       })

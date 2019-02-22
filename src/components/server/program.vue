@@ -8,7 +8,7 @@
             <dt class="clearfix">
                 <div class="swiper-container swiper1">
                     <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="image in item.Images">
+                    <div class="swiper-slide" v-for="image in item.Images" :key="image.Id">
                         <img :src="image.Image" alt>
                     </div>                    
                     </div>
@@ -27,7 +27,7 @@
                 </div>
             </dt>
             <dd>
-                <div class="title">店型分类说明</div>
+                <!-- <div class="title">店型分类说明</div> -->
                 <p>{{item.Description}}</p>
             </dd>
         </dl>        
