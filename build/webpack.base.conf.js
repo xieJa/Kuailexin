@@ -14,6 +14,9 @@ module.exports = {
   entry: {
     app: ['babel-polyfill','./src/main.js']
   },
+  externals:{
+    'swiper':'Swiper',
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

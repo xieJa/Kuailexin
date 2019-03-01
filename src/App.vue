@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <Hearder v-if="!this.$M"></Hearder>
-    <mHeader v-else></mHeader>
+    <div v-show="Errorinfo">
+      <Hearder v-if="!this.$M"></Hearder>
+      <mHeader v-else></mHeader>
+    </div>
     <router-view/>
-    <Footer></Footer>
+    <div v-show="Errorinfo">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -13,9 +17,23 @@ import mHeader from './components/m_Header'
 import Footer from './components/Footer'
 export default {
   name: 'App',
+  data(){
+    return{
+      Errorinfo:true
+    }
+  },
   components: {
     Hearder,Footer,mHeader
   },
+  watch:{
+    '$route'(to,from){
+      if(to.name=='Errorinfo'){
+          this.Errorinfo = false
+      }else{
+          this.Errorinfo = true
+      }
+    }
+  }
 }
 </script>
 

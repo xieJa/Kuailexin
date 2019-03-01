@@ -172,7 +172,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/market/Marketingdetail',query:{name:'新品营销',Object:'NewProductMarketing',Id:item.Id}}">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'新品营销',Object:'NewProductMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
           </li>          
@@ -186,7 +186,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/market/Marketingdetail',query:{name:'日常营销',Object:'DailyMarketing',Id:item.Id}}">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'日常营销',Object:'DailyMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
           </li>
@@ -200,7 +200,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/market/Marketingdetail',query:{name:'节日营销',Object:'HolidayMarketing',Id:item.Id}}">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'节日营销',Object:'HolidayMarketing',Id:item.Id}}">查看详情</router-link>
               </div>
             </div>
           </li>
@@ -533,7 +533,7 @@ export default {
     },
     programTap:function(id){
       this.$router.push({
-        path:'/server/program',
+        path:'/program',
         query:{
           name:'加盟方案', 
         },

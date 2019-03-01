@@ -470,7 +470,8 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+  margin-right: 30px; }
   .el-checkbox.is-bordered {
     padding: 9px 20px 9px 10px;
     border-radius: 4px;
@@ -629,8 +630,8 @@
     padding-left: 10px;
     line-height: 19px;
     font-size: 14px; }
-  .el-checkbox + .el-checkbox {
-    margin-left: 30px; }
+  .el-checkbox:last-child {
+    margin-right: 0; }
 
 .el-checkbox-button {
   position: relative;
@@ -1512,6 +1513,7 @@
     -ms-flex-align: center;
     align-items: center; }
   .el-table__empty-text {
+    line-height: 60px;
     width: 50%;
     color: #909399; }
   .el-table__expand-column .cell {

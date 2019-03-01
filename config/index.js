@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/': {
-        target: 'http://www.kuailexing.cn',//后端接口地址
+        target: 'http://www.k2688.com',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
           '^/': '/',//重写接口

@@ -28,10 +28,11 @@ const Case = () => import(/* webpackChunkName: "group-News" */ '@/components/new
 const newdetail = () => import(/* webpackChunkName: "group-News" */ '@/components/new/newdetail')
 const Contact = () => import(/* webpackChunkName: "group-Contact" */ '@/components/contact/Contact')
 const search = () => import(/* webpackChunkName: "group-Search" */ '@/components/search/search')
+const Errorinfo = () => import(/* webpackChunkName: "group-error" */ '@/components/error404')
 
 
-export default new Router({
-  // mode: 'history',
+const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -50,7 +51,7 @@ export default new Router({
       component: Product,
     },
     {
-      path: '/Product/ProductDetail',
+      path: '/ProductDetail',
       name: 'ProductDetail',
       component: ProductDetail,
       
@@ -65,14 +66,14 @@ export default new Router({
       name: 'Market',
       component: Market,
       children:[
-          {path:'/market/Marketing',component:Marketing},        
-          {path:'/market/festivalMarket',component: festivalMarket},        
-          {path:'/market/trill',component:Trill},        
+          {path:'/Marketing',component:Marketing},        
+          {path:'/festivalMarket',component: festivalMarket},        
+          {path:'/trill',component:Trill},        
           {path:'',component: PageView},        
       ]
     }, 
     {
-      path:'/market/Marketingdetail',
+      path:'/Marketingdetail',
       name:'Marketingdetail',
       component: Marketingdetail,
     },   
@@ -81,13 +82,13 @@ export default new Router({
       name:'server',
       component: Server,
       children:[
-        {path:'/server/Credit',component: Credit},
-        {path:'/server/mapSide',component: mapSide},
-        {path:'/server/program',component: program},
-        {path:'/server/example',component: example},
-        {path:'/server/joinIn',component: joinIn},
-        {path:'/server/Train',component: Train},
-        {path:'/server/FAQ',component: FAQ},
+        {path:'/Credit',component: Credit},
+        {path:'/mapSide',component: mapSide},
+        {path:'/program',component: program},
+        {path:'/example',component: example},
+        {path:'/joinIn',component: joinIn},
+        {path:'/Train',component: Train},
+        {path:'/FAQ',component: FAQ},
         {path:'',component: PageView},        
       ]
     }, 
@@ -96,8 +97,8 @@ export default new Router({
       name:'news',
       component: News,
       children:[
-        {path:"",component:NewList,meta:{title:'品牌新闻'}},
-        {path:"/case",component: Case,meta:{title:'成功案例'}},
+        {path:"",name:'new',component:NewList,meta:{title:'品牌新闻'}},
+        {path:"/case",name:'case',component: Case,meta:{title:'成功案例'}},
       ]
     },
     {
@@ -117,9 +118,14 @@ export default new Router({
       component: search
     },  
     {
+      path: '/404error',
+      name: 'Errorinfo',
+      component: Errorinfo, 
+    },  
+    {
       path: '*',
-      name: '404',
-      component: Home, 
+      name: 'Errorinfo',
+      component: Errorinfo, 
     }
   ],
   scrollBehavior(to,from,savedPosition){
@@ -134,7 +140,16 @@ export default new Router({
         return { x: 0, y: 0 }
       }
     }    
-  },
-  
+  },  
 })
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.length ===0){ //如果未匹配到路由
+    next({path:'/404error'})
+    return false
+  }
+  next()
+})
+
+export default router
 

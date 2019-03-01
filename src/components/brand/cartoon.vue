@@ -2,7 +2,6 @@
   <div class="cartoon">
       <div class="describe">主色调为红、黄颜色为主要色彩，贴合汉堡的产品特色，图形中的卡通形象戴了着汉堡形状的帽子，更加的贴近汉堡的主题，造型可爱，色彩明快，体现了快餐的行业特征，充分传递了“味行天下，快乐你我”的品牌理念。</div>
       <div class="brand-style">
-          <h2>品牌形象</h2>
           <ul class="clearfix">            
             <li v-for="(item,index) in list" :key="index">
               <div class="brand-logo"><img :src="item.Image" alt=""></div>

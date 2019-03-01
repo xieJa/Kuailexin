@@ -21,16 +21,16 @@
             <span>400-035-2688</span>
           </a>
         </li>
-        <li>
+        <li class="qr">
           <a href="javascript:;">
             <img src="../assets/wechat_zx1.jpg">
-            <p>微信客服1</p>
+            <p>招商经理1</p>
           </a>
         </li>
-        <li>
+        <li class="qr">
           <a href="javascript:;">
             <img src="../assets/wechat_zx2.jpg">
-            <p>微信客服2</p>
+            <p>招商经理2</p>
           </a>
         </li>
       </ul>
@@ -338,6 +338,24 @@ export default {
 }
 .fixedtool .a-tool:hover {
   transform: translateX(44px);
+}
+.qr {
+  position: relative;
+  width:86px;
+  height:86px;
+}
+.qr a{
+  right:0;
+  position: absolute;
+}
+.qr a:hover{  
+  width: 172px;
+  height: 190px;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.8);
+}
+.qr a:hover img{
+  width:172px;
 }
 @media screen and (min-width: 1000px){
   .m-shade{display: none;}

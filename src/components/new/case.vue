@@ -33,10 +33,11 @@ export default {
     },
     methods:{
         tabJump:function(id){
-            this.$router.push({
+            let routeUrl = this.$router.resolve({
                 path:'/newdetail',
                 query:{TypeId:this.$route.query.Id,Id:id}
             })
+            window.open(routeUrl.href, '_blank');
         },
         loadCase:function(){
             let that = this;

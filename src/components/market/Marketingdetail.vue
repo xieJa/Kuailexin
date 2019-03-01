@@ -14,11 +14,11 @@
             </div>
             <div class="page-turning clearfix">
                 <div class="paging page-prev">
-                    <router-link :to="{path:'/market/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Pid}}"  v-show="list.Pid!=''">上一篇</router-link>         
+                    <router-link :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Pid}}"  v-show="list.Pid!=''">上一篇</router-link>         
                     <p>{{list.Ptitle}}</p>           
                 </div>
                 <div class="paging page-next" style="float:right;">
-                    <router-link  :to="{path:'/market/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Nid}}"  v-show="list.Nid!=''">下一篇</router-link>         
+                    <router-link  :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Nid}}"  v-show="list.Nid!=''">下一篇</router-link>         
                     <p>{{list.Ntitle}}</p>           
                 </div>
             </div>

@@ -13,6 +13,7 @@ export default {
     },
     created:function(){
         this.loadContent()
+        
     },
     methods:{
         loadContent:function(){

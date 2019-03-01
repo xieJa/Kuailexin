@@ -39,27 +39,27 @@
 		  		<dl>
 		  			<dt>营销活动</dt>
 		  			<dd>
-		  				<router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
-						<router-link :to="{path:'/market/festivalMarket',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
-						<router-link :to="{path:'/market/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
+		  				<router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
+						<router-link :to="{path:'/festivalMarket',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
+						<router-link :to="{path:'/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
 						<router-link :to="{path:'/market',query:{name:'微信点餐'}}" >微信点餐</router-link>
 						<router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
 						<a href="https://weibo.com/hanbaodian?topnav=1&wvr=6&topsug=1" target="_blank">晒！微博</a>
-						<router-link :to="{path:'/market/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
+						<router-link :to="{path:'/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
 		  			</dd>
 		  		</dl>
 		  		<dl>
 		  			<dt>加盟服务</dt>
 		  			<dd>
-		  				<router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
+		  				<router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
 						<router-link :to="{path:'/server',query:{name:'如何选择'}}" >如何选择</router-link>
 						<router-link :to="{path:'/server',query:{name:'加盟流程'}}" >加盟流程</router-link>
 						<router-link :to="{path:'/server',query:{name:'在您身边'}}" >在您身边</router-link>
-						<router-link :to="{path:'/server/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
-						<router-link :to="{path:'/server/example',query:{name:'装修指导'}}" >装修指导</router-link>
-						<router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
-						<router-link :to="{path:'/server/Train',query:{name:'培训系统'}}" >培训系统</router-link>
-						<router-link :to="{path:'/server/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
+						<router-link :to="{path:'/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
+						<router-link :to="{path:'/example',query:{name:'装修指导'}}" >装修指导</router-link>
+						<router-link :to="{path:'/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
+						<router-link :to="{path:'/Train',query:{name:'培训系统'}}" >培训系统</router-link>
+						<router-link :to="{path:'/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
 		  			</dd>
 		  		</dl>
 		  		<dl>
@@ -79,16 +79,16 @@
 		  	</div>
   		</div>
 	  	<div class="website-records">
-	  		<a href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action" target="_blank"><img src="../assets/cert01.jpg"></a>
+	  		<a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank"><img src="../assets/cert01.jpg"></a>
 	  		<a href="http://www.12377.cn/" target="_blank"><img src="../assets/cert02.jpg"></a>
 	  		<a href="http://www.cyberpolice.cn/wfjb/" target="_blank"><img src="../assets/cert03.jpg"></a>
 	  		<a href="http://txjy.syggs.mofcom.gov.cn/index.do?method=entpsearch" target="_blank"><img src="../assets/cert04.jpg"></a>
 	  		<a href="http://www.noagroup.org/" target="_blank"><img src="../assets/cert05.jpg"></a>
 	  		<a href="http://www.cxqycx.cn/AllCompanys.aspx?type=jingque&str=上海斗石餐饮管理有限公司" target="_blank"><img src="../assets/cert06.jpg"></a>
-	  		<a href="http://www.sgs.gov.cn/shaic/index_new.html" target="_blank"><img src="../assets/cert07.jpg"></a>
+	  		<a href="http://www.sgs.gov.cn" target="_blank"><img src="../assets/cert07.jpg"></a>
 	  	</div>
   	</div>
-  	<div class="copyright"><span style="margin-right:20px;">上海斗石餐饮管理有限公司</span> 沪公网安备31010702003802号 沪ICP备11021478号      <a href="http://www.by1983.com/" target="_bland" style="display:none;">Powered by BEIYU</a>	
+  	<div class="copyright"><span style="margin-right:20px;">上海斗石餐饮管理有限公司</span> 沪公网安备31010702003802号 <a href="http://www.miitbeian.gov.cn/" target="_blank">沪ICP备11021478号</a><a href="http://www.by1983.com/" target="_bland" style="display:none;">Powered by BEIYU</a>	
   	</div>
   	<silde-float></silde-float>
   </div>

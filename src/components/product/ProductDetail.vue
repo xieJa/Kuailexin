@@ -12,8 +12,8 @@
           </div>
         </div>
         <!-- 如果需要分页器 -->
-        <router-link v-if="list.Pid" :to="{path:'/Product/ProductDetail',query:{Id:list.Pid}}" class="swiper-button-prev swiper-button-black product-prev" :title="'上一条:'+list.Ptitle"></router-link>
-        <router-link v-if="list.Nid" :to="{path:'/Product/ProductDetail',query:{Id:list.Nid}}"  class="swiper-button-next swiper-button-black product-next" :title="'下一条:'+list.Ntitle"></router-link>
+        <router-link v-if="list.Pid" :to="{path:'/ProductDetail',query:{Id:list.Pid}}" class="swiper-button-prev swiper-button-black product-prev" :title="'上一条:'+list.Ptitle"></router-link>
+        <router-link v-if="list.Nid" :to="{path:'/ProductDetail',query:{Id:list.Nid}}"  class="swiper-button-next swiper-button-black product-next" :title="'下一条:'+list.Ntitle"></router-link>
         <!-- <div class="hot"></div> -->
       </div>
       <div class="product-inner" v-html="list.Content"></div>
@@ -111,7 +111,7 @@ export default {
     
     proLink: function(id) {
       this.$router.push({
-        path: "/Product/ProductDetail",
+        path: "/ProductDetail",
         query: { Id: id }
       });
     },

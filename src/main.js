@@ -6,14 +6,14 @@ import App from './App'
 import router from './router'
 import Axios from 'axios'
 import MetaInfo from 'vue-meta-info'
-import Swiper from 'swiper'
+// import Swiper from 'swiper'
 import WOW from 'wowjs'
-import { Button, Select,Form,Input,Option,Radio,RadioGroup,OptionGroup,DatePicker,FormItem,Cascader,Checkbox} from 'element-ui';
+import { Button, Select,Form,Input,Option,Radio,RadioGroup,OptionGroup,DatePicker,FormItem,Cascader,Checkbox,MessageBox,Collapse,CollapseItem} from 'element-ui';
 // css
 import './font/iconfont.css';
-import 'swiper/dist/css/swiper.css';
-import 'animate.css';
-import '../theme/index.css'
+// import 'swiper/dist/css/swiper.css';
+// import 'animate.css';
+import '../theme/index.css'   //element-ui
 import './css/style.css';
 
 
@@ -38,7 +38,9 @@ Vue.use(DatePicker)
 Vue.use(Cascader)
 Vue.use(FormItem)
 Vue.use(Checkbox)
-
+Vue.use(Collapse)
+Vue.use(CollapseItem)
+Vue.prototype.$alert = MessageBox.alert;
 // 组件
 import MyComponent from './components/integer';
 import PageBanner from './components/PageBanner';

@@ -31,10 +31,11 @@ export default {
     },
     methods:{
         tabJump:function(id){
-            this.$router.push({
-                path:'/market/Marketingdetail',
+             let routeUrl = this.$router.push({
+                path:'/Marketingdetail',
                 query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:id}
             })
+            window.open(routeUrl.href, '_blank');
         },
         loadHolidayMarke:function(){
             let that = this;

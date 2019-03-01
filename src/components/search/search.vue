@@ -172,7 +172,7 @@ export default {
     },
     proLink:function(id){
       this.$router.push({
-        path:"/Product/ProductDetail",
+        path:"/ProductDetail",
         query:{Id:id}
       })
     },

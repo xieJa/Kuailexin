@@ -8,7 +8,7 @@
                         <div class="name">
                             {{item.Title}}
                         </div>
-                        <router-link :to="{path:'/Product/ProductDetail',query:{Id:item.Id}}">查看详情</router-link>
+                        <router-link :to="{path:'/ProductDetail',query:{Id:item.Id}}" target="_blank">查看详情</router-link>
                     </div>                        
                     <div class="product-pic"><img :src="item.Image"></div>
                 </div>

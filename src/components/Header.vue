@@ -8,6 +8,9 @@
         </div>
         <ul class="site-nav-bd-r">
           <li>
+            <a href="http://www.kuailexing.cn/" target="_blank">【切换旧版本】</a>
+          </li>
+          <li style="margin-left:5px;">
             <i class="icon iconfont icon-dianhua"></i>加盟服务电话：
             <span class="red">400-035-2688</span>
           </li>
@@ -46,10 +49,10 @@
             <router-link :to="{path:'/brand',query:{name:'店面规划'}}" data-value="品牌形象">品牌形象</router-link>
           </li>
           <li data-value="营销活动">
-            <router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" data-value="营销活动">营销活动</router-link>
+            <router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" data-value="营销活动">营销活动</router-link>
           </li>
           <li data-value="加盟服务">
-            <router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" data-value="加盟服务">加盟服务</router-link>
+            <router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" data-value="加盟服务">加盟服务</router-link>
           </li>
           <li data-value="新闻资讯">
             <router-link :to="{path:newNav[0].Title=='成功案例'?'/case':'/news',query:{Id:newNav[0].Id}}"  data-value="新闻资讯">新闻资讯</router-link>
@@ -99,7 +102,7 @@
               >{{item.Title}} ></router-link>
             </dt>
             <dd>
-              <router-link :to="{path:'/Product/ProductDetail',query:{Id:pro.Id}}" v-for="pro in item.child" :key="pro.Id">{{pro.Title}}</router-link>              
+              <router-link :to="{path:'/ProductDetail',query:{Id:pro.Id}}" v-for="pro in item.child" :key="pro.Id">{{pro.Title}}</router-link>              
             </dd>
           </dl>          
         </div>
@@ -111,24 +114,24 @@
           <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" >品牌IP</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='营销活动'">
-          <router-link :to="{path:'/market/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
-          <router-link :to="{path:'/market/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
-          <router-link :to="{path:'/market/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
           <router-link :to="{path:'/market',query:{name:'微信点餐'}}" >微信点餐</router-link>
           <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
           <a href="https://weibo.com/hanbaodian?topnav=1&wvr=6&topsug=1" target="_blank">晒！微博</a>
-          <router-link :to="{path:'/market/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
+          <router-link :to="{path:'/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='加盟服务'">
-          <router-link :to="{path:'/server/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
+          <router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
           <router-link :to="{path:'/server',query:{name:'如何选择'}}" >如何选择</router-link>
           <router-link :to="{path:'/server',query:{name:'加盟流程'}}" >加盟流程</router-link>
           <router-link :to="{path:'/server',query:{name:'在您身边'}}" >在您身边</router-link>
-          <router-link :to="{path:'/server/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
-          <router-link :to="{path:'/server/example',query:{name:'装修指导'}}" >装修指导</router-link>
-          <router-link :to="{path:'/server/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
-          <router-link :to="{path:'/server/Train',query:{name:'培训系统'}}" >培训系统</router-link>
-          <router-link :to="{path:'/server/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
+          <router-link :to="{path:'/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
+          <router-link :to="{path:'/example',query:{name:'装修指导'}}" >装修指导</router-link>
+          <router-link :to="{path:'/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
+          <router-link :to="{path:'/Train',query:{name:'培训系统'}}" >培训系统</router-link>
+          <router-link :to="{path:'/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新闻资讯'">
           <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  v-for="(item,index) in newNav" :key="index">{{item.Title}}</router-link>
@@ -323,6 +326,12 @@ export default {
   float: left;
   color: #fff;
   margin-left: 25px;
+}
+.site-nav-bd-r a{
+  color:#fff;
+}
+.site-nav-bd-r a:hover{
+  color: #d4d4d4;
 }
 .site-nav-bd-r li span {
   font-weight: bold;

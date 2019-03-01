@@ -3,8 +3,7 @@
         
         <div v-if="!isChildViewShow">
             <PageBanner :pageBanner='pageBanner'></PageBanner>
-            <PageTitle :title="pTitle" :description="description" ></PageTitle>  
-            
+            <PageTitle :title="pTitle" :description="description" ></PageTitle>              
             <NewProduct v-if="this.$route.query.name=='新品动态'"></NewProduct>   
             <StarProduct v-else-if="this.$route.query.name=='明星产品'"></StarProduct> 
             <GeneralProduct v-else></GeneralProduct>        

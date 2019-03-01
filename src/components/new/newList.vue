@@ -3,13 +3,13 @@
         <ul>
             <li class="clearfix" v-for="(item,index) in list" :key="index">
                 <div class="newPic">
-                    <img :src="item.Image" alt="">
+                    <router-link :to="{path:'/newdetail',query:{TypeId:$route.query.Id,Id:item.Id}}" target="_blank"><img :src="item.Image" alt=""></router-link>
                 </div>
                 <div class="new-inner">
-                    <div class="new-title">{{item.Title}}</div>
+                    <div class="new-title"><router-link :to="{path:'/newdetail',query:{TypeId:$route.query.Id,Id:item.Id}}" target="_blank">{{item.Title}}</router-link></div>
                     <div class="new-date">{{item.CreateDate}}</div>
                     <div class="new-intro">{{item.Description}}</div>
-                    <router-link :to="{path:'/newdetail',query:{TypeId:$route.query.Id,Id:item.Id}}">查看详情    ></router-link>
+                    <router-link :to="{path:'/newdetail',query:{TypeId:$route.query.Id,Id:item.Id}}" class="btn" target="_blank">查看详情    ></router-link>
                 </div>
             </li>           
         </ul>
@@ -114,7 +114,7 @@ export default {
     margin:4% 0;
     overflow: hidden;
 }
-.new-inner a{
+.new-inner a.btn{
     display: block;
     width:210px;
     height:43px;
@@ -124,7 +124,7 @@ export default {
     border:1px solid #c7c7c7;
     transition:all .3s;
 }
-.new-inner a:hover{   
+.new-inner a.btn:hover{   
     background:#c8161e;
     color:#fff;
     border:1px solid #c8161e;
@@ -154,7 +154,7 @@ export default {
         margin:0;
         height: 64px;
     }
-    .new-inner a{
+    .new-inner a.btn{
         margin:20px auto;
         border:0;
         background:#c8161e;
