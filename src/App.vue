@@ -26,7 +26,7 @@ export default {
     Hearder,Footer,mHeader
   },
   watch:{
-    '$route'(to,from){
+    '$route'(to,from){      
       if(to.name=='Errorinfo'){
           this.Errorinfo = false
       }else{

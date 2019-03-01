@@ -121,11 +121,6 @@ const router = new Router({
       path: '/404error',
       name: 'Errorinfo',
       component: Errorinfo, 
-    },  
-    {
-      path: '*',
-      name: 'Errorinfo',
-      component: Errorinfo, 
     }
   ],
   scrollBehavior(to,from,savedPosition){
