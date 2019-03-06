@@ -81,6 +81,7 @@ export default {
     margin-bottom:8%;
     text-align: left;
     position: relative;
+    cursor: pointer;
 }
 
 .newMarket li:nth-child(2n){

@@ -1,7 +1,7 @@
 <template>
     <div class="Market-detail cover">
         <crumbs>
-            <router-link :to="{path:'/market/Marketing',query:{name:this.$route.query.name,Object:this.$route.query.Object}}">{{this.$route.query.name}}</router-link>>
+            <router-link :to="{path:'/Marketing',query:{name:this.$route.query.name,Object:this.$route.query.Object}}">{{this.$route.query.name}}</router-link>>
             <a href="javascript:;">{{list.Title}}</a>
         </crumbs>
         <div class="market-info">

@@ -26,6 +26,19 @@
           <p v-else>没有更多信息了</p>
       </LoadMore> 
     </div>
+    <div class="shop-behind">
+      <div class="title">{{list[2].Title}}</div>
+      <ul class="shop-style clearfix">
+        <li @click="tapJump('showbehind2',index)" v-for="(item,index) in list[2].child" :key="index">
+          <img :src="item.Image" alt>
+          <p>{{item.Title}}</p>
+        </li>
+      </ul>
+      <LoadMore>            
+          <button class="moreBtn"  @click="more(2)" v-if="pageIndex3" slot="moreBtn">加载更多</button>
+          <p v-else>没有更多信息了</p>
+      </LoadMore> 
+    </div>
     <transition name="fade">
       <div v-show="isShow==='showfront'" @click="tapShade($event)">
         <div class="shade"></div>
@@ -63,6 +76,24 @@
         </div>
       </div>
     </transition>
+    <transition name="fade">
+      <div v-show="isShow==='showbehind2'" @click="tapShade($event)">
+        <div class="shade"></div>
+        <div class="shop-style-slide">
+          <div class="swiper-container showbehind2">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="(item,index) in list[2].child" :key="index">
+                <p class="entry">{{item.Title}}</p>
+                <img :src="item.Image" alt>
+              </div>
+            </div>
+            <div class="swiper-button-prev swiper-button-white entry"></div>
+            <div class="swiper-button-next swiper-button-white entry"></div>
+          </div>
+          <div class="swiper-pagination showbehind2-pagination"></div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -72,10 +103,11 @@ export default {
   name: "DecorationEffect",
   data() {
     return {      
-      list:[{Id: '',Title: ''},{Id: '',Title: ''}],
+      list:[{Id: '',Title: ''},{Id: '',Title: ''},{Id: '',Title: ''}],
       isShow: "",    
       pageIndex1:1,  
       pageIndex2:1,  
+      pageIndex3:1,  
     };
   },
   created:function(){
@@ -140,16 +172,19 @@ export default {
                     }else{
                         that.pageIndex1++;
                     }
-                  }else{
+                  }else if(i===1){
                     if(res.data.list.length<6){
                         that.pageIndex2=false
                     }else{
                         that.pageIndex2++;
                     }
-                  }                                     
-                  
-                  
-
+                  }else{
+                    if(res.data.list.length<6){
+                        that.pageIndex3=false
+                    }else{
+                        that.pageIndex3++;
+                    }
+                  }                                  
               })
           }    
       })     
@@ -160,8 +195,10 @@ export default {
       let pageIndex;
       if(num===0){
         pageIndex = that.pageIndex1
-      }else{
+      }else if(num===1){
         pageIndex = that.pageIndex2
+      }else{
+        pageIndex = that.pageIndex3
       }
       if(pageIndex){
         that.$axios.get("/ajaxdata.aspx?Action=list&Object=shop&SearchKey=TypeId",{
@@ -177,17 +214,23 @@ export default {
               }
               if(num===0){
                 if(res.data.list.length<6){
-                  that.pageIndex1=false
+                    that.pageIndex1=false
                 }else{
-                  that.pageIndex1++
-                }              
+                    that.pageIndex1++;
+                }
+              }else if(num===1){
+                if(res.data.list.length<6){
+                    that.pageIndex2=false
+                }else{
+                    that.pageIndex2++;
+                }
               }else{
                 if(res.data.list.length<6){
-                  that.pageIndex2=false
+                    that.pageIndex3=false
                 }else{
-                  that.pageIndex2++
+                    that.pageIndex3++;
                 }
-              }
+              }      
           })
       }
     }

@@ -318,7 +318,9 @@ h3{
 
 .m-show{display: none;}
 .pc-show{display: block;}
-
+#newBridge{
+  z-index: 998 !important;
+}
 #newBridge .icon-right-bottom{
   bottom:120px !important;
 }

@@ -6,7 +6,7 @@
 		  		<div class="ft-logo"><img src="../assets/logo.png"></div>
 		  		<div class="ft-text"><b>联系地址：</b>上海市嘉定区金沙江西路1555弄35号705室</div>
 		  		<div class="ft-text"><b>联系电话：</b><span class="red">400-035-2688</span></div>
-		  		<div class="qr-code"><img src="../assets/qrcode.png"></div>
+		  		<div class="qr-code"><img src="../assets/qrcode.png"><p>请保存图片后，微信识别二维码</p></div>
 		  	</div>
 		  	<div class="footer-r"  v-if="!this.$M">
 		  		<dl>
@@ -137,6 +137,7 @@ export default {
 .ft-text b{color: #333}
 .ft-text span{font-size: 18px;}
 .qr-code img{max-width: 300px;width:70%;margin-right: 20px;}
+.qr-code p{display:none;}
 .footer-r{float: right;}
 .footer-r dl{float: left;margin-left: 40px;}
 .footer-r dt{font-size: 16px;margin-bottom: 20px;}
@@ -175,6 +176,14 @@ export default {
 		line-height: 1.5;
 		font-size:.18rem;
 		padding:10px;
+	}
+	.qr-code img{
+		margin:0 10px;
+	}
+	.qr-code p{
+		display: block;
+		text-align: center;
+		color: #d85d63;
 	}
 }
 </style>

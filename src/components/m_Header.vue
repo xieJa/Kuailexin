@@ -220,8 +220,9 @@ export default {
       });
     },
     wechat:function(){
-      this.$alert(' <img src='+require('../assets/wechat_zx1.jpg')+'>', '微信扫描销售二维码', {
-          dangerouslyUseHTMLString: true
+      this.$alert(' <img src='+require('../assets/wechat_zx1.jpg')+'>', '请保存图片后微信识别二维码', {
+          dangerouslyUseHTMLString: true,
+          showConfirmButton:false
         });
     }
   },

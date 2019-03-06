@@ -4,7 +4,7 @@
       <div class="site-nav-bd">
         <div class="site-nav-bd-l">
           <i class="iconfont icon-shouye--"></i>
-          <span>您好，欢迎您来到快乐星汉堡官网网站！</span>
+          <span>您好，欢迎您来到快乐星汉堡官方网站！</span>
         </div>
         <ul class="site-nav-bd-r">
           <li>

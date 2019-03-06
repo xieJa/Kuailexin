@@ -3,7 +3,7 @@
         <div class="cd-timeline">
             <div class="cd-timeline-block wow slideInLeft" :class="index%2==0?'slideInLeft':'slideInRight'" @click="Popup(index)"  v-for="(item,index) in historylist" :key="index">
                 <div class="cd-timeline-img">
-                    <img :src="item.Image">
+                    <img :src="'/'+item.Image">
                 </div><!-- cd-timeline-img -->
                 <div class="cd-timeline-content">
                     <span class="cd-date">{{item.Year}}</span>
@@ -22,7 +22,7 @@
                     <i class="close" @click="closePop()"></i>
                     <span class="pop-up-date">{{item.Year}}</span>
                     <div>
-                        <p style="padding-bottom:10px;text-align:center;"><img :src="item.Image1" alt=""></p>
+                        <p style="padding-bottom:10px;text-align:center;"><img :src="'/'+item.Image1" alt=""></p>
                         <p v-for="(self,index) in item.Events" :key="index">{{self.Title}}</p>
                     </div>
                     

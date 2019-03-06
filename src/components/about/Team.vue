@@ -4,7 +4,7 @@
         <ul class="team-list clearfix">
             <li @click="tapJump(item.Id)" v-for="item in list" :key="item.Id">
                 <div class="item-img">
-                    <img :src="item.Image" alt="" :onerror="errorImg">
+                    <img :src="'/'+item.Image" alt="" :onerror="errorImg">
                 </div>
                 <p class="item-name">{{item.Title}}</p>
                 <p class="item-job">{{item.Department}}</p>
@@ -58,6 +58,7 @@ export default {
                     that.lastPage = false;
                 }                   
             })
+            console.log( that.list)
         },
         more:function(){
             if(this.lastPage){

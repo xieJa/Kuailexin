@@ -6,7 +6,7 @@
         <div class="team-info">
             <h3>简介</h3>
             <p>{{list.Description}}</p>
-            <p style="text-align:center;padding:30px 0;"><img :src="list.Image" alt=""></p>
+            <p style="text-align:center;padding:30px 0;"><img :src="'/'+list.Image" alt=""></p>
             <h3>工作特长</h3>
             <p v-html="list.Content"></p>            
         </div>
@@ -16,7 +16,7 @@
         <ul class="team-list clearfix">
             <li @click="tapJump(item.Id)" v-for="item in list.MoreData" :key="item.Id">
                 <div class="item-img">
-                    <img :src="item.Image" alt="">
+                    <img :src="'/'+item.Image" alt="">
                 </div>
                 <p class="item-name">{{item.Title}}</p>
                 <p class="item-job">{{item.Department}}</p>
