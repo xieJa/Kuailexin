@@ -2,7 +2,7 @@
     <div class="newProduct cover">
         <ul class="newProduct-list">
             <li v-for="item in list" :key="item.Id">
-                <div class="ad-pic"><img :src="item.Image"></div>
+                <div class="ad-pic"><img :src="'/'+item.Image"></div>
                 <div class="ad-inner">
                     <div class="ad-bt">{{item.Title}}</div>
                     <p>{{item.Description}}</p>

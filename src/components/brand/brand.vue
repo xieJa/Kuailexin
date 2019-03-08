@@ -2,24 +2,15 @@
     <div class="brand">
         <page-banner :pageBanner="pageBanner"></page-banner>
         <div class="cover">
-            <PageTitle :title="pTitle" :description="description"></PageTitle> 
-            <Project v-if="this.$route.query.name==='店面规划'"></Project>
-            <DecorationEffect v-else-if="this.$route.query.name==='我们的店'"></DecorationEffect>
-            <Cartoon v-else-if="this.$route.query.name==='卡通形象'"></Cartoon>
-            <brandVI v-else-if="this.$route.query.name==='品牌VI'"></brandVI>
-            <brandIP v-else-if="this.$route.query.name==='品牌IP'"></brandIP>
-            <PageView :content="pView" v-else></PageView>
+            <PageTitle :description="description"></PageTitle> 
+            <router-view></router-view>
         </div>
         
     </div>
 </template>
 
 <script>
-import Project from './project'
-import DecorationEffect from './Decorationeffect'
-import Cartoon from './cartoon'
-import brandVI from './brandVI'
-import brandIP from './brandIP'
+
 export default {
     name:'brand',
     data(){
@@ -38,9 +29,6 @@ export default {
     },
     created:function(){
         this.pTitle=this.$route.query.name
-    },
-    components:{
-        Project,DecorationEffect,Cartoon,brandVI,brandIP
     },
     watch:{
         '$route'(to,from){            

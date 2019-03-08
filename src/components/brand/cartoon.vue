@@ -4,7 +4,7 @@
       <div class="brand-style">
           <ul class="clearfix">            
             <li v-for="(item,index) in list" :key="index">
-              <div class="brand-logo"><img :src="item.Image" alt=""></div>
+              <div class="brand-logo"><img :src="'/'+item.Image" alt=""></div>
               <div class="brand-intro">
                   <b>{{item.Title}}</b>
                   <p>{{item.Description}}</p>

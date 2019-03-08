@@ -9,7 +9,7 @@
                   <p v-html="item.Description"></p>
               </div>
               <div class="img">
-                  <img :src="item.Image" alt="">
+                  <img :src="'/'+item.Image" alt="">
               </div>
           </li>          
       </ul>

@@ -37,7 +37,7 @@ export default {
         tabJump:function(id){
             let routeUrl = this.$router.resolve({
                 path:'/Marketingdetail',
-                query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:id}
+                query:{name:this.$route.query.name,Id:id}
             })
             window.open(routeUrl.href, '_blank');
         },
@@ -45,7 +45,7 @@ export default {
             let that = this;
             this.$axios.get("/ajaxdata.aspx?Action=list",{
                 params:{
-                    Object:that.$route.query.Object,
+                    Object:that.$route.query.name,
                     pageIndex:that.pageIndex,
                     pageSize:6,
                 }
@@ -89,6 +89,7 @@ export default {
     margin-bottom:4%;
     text-align: left;
     position: relative;
+    cursor: pointer;
 }
 
 .newMarket li:nth-child(2n){

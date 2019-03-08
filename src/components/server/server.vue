@@ -26,14 +26,6 @@ export default {
             pView:''            
         }
     },
-    created:function(){
-        this.pTitle=this.$route.query.name
-    },
-    watch:{
-        '$route'(to,from){            
-            this.pTitle=this.$route.query.name            
-        }
-    }
 }
 </script>
 

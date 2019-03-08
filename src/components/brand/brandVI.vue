@@ -1,7 +1,7 @@
 <template>
   <div class="brandVI">
       <ul>
-        <li class="wow bounceInLeft" :class="index%2==1?'bounceInRight':'bounceInLeft'" v-for="(item,index) in list" :key="index"><img :src="item.Image" :alt="item.Title"></li>
+        <li class="wow bounceInLeft" :class="index%2==1?'bounceInRight':'bounceInLeft'" v-for="(item,index) in list" :key="index"><img :src="'/'+item.Image" :alt="item.Title"></li>
       </ul>
       <LoadMore>            
           <button class="moreBtn"  @click="more" v-if="lastPage" slot="moreBtn">加载更多</button>

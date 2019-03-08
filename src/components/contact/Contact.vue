@@ -2,17 +2,12 @@
     <div class="contact">
         <page-banner :pageBanner="pageBanner"></page-banner>
         <div class="cover">
-            <PageTitle :title="pTitle"></PageTitle>
-            <Contactus v-if="this.$route.query.name=='联系我们'"></Contactus>    
-            <complain v-else-if="this.$route.query.name=='投诉建议'"></complain>    
-            <Message v-else></Message>    
+            <PageTitle></PageTitle>
+            <router-view></router-view>
         </div>
     </div>
 </template>
 <script>
-import Contactus from './contactus'
-import Message from './Message'
-import complain from './complain'
 export default {
     name:'Contact',
     data(){
@@ -26,17 +21,6 @@ export default {
             },
             pTitle:'',
             pView:''  
-        }
-    },
-    created:function(){
-        this.pTitle=this.$route.query.name
-    },
-    components:{
-        Contactus,Message,complain
-    },
-    watch:{
-        '$route'(to,from){            
-            this.pTitle=this.$route.query.name            
         }
     }
 }

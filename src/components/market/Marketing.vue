@@ -24,33 +24,6 @@ export default {
             description:'',
             pView:''  
         }
-    },    
-    created:function(){
-        this.pTitle=this.$route.query.name
-        if(this.$route.query.Object ==''){
-            this.loadMemoinfo()
-        }
-    },
-    methods:{
-        loadMemoinfo:function(){
-            let that = this;
-            this.$axios.get("/ajaxdata.aspx?Action=memoinfo",{
-                params:{
-                    Type:that.$route.query.name
-                }
-            })
-            .then(function(res){
-                that.pView = res.data.list[0].Content
-            })
-        }
-    },
-    watch:{
-        '$route'(to,from){            
-            this.pTitle=this.$route.query.name            
-            if(this.$route.query.Object ==''){
-                this.loadMemoinfo()
-            }
-        }
     }
 }
 </script>

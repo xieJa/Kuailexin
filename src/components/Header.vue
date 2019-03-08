@@ -40,25 +40,25 @@
             <router-link to="/" >首页</router-link>
           </li>
           <li data-value="关于我们">
-            <router-link to="/about/公司简介" data-value="关于我们">关于我们</router-link>
+            <router-link :to="{path:'/about',query:{name:'CompanyInfo'}}" data-value="关于我们">关于我们</router-link>
           </li>
           <li data-value="新鲜美食">
-            <router-link :to="{path:'/Product',query:{name:'新品动态'}}" data-value="新鲜美食">新鲜美食</router-link>
+            <router-link to="/Product/NewProduct" data-value="新鲜美食">新鲜美食</router-link>
           </li>
           <li data-value="品牌形象">
-            <router-link :to="{path:'/brand',query:{name:'店面规划'}}" data-value="品牌形象">品牌形象</router-link>
+            <router-link to="/brand/Project" data-value="品牌形象">品牌形象</router-link>
           </li>
           <li data-value="营销活动">
-            <router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" data-value="营销活动">营销活动</router-link>
+            <router-link :to="{path:'/Marketing',query:{name:'NewProductMarketing'}}" data-value="营销活动">营销活动</router-link>
           </li>
           <li data-value="加盟服务">
-            <router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" data-value="加盟服务">加盟服务</router-link>
+            <router-link to="/Credit" data-value="加盟服务">加盟服务</router-link>
           </li>
           <li data-value="新闻资讯">
             <router-link :to="{path:newNav[0].Title=='成功案例'?'/case':'/news',query:{Id:newNav[0].Id}}"  data-value="新闻资讯">新闻资讯</router-link>
           </li>
           <li data-value="联系我们">
-            <router-link :to="{path:'/contact',query:{name:'联系我们'}}" data-value="联系我们">联系我们</router-link>
+            <router-link to="/contact/contactus" data-value="联系我们">联系我们</router-link>
           </li>
         </ul>
       </div>
@@ -73,20 +73,20 @@
       <div class="cover relative">
         <i class="iconfont icon-guanbi" @click="submenu=!submenu"></i>
         <div class="submenu-item" v-show="submenu=='关于我们'">
-          <router-link to="/about/公司简介" >公司简介</router-link>
-          <router-link to="/about/企业愿景" >企业愿景</router-link>
-          <router-link to="/about/发展历程" >发展历程</router-link>
-          <router-link to="/about/体系建设" >体系建设</router-link>
-          <router-link to="/about/优秀团队" >优秀团队</router-link>
+          <router-link :to="{path:'/about',query:{name:'CompanyInfo'}}" >公司简介</router-link>
+          <router-link :to="{path:'/about',query:{name:'EnterpriseVision'}}" >企业愿景</router-link>
+          <router-link to="/about/TimeLine" >发展历程</router-link>
+          <router-link :to="{path:'/about',query:{name:'SystemConstruction'}}">体系建设</router-link>
+          <router-link to="/about/Team" >优秀团队</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新鲜美食'">
           <dl class="new-product clearfix">
             <dt>
-              <router-link :to="{path:'/Product',query:{name:'新品动态'}}">新品动态 ></router-link>
+              <router-link to="/Product/NewProduct">新品动态 ></router-link>
             </dt>
             <dd>
               <div class="new-product-item" v-for="item in newproductlist" :key="item.Id">
-                <router-link :to="{path:'/Product',query:{name:'新品动态'}}" @click.native="submenu=false">
+                <router-link to="/Product/NewProduct" @click.native="submenu=false">
                   <span>
                     <img :src="item.Image" :onerror="errorImg">
                   </span>
@@ -98,7 +98,7 @@
           <dl v-for="item in loadPro" :key="item.Id">
             <dt>
               <router-link
-                :to="{path:'/Product',query:{name:item.Title,id:item.Id}}"                
+                :to="{path:'/Product',query:{id:item.Id}}"                
               >{{item.Title}} ></router-link>
             </dt>
             <dd>
@@ -107,39 +107,39 @@
           </dl>          
         </div>
         <div class="submenu-item" v-show="submenu=='品牌形象'">
-          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" >店面规划</router-link>
-          <router-link :to="{path:'/brand',query:{name:'我们的店'}}" >我们的店</router-link>
-          <router-link :to="{path:'/brand',query:{name:'卡通形象'}}" >卡通形象</router-link>
-          <router-link :to="{path:'/brand',query:{name:'品牌VI'}}" >品牌VI</router-link>
-          <router-link :to="{path:'/brand',query:{name:'品牌IP'}}" >品牌IP</router-link>
+          <router-link to="/brand/Project">店面规划</router-link>
+          <router-link to="/brand/DecorationEffect">我们的店</router-link>
+          <router-link to="/brand/Cartoon">卡通形象</router-link>
+          <router-link to="/brand/brandVI">品牌VI</router-link>
+          <router-link to="/brand/brandIP">品牌IP</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='营销活动'">
-          <router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
-          <router-link :to="{path:'/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
-          <router-link :to="{path:'/Marketing',query:{name:'日常营销',Object:'DailyMarketing'}}">日常营销</router-link>
-          <router-link :to="{path:'/market',query:{name:'微信点餐'}}" >微信点餐</router-link>
-          <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'NewProductMarketing'}}" >新品营销</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'HolidayMarketing'}}" >节日营销</router-link>
+          <router-link :to="{path:'/Marketing',query:{name:'DailyMarketing'}}">日常营销</router-link>
+          <router-link :to="{path:'/market',query:{name:'order'}}" >微信点餐</router-link>
+          <router-link :to="{path:'/market',query:{name:'takeOut'}}" >外卖运营</router-link>
           <a href="https://weibo.com/hanbaodian?topnav=1&wvr=6&topsug=1" target="_blank">晒！微博</a>
-          <router-link :to="{path:'/trill',query:{name:'嗨！抖音'}}" >嗨！抖音</router-link>
+          <router-link to="/trill" >嗨！抖音</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='加盟服务'">
-          <router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
-          <router-link :to="{path:'/server',query:{name:'如何选择'}}" >如何选择</router-link>
-          <router-link :to="{path:'/server',query:{name:'加盟流程'}}" >加盟流程</router-link>
-          <router-link :to="{path:'/server',query:{name:'在您身边'}}" >在您身边</router-link>
-          <router-link :to="{path:'/program',query:{name:'加盟方案'}}" >加盟方案</router-link>
-          <router-link :to="{path:'/example',query:{name:'装修指导'}}" >装修指导</router-link>
-          <router-link :to="{path:'/joinIn',query:{name:'申请加盟'}}" >申请加盟</router-link>
-          <router-link :to="{path:'/Train',query:{name:'培训系统'}}" >培训系统</router-link>
-          <router-link :to="{path:'/FAQ',query:{name:'常见问题'}}" >常见问题</router-link>
+          <router-link to="/Credit" >品牌资信</router-link>
+          <router-link :to="{path:'/server',query:{name:'choose'}}" >如何选择</router-link>
+          <router-link :to="{path:'/server',query:{name:'process'}}" >加盟流程</router-link>
+          <router-link :to="{path:'/server',query:{name:'side'}}" >在您身边</router-link>
+          <router-link to="/program" >加盟方案</router-link>
+          <router-link to="/example" >装修指导</router-link>
+          <router-link to="/joinIn" >申请加盟</router-link>
+          <router-link to="/Train" >培训系统</router-link>
+          <router-link to="/FAQ" >常见问题</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='新闻资讯'">
           <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  v-for="(item,index) in newNav" :key="index">{{item.Title}}</router-link>
         </div>
         <div class="submenu-item" v-show="submenu=='联系我们'">
-          <router-link :to="{path:'/contact',query:{name:'联系我们'}}" >联系我们</router-link>
-          <router-link :to="{path:'/contact',query:{name:'在线留言'}}" >在线留言</router-link>
-          <router-link :to="{path:'/contact',query:{name:'投诉建议'}}" >投诉建议</router-link>
+          <router-link to="/contact/contactus" >联系我们</router-link>
+          <router-link to="/contact/Message" >在线留言</router-link>
+          <router-link to="/contact/complain" >投诉建议</router-link>
         </div>
       </div>
     </div>

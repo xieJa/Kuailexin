@@ -4,7 +4,7 @@
       <div class="title">{{list[0].Title}}</div>
       <ul class="shop-style clearfix">
         <li @click="tapJump('showfront',index)" v-for="(item,index) in list[0].child" :key="index">
-          <img :src="item.Image" alt>
+          <img :src="'/'+item.Image" alt>
           <p>{{item.Title}}</p>
         </li>        
       </ul> 
@@ -17,7 +17,7 @@
       <div class="title">{{list[1].Title}}</div>
       <ul class="shop-style clearfix">
         <li @click="tapJump('showbehind',index)" v-for="(item,index) in list[1].child" :key="index">
-          <img :src="item.Image" alt>
+          <img :src="'/'+item.Image" alt>
           <p>{{item.Title}}</p>
         </li>
       </ul>
@@ -30,7 +30,7 @@
       <div class="title">{{list[2].Title}}</div>
       <ul class="shop-style clearfix">
         <li @click="tapJump('showbehind2',index)" v-for="(item,index) in list[2].child" :key="index">
-          <img :src="item.Image" alt>
+          <img :src="'/'+item.Image" alt>
           <p>{{item.Title}}</p>
         </li>
       </ul>
@@ -48,7 +48,7 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item,index) in list[0].child" :key="index">
                 <p class="entry">{{item.Title}}</p>
-                <img :src="item.Image" alt>
+                <img :src="'/'+item.Image" alt>
               </div>              
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
@@ -66,7 +66,7 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item,index) in list[1].child" :key="index">
                 <p class="entry">{{item.Title}}</p>
-                <img :src="item.Image" alt>
+                <img :src="'/'+item.Image" alt>
               </div>
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
@@ -84,7 +84,7 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(item,index) in list[2].child" :key="index">
                 <p class="entry">{{item.Title}}</p>
-                <img :src="item.Image" alt>
+                <img :src="'/'+item.Image" alt>
               </div>
             </div>
             <div class="swiper-button-prev swiper-button-white entry"></div>
@@ -184,11 +184,12 @@ export default {
                     }else{
                         that.pageIndex3++;
                     }
-                  }                                  
+                  }  
+                                                  
               })
           }    
       })     
-                   
+        
     },
     more:function(num){
       let that = this;
@@ -208,9 +209,9 @@ export default {
               pageSize:6          
             }
           })
-          .then(function(res){
-              if(res.data.list>0){
-                that.list[num].child.push(res.data.list)
+          .then(function(res){             
+              if(res.data.list.length>0){
+                that.list[num].child.push.apply(that.list[num].child,res.data.list)
               }
               if(num===0){
                 if(res.data.list.length<6){
@@ -230,7 +231,8 @@ export default {
                 }else{
                     that.pageIndex3++;
                 }
-              }      
+              }    
+             
           })
       }
     }

@@ -34,7 +34,7 @@ export default {
     methods:{
         tapJump:function(id){
             this.$router.push({
-                path: '/about/优秀员工',
+                path: '/about/TeamView',
                 query:{
                     id:id
                 }
@@ -58,7 +58,6 @@ export default {
                     that.lastPage = false;
                 }                   
             })
-            console.log( that.list)
         },
         more:function(){
             if(this.lastPage){

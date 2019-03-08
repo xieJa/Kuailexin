@@ -21,7 +21,7 @@
       <a href="http://p.qiao.baidu.com/cps/chat?siteId=20704&userId=654182" target="_blank">在线咨询</a>
       <a href="javascript:;" @click="wechat('123456')">微信咨询</a>
       <a href="tel:4000352688">电话沟通</a>
-      <router-link :to="{path:'/joinIn',query:{name:'申请加盟'}}">申请加盟</router-link>
+      <router-link to="/joinIn">申请加盟</router-link>
     </div>
     <transition name="fade">
       <div class="shade" v-show="isNav"></div>
@@ -54,7 +54,7 @@
             <router-link :to="{path:item.Title=='成功案例'?'/case':'/news',query:{Id:item.Id}}"  >{{item.Title}}</router-link>
           </li>          
           <li>
-            <router-link :to="{path:'/contact',query:{name:'联系我们'}}">联系方式</router-link>
+            <router-link to="/contact/contactus">联系方式</router-link>
           </li>
           
         </ul>
@@ -64,7 +64,7 @@
             <dd>
               <ul>
                 <li v-for="item in loadPro" :key="item.Id">
-                  <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}">{{item.Title}}</router-link>
+                  <router-link :to="{path:'/Product',query:{id:item.Id}}">{{item.Title}}</router-link>
                 </li>                
               </ul>
             </dd>
@@ -74,16 +74,16 @@
             <dd>
               <ul>
                 <li>
-                  <router-link :to="{path:'/Credit',query:{name:'品牌资信'}}" >品牌资信</router-link>
+                  <router-link to="/Credit" >品牌资信</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/server',query:{name:'如何选择'}}">如何选择</router-link>
+                  <router-link :to="{path:'/server',query:{name:'choose'}}">如何选择</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/brand',query:{name:'我们的店'}}">我们的店</router-link>
+                  <router-link to="/brand/DecorationEffect">我们的店</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/program',query:{name:'加盟方案'}}">加盟方案</router-link>
+                  <router-link to="/program">加盟方案</router-link>
                 </li>               
               </ul>
             </dd>
@@ -93,13 +93,13 @@
             <dd>
               <ul>
                 <li>
-                  <router-link :to="{path:'/Marketing',query:{name:'新品营销',Object:'NewProductMarketing'}}" >新品营销</router-link>
+                  <router-link :to="{path:'/Marketing',query:{name:'NewProductMarketing'}}" >新品营销</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/Marketing',query:{name:'节日营销',Object:'HolidayMarketing'}}" >节日营销</router-link>
+                  <router-link :to="{path:'/Marketing',query:{name:'HolidayMarketing'}}" >节日营销</router-link>
                 </li>
                 <li>
-                  <router-link :to="{path:'/market',query:{name:'外卖运营'}}" >外卖运营</router-link>
+                  <router-link :to="{path:'/market',query:{name:'takeOut'}}" >外卖运营</router-link>
                 </li>
               </ul>
             </dd>

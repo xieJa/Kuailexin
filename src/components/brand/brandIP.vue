@@ -5,7 +5,7 @@
           <h2>基础设定</h2>
           <ul class="clearfix">
             <li v-for="item in list" :key="item.Id">
-                <div class="ip-style"><img :src="item.Image" alt=""></div>
+                <div class="ip-style"><img :src="'/'+item.Image" alt=""></div>
                 <div class="ip-intro">
                     <div class="name">{{item.SubTitle}}<span>（{{item.Title}}）</span></div>
                     <p>基础设定</p>

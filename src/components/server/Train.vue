@@ -52,7 +52,6 @@ export default {
           }else{
               that.lastPage = false;
           }  
-          console.log(res)
       })
     },
     more:function(){

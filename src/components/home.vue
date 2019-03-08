@@ -16,14 +16,15 @@
           <p>{{threehearts[0].Description}}</p>
         </div>
         <ul class="zx-hb-bd pc-show clearfix" v-if="!this.$M">          
-          <li v-for="item in typelist" :key="item.Id" @click="this.$router.push({path:'/Product',query:{name:item.Title,id:item.Id}})">
+          <li v-for="(item,index) in typelist" :key="item.Id">
             <div class="flipper">
-              <img :src="item.Image" :onerror="errorImg">
+              <img :src="item.Image" :onerror="errorImg"> 
               <div class="zx-hb-inner">
                 <div class="zx-hb-item">
                   <div class="zx-hb-hd">{{item.Title}}</div>
                   <p>{{item.Description}}</p>
-                  <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}" target="_blank">查看详情 ></router-link>
+                  <router-link to="/Product/NewProduct" v-if="index==0" target="_blank">查看详情 ></router-link>
+                  <router-link :to="{path:'/Product',query:{id:item.Id}}" target="_blank" v-else>查看详情 ></router-link>
                 </div>
               </div>
             </div>
@@ -36,7 +37,11 @@
           </div>
           <transition-group>
             <div class="m-zx-inner" v-for="(item,index) in typelist" :key="item.Id" v-show="index== zx"> 
-              <router-link :to="{path:'/Product',query:{name:item.Title,id:item.Id}}" >
+              <router-link to="/Product/NewProduct" v-if="index==0">
+              <img :src="item.Image">
+              <p>{{item.Description}}</p>
+              </router-link>             
+              <router-link :to="{path:'/Product',query:{id:item.Id}}" v-else>
               <img :src="item.Image">
               <p>{{item.Description}}</p>
               </router-link>             
@@ -56,13 +61,13 @@
         <div class="swiper-container ad-propaganda">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(item,index) in newproductlist" :key="index">              
-              <div class="ad-pic" @click="this.$router.push({path:'/Product',query:{name:'新品动态'}})">
+              <div class="ad-pic">
                 <img :src="item.Image" :onerror="errorImg">
               </div>
               <div class="ad-inner">
                 <div class="ad-bt">{{item.Title}}</div>
                 <p>{{item.Description}}</p>
-                <router-link :to="{path:'/Product',query:{name:'新品动态'}}" @click.native="submenu=false" target="_blank">查看详情 ></router-link>
+                <router-link to="/Product/NewProduct" @click.native="submenu=false" target="_blank">查看详情 ></router-link>
               </div>
             </div>            
           </div>
@@ -87,28 +92,28 @@
         </div>
         <ul class="yx-server clearfix" v-if="!this.$M">
           <li>
-            <router-link :to="{path:'/market',query:{name:'微信点餐'}}" target="_blank">
+            <router-link :to="{path:'/market',query:{name:'order'}}" target="_blank">
               <img src="../assets/server_icon1.png">
               <span>微信点餐</span>
               <p>通过微信自助点餐更加方便快捷，建立属于自己的消费者社群</p>
             </router-link>
           </li>
           <li>
-            <router-link :to="{path:'/market',query:{name:'外卖运营'}}" target="_blank">
+            <router-link :to="{path:'/market',query:{name:'takeOut'}}" target="_blank">
             <img src="../assets/server_icon2.png">
             <span>外卖运营</span>
             <p>深度对接，专业的外卖的接单系统自动接收第三方平台订单</p>
             </router-link>
           </li>
           <li>
-            <router-link :to="{path:'/program',query:{name:'加盟方案'}}" target="_blank">
+            <router-link to="/program" target="_blank">
             <img src="../assets/server_icon3.png">
             <span>加盟方案</span>
             <p>让每一位加盟快乐星汉堡店的加盟商，都能更加轻松经营，助力加盟者成就梦想</p>
             </router-link>
           </li>
           <li>
-            <router-link :to="{path:'/server',query:{name:'如何选择'}}" target="_blank">
+            <router-link :to="{path:'/server',query:{name:'choose'}}" target="_blank">
             <img src="../assets/server_icon4.png">
             <span>如何选择</span>
             <p>精心挑选每一个食材，精心烹饪每一种产品，通过专业、科学、严格的制作工艺而成</p>
@@ -128,7 +133,7 @@
               </div>
             </li>            
           </ul>
-          <router-link :to="{path:'/news',query:{name:'加盟资讯',Id:newJoinM}}" class="seeAll">查看全部</router-link>
+          <router-link :to="{path:'/news',query:{Id:newJoinM}}" class="seeAll">查看全部</router-link>
         </div>
       </div>
       <div class="modifying modifying04">
@@ -172,7 +177,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/Marketingdetail',query:{name:'新品营销',Object:'NewProductMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'NewProductMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
               </div>
             </div>
           </li>          
@@ -186,7 +191,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/Marketingdetail',query:{name:'日常营销',Object:'DailyMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'DailyMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
               </div>
             </div>
           </li>
@@ -200,7 +205,7 @@
               <div class="campaign-item-bt">{{item.Title}}</div>
               <div class="campaign-item-text">{{item.Description}}</div>
               <div class="campaign-item-btn">
-                <router-link :to="{path:'/Marketingdetail',query:{name:'节日营销',Object:'HolidayMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
+                <router-link :to="{path:'/Marketingdetail',query:{name:'HolidayMarketing',Id:item.Id}}" target="_blank">查看详情</router-link>
               </div>
             </div>
           </li>
@@ -242,7 +247,7 @@
               <div class="fx-hb-inner">
                 <div class="fx-hb-item">
                   <p>{{item.Title}}</p>
-                  <router-link :to="{path:'/newdetail',query:{typeName:'成功案例',Id:item.Id}}" target="_blank">查看详情 ></router-link>
+                  <router-link :to="{path:'/newdetail',query:{Id:item.Id}}" target="_blank">查看详情 ></router-link>
                 </div>
               </div>
             </div>            
@@ -270,7 +275,7 @@
               <div class="team-name">{{item.Title}}</div>
               <div class="team-job">{{item.Department}}</div>
               <div class="team-intro">{{item.Description}}</div>
-              <router-link :to="{path: '/about/优秀员工',query:{id:item.Id}}" target="_blank">查看详情</router-link>
+              <router-link :to="{path: '/about/TeamView',query:{id:item.Id}}" target="_blank">查看详情</router-link>
             </div>            
           </div>
         </div>
@@ -291,7 +296,7 @@
           class="storefront-intro"
         >店面规划和设计是门店取得成功的基础。厨房结构，设备规划摆放流程对于操作和产出率和出餐速度是极大的影响，油烟机、空调和炸炉、烤箱和裹粉台的关系决定门店的能耗的高低及粉尘的溅落和漂浮，进而决定机器的使用寿命。吧台和厨房适宜的高度差决定了员工的状态和激情，也能更好的提高配单效率，吧台和门的距离有店面大小和客户心理叠加系数决定，餐厅位置摆放决定主动客户和被动客户的占比等</div>
         <div class="storefront clearfix">
-          <router-link :to="{path:'/brand',query:{name:'店面规划'}}" target="_blank">
+          <router-link to="/brand/Project" target="_blank">
             <img :src="shop[0].Image" alt="">
           </router-link>
         </div>
@@ -517,7 +522,6 @@ export default {
       this.$router.push({
         path:'/newdetail',
         query:{
-          typeName:'加盟资讯',
           Id:id
         }
       })
@@ -526,7 +530,6 @@ export default {
       const caseUrl = this.$router.resolve({
         path:'/newdetail',
         query:{
-          typeName:'成功案例',
           Id:id
         }
       })
@@ -535,9 +538,6 @@ export default {
     programTap:function(id){
       this.$router.push({
         path:'/program',
-        query:{
-          name:'加盟方案', 
-        },
         hash:id
       })
     },

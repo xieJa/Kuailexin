@@ -6,12 +6,22 @@ Vue.use(Router)
 const Home = () => import(/* webpackChunkName: "group-Home" */ '@/components/home')
 const PageView = () => import(/* webpackChunkName: "group-PageView" */ '@/components/PageView')
 const About = () => import(/* webpackChunkName: "group-About" */ '@/components/about/about')
+const TimeLine = () => import(/* webpackChunkName: "group-About" */ '@/components/about/TimeLine')
+const Team = () => import(/* webpackChunkName: "group-About" */ '@/components/about/Team')
+const TeamView = () => import(/* webpackChunkName: "group-About" */ '@/components/about/TeamView')
 const Product = () => import(/* webpackChunkName: "group-Product" */ '@/components/product/product')
+const NewProduct = () => import(/* webpackChunkName: "group-Product" */ '@/components/product/NewProduct')
+const StarProduct = () => import(/* webpackChunkName: "group-Product" */ '@/components/product/StarProduct')
+const GeneralProduct = () => import(/* webpackChunkName: "group-Product" */ '@/components/product/GeneralProduct')
 const ProductDetail = () => import(/* webpackChunkName: "group-Product" */ '@/components/product/ProductDetail')
 const Brand = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/brand')
-const Market = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/Marketing')
-const Marketing = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/newMarketing')
-const festivalMarket = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/festivalMarket')
+const Project = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/Project')
+const Decorationeffect = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/Decorationeffect')
+const cartoon = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/cartoon')
+const brandVI = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/brandVI')
+const brandIP = () => import(/* webpackChunkName: "group-Brand" */ '@/components/brand/brandIP')
+const Marketing = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/Marketing')
+const newMarketing = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/newMarketing')
 const Trill = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/trill')
 const Marketingdetail = () => import(/* webpackChunkName: "group-Market" */ '@/components/market/Marketingdetail')
 const Server = () => import(/* webpackChunkName: "group-Server" */ '@/components/server/server')
@@ -27,6 +37,9 @@ const NewList = () => import(/* webpackChunkName: "group-News" */ '@/components/
 const Case = () => import(/* webpackChunkName: "group-News" */ '@/components/new/case')
 const newdetail = () => import(/* webpackChunkName: "group-News" */ '@/components/new/newdetail')
 const Contact = () => import(/* webpackChunkName: "group-Contact" */ '@/components/contact/Contact')
+const Contactus = () => import(/* webpackChunkName: "group-Contact" */ '@/components/contact/contactus')
+const Message = () => import(/* webpackChunkName: "group-Contact" */ '@/components/contact/Message')
+const complain = () => import(/* webpackChunkName: "group-Contact" */ '@/components/contact/complain')
 const search = () => import(/* webpackChunkName: "group-Search" */ '@/components/search/search')
 const Errorinfo = () => import(/* webpackChunkName: "group-error" */ '@/components/error404')
 
@@ -41,14 +54,51 @@ const router = new Router({
       component: Home,
     },
     {
-      path: '/about/:Name',
-      name: 'About',      
-      component: About,
+      path: '/about',
+      name: 'About', 
+      component: About,           
+      children:[
+        {
+          path:'TimeLine',
+          name:'发展历程',
+          component:TimeLine
+        },
+        {
+          path:'Team',
+          name:'优秀团队',
+          component:Team
+        },
+        {
+          path:'TeamView',
+          name:'优秀员工',
+          component:TeamView
+        },
+        {
+          path:'',
+          component:PageView
+        }        
+      ]
     },
     {
       path: '/Product',
       name: 'Product',
       component: Product,
+      children:[
+        {
+          path:'NewProduct',
+          name:'新品动态',
+          component:NewProduct
+        },
+        {
+          path:'StarProduct',
+          name:'明星产品',
+          component:StarProduct
+        },        
+        {
+          path:'',
+          component:GeneralProduct
+        }        
+      ]
     },
     {
       path: '/ProductDetail',
@@ -60,15 +110,45 @@ const router = new Router({
       path: '/brand',
       name: 'Brand',
       component: Brand,
+      children:[
+        {
+          path:'Project',
+          name:'店面规划',
+          component:Project
+        },
+        {
+          path:'DecorationEffect',
+          name:'我们的店',
+          component:Decorationeffect
+        },        
+        {
+          path:'Cartoon',
+          name:'卡通形象',
+          component:cartoon
+        },        
+        {
+          path:'brandVI',
+          name:'品牌VI',
+          component:brandVI
+        },        
+        {
+          path:'brandIP',
+          name:'品牌IP',
+          component:brandIP
+        },        
+        {
+          path:'',
+          component:PageView
+        }        
+      ]
     },
     {
       path: '/market',
       name: 'Market',
-      component: Market,
+      component: Marketing,
       children:[
-          {path:'/Marketing',component:Marketing},        
-          {path:'/festivalMarket',component: festivalMarket},        
-          {path:'/trill',component:Trill},        
+          {path:'/Marketing',component:newMarketing},        
+          {path:'/trill',name:'嗨！抖音',component:Trill},        
           {path:'',component: PageView},        
       ]
     }, 
@@ -82,23 +162,22 @@ const router = new Router({
       name:'server',
       component: Server,
       children:[
-        {path:'/Credit',component: Credit},
+        {path:'/Credit',name:'品牌资信',component: Credit},
         {path:'/mapSide',component: mapSide},
-        {path:'/program',component: program},
-        {path:'/example',component: example},
-        {path:'/joinIn',component: joinIn},
-        {path:'/Train',component: Train},
-        {path:'/FAQ',component: FAQ},
+        {path:'/program',name:'加盟方案',component: program},
+        {path:'/example',name:'装修指导',component: example},
+        {path:'/joinIn',name:'申请加盟',component: joinIn},
+        {path:'/Train',name:'培训系统',component: Train},
+        {path:'/FAQ',name:'常见问题',component: FAQ},
         {path:'',component: PageView},        
       ]
     }, 
     {
       path:'/news',
-      name:'news',
       component: News,
       children:[
-        {path:"",name:'new',component:NewList,meta:{title:'品牌新闻'}},
-        {path:"/case",name:'case',component: Case,meta:{title:'成功案例'}},
+        {path:"",component:NewList,meta:{title:'品牌新闻'}},
+        {path:"/case",component: Case,meta:{title:'成功案例'}},
       ]
     },
     {
@@ -109,8 +188,12 @@ const router = new Router({
     },
     {
       path:'/contact',
-      name:'contact',
-      component: Contact
+      component: Contact,
+      children:[
+        {path:"contactus",name:'联系我们',component:Contactus},
+        {path:"Message",name:'在线留言',component: Message},
+        {path:"complain",name:'投诉建议',component: complain}
+      ]
     },  
     {
       path:'/search',

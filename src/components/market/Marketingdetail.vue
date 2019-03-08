@@ -1,7 +1,15 @@
 <template>
     <div class="Market-detail cover">
         <crumbs>
-            <router-link :to="{path:'/Marketing',query:{name:this.$route.query.name,Object:this.$route.query.Object}}">{{this.$route.query.name}}</router-link>>
+            <template v-if="this.$route.query.name =='NewProductMarketing'">
+                <router-link :to="{path:'/Marketing',query:{name:this.$route.query.name}}">新品营销</router-link>>
+            </template>
+            <template v-else-if="this.$route.query.name =='HolidayMarketing'">
+                <router-link :to="{path:'/Marketing',query:{name:this.$route.query.name}}">节日营销</router-link>>
+            </template>
+            <template v-else>
+                <router-link :to="{path:'/Marketing',query:{name:this.$route.query.name}}">日常营销</router-link>>
+            </template>
             <a href="javascript:;">{{list.Title}}</a>
         </crumbs>
         <div class="market-info">
@@ -14,11 +22,11 @@
             </div>
             <div class="page-turning clearfix">
                 <div class="paging page-prev">
-                    <router-link :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Pid}}"  v-show="list.Pid!=''">上一篇</router-link>         
+                    <router-link :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Id:list.Pid}}"  v-show="list.Pid!=''">上一篇</router-link>         
                     <p>{{list.Ptitle}}</p>           
                 </div>
                 <div class="paging page-next" style="float:right;">
-                    <router-link  :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Object:this.$route.query.Object,Id:list.Nid}}"  v-show="list.Nid!=''">下一篇</router-link>         
+                    <router-link  :to="{path:'/Marketingdetail',query:{name:this.$route.query.name,Id:list.Nid}}"  v-show="list.Nid!=''">下一篇</router-link>         
                     <p>{{list.Ntitle}}</p>           
                 </div>
             </div>
@@ -47,7 +55,7 @@ export default {
             let that = this;
             this.$axios.get("/ajaxdata.aspx?Action=loaddetail",{
                 params:{
-                    Object:that.$route.query.Object,
+                    Object:that.$route.query.name,
                     Id:that.$route.query.Id
                 }
             })

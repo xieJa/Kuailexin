@@ -55,7 +55,7 @@ export default {
       this.$axios
         .get("/ajaxdata.aspx?Action=memoinfo", {
           params: {
-            Type: that.$route.query.name
+            Type:'嗨！抖音'
           }
         })
         .then(function(res) {
